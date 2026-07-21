@@ -156,8 +156,13 @@ function StickyBottomBar() {
 
 function OnlineNudge() {
   return (
-    <a
+    <motion.a
       href={TEL}
+      initial={{ opacity: 0, x: -14 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, amount: 0.6 }}
+      whileTap={{ scale: 0.97 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
       className="my-3 flex items-center justify-between gap-2 rounded-md bg-gradient-to-r from-brand-green-dark via-[#3d7a2f] to-brand-gold p-[1.5px] shadow-hard-sm"
     >
       <div className="flex w-full items-center justify-between gap-2 rounded-md bg-[#0C2416] px-3 py-2.5">
@@ -169,7 +174,7 @@ function OnlineNudge() {
           <Phone size={13} strokeWidth={3} /> कॉल करें
         </span>
       </div>
-    </a>
+    </motion.a>
   );
 }
 
