@@ -38,8 +38,8 @@ export const Route = createFileRoute("/")({
   component: Landing,
 });
 
-const TEL = "tel:+918707868504";
-const PHONE_DISPLAY = "+91 87078 68504";
+const TEL = "tel:+916306988550";
+const PHONE_DISPLAY = "+91 63069 88550";
 
 function Landing() {
   return (
