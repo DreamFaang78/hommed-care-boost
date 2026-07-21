@@ -643,16 +643,18 @@ const STEPS = [
 ];
 
 function ProcessSteps() {
+  const ref = useRef<HTMLElement | null>(null);
+  useRevealOnScroll(ref);
   return (
-    <section id="process" className="bg-section-alt px-4 py-6">
-      <h2 className="mb-4 text-center text-[22px] font-black leading-tight text-white">
+    <section ref={ref} id="process" className="bg-section-alt px-4 py-6">
+      <h2 className="reveal mb-4 text-center text-[22px] font-black leading-tight text-white">
         हमारा <span className="text-brand-gold">प्लान</span> कैसे काम करता है?
       </h2>
       <ol className="space-y-2.5">
         {STEPS.map((s, i) => (
           <li
             key={s.t}
-            className="flex items-start gap-3 rounded-md border border-[color:var(--card-border)] bg-card p-3 shadow-hard-sm"
+            className="reveal flex items-start gap-3 rounded-md border border-[color:var(--card-border)] bg-card p-3 shadow-hard-sm"
             style={{ borderLeftWidth: 4, borderLeftColor: s.color }}
           >
             <div
@@ -672,12 +674,15 @@ function ProcessSteps() {
           </li>
         ))}
       </ol>
-      <a
+      <motion.a
         href={TEL}
-        className="mt-4 flex items-center justify-center gap-2 rounded-md bg-brand-gold px-4 py-3.5 text-[15px] font-black tracking-wide text-[color:var(--primary-foreground)] shadow-hard"
+        whileTap={{ scale: 0.96 }}
+        whileHover={{ scale: 1.02 }}
+        transition={{ duration: 0.18, ease: "easeOut" }}
+        className="reveal mt-4 flex items-center justify-center gap-2 rounded-md bg-brand-gold px-4 py-3.5 text-[15px] font-black tracking-wide text-[color:var(--primary-foreground)] shadow-hard"
       >
         <Phone size={16} strokeWidth={3} /> अभी शुरुआत करें
-      </a>
+      </motion.a>
     </section>
   );
 }
