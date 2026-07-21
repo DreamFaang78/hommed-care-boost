@@ -26,7 +26,7 @@ import {
   Loader2,
 } from "lucide-react";
 
-import drIqbalPortraitAsset from "@/assets/dr-iqbal-portrait.jpg.asset.json";
+import drIqbalPortraitAsset from "@/assets/dr-iqbal-portrait-hq.jpg.asset.json";
 import drIqbalClinicAsset from "@/assets/dr-iqbal-clinic.jpg.asset.json";
 import clinicExteriorAsset from "@/assets/hommed-clinic-exterior-v2.jpg.asset.json";
 import hommedLogoAsset from "@/assets/hommed-logo.jpg.asset.json";
