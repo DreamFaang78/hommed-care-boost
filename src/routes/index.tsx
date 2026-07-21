@@ -510,8 +510,10 @@ const PROBLEM_CARDS = [
 ];
 
 function ProblemGrid() {
+  const ref = useRef<HTMLElement | null>(null);
+  useRevealOnScroll(ref, { selector: ".reveal-card" });
   return (
-    <section id="problems" className="bg-background px-3 py-6">
+    <section ref={ref} id="problems" className="bg-background px-3 py-6">
       <h2 className="mb-4 text-center text-[22px] font-black leading-tight text-white">
         हम किन <span className="text-brand-gold">रोगों</span> का इलाज करते हैं?
       </h2>
