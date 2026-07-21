@@ -188,77 +188,6 @@ function OnlineNudge() {
   );
 }
 
-/* ---------------- Trust Seal (circular stamp) ---------------- */
-
-function TrustSeal() {
-  return (
-    <div
-      className="pointer-events-none absolute -right-1.5 -top-2.5 z-10 h-[54px] w-[54px] -rotate-6 drop-shadow-[0_3px_8px_rgba(0,0,0,0.45)] sm:h-[60px] sm:w-[60px]"
-      aria-label="100% भरोसेमंद क्लिनिक"
-    >
-      <svg viewBox="0 0 100 100" className="h-full w-full">
-        {/* outer red ring */}
-        <circle cx="50" cy="50" r="48" fill="#B91C1C" />
-        <circle cx="50" cy="50" r="42" fill="none" stroke="#FDE68A" strokeWidth="2" />
-        {/* inner gold disc */}
-        <circle cx="50" cy="50" r="32" fill="#E8A93C" />
-        {/* curved TRUSTED text */}
-        <defs>
-          <path
-            id="topArc"
-            d="M 14,50 A 36,36 0 0,1 86,50"
-          />
-          <path
-            id="bottomArc"
-            d="M 18,50 A 32,32 0 0,0 82,50"
-          />
-        </defs>
-        <text
-          fill="#FDE68A"
-          fontSize="11"
-          fontWeight="900"
-          letterSpacing="2"
-        >
-          <textPath href="#topArc" startOffset="50%" textAnchor="middle">
-            TRUSTED
-          </textPath>
-        </text>
-        <text
-          fill="#FDE68A"
-          fontSize="10"
-          fontWeight="900"
-          letterSpacing="2"
-        >
-          <textPath href="#bottomArc" startOffset="50%" textAnchor="middle">
-            BRAND
-          </textPath>
-        </text>
-        {/* center check + 100% */}
-        <text
-          x="50"
-          y="46"
-          textAnchor="middle"
-          fill="#081A0F"
-          fontSize="20"
-          fontWeight="900"
-        >
-          100%
-        </text>
-        <text
-          x="50"
-          y="58"
-          textAnchor="middle"
-          fill="#081A0F"
-          fontSize="9"
-          fontWeight="800"
-        >
-          भरोसा
-        </text>
-      </svg>
-    </div>
-  );
-}
-
 /* ---------------- Lead Form ---------------- */
 
 const PROBLEMS = [
@@ -300,8 +229,7 @@ function LeadForm() {
 
   return (
     <section id="lead" className="bg-background px-3 py-4">
-      <div className="relative overflow-visible rounded-md border-2 border-brand-gold bg-card p-4 shadow-hard">
-        {!submitted && <TrustSeal />}
+      <div className="relative rounded-md border-2 border-brand-gold bg-card p-4 shadow-hard">
         {submitted ? (
           <div className="py-4 text-center">
             <div className="mx-auto mb-3 grid h-14 w-14 place-items-center rounded-full bg-brand-green text-white shadow-hard-sm">
