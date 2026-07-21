@@ -85,7 +85,7 @@ function StickyHeader() {
         <div className="flex items-center gap-1.5">
           <a
             href="#lead"
-            className="rounded-md bg-brand-gold px-3.5 py-2 text-[13px] font-black tracking-wide text-[color:var(--primary-foreground)] shadow-hard-sm active:translate-y-[1px]"
+            className="rounded-md bg-brand-gold px-3.5 py-2 text-[13px] font-black tracking-wide text-[color:var(--primary-foreground)] cta-glow-gold active:translate-y-[1px]"
           >
             अपॉइंटमेंट लें
           </a>
