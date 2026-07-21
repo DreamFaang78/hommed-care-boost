@@ -24,8 +24,10 @@ import {
   FlaskConical,
 } from "lucide-react";
 import clinicImg from "@/assets/clinic-exterior.jpg";
-import drIqbalImg from "@/assets/dr-iqbal.jpg";
-import drCertsImg from "@/assets/dr-iqbal-certificates.jpg";
+import drIqbalPortraitAsset from "@/assets/dr-iqbal-portrait.jpg.asset.json";
+import drIqbalClinicAsset from "@/assets/dr-iqbal-clinic.jpg.asset.json";
+const drIqbalImg = drIqbalPortraitAsset.url;
+const drCertsImg = drIqbalClinicAsset.url;
 
 export const Route = createFileRoute("/")({
   component: Landing,
