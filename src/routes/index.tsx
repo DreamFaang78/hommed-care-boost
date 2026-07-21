@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { gsap, useGSAP, useRevealOnScroll, useReducedMotion, CountUp } from "@/lib/motion";
 import {
   Phone,
   Menu,
