@@ -124,8 +124,28 @@ function StickyHeader() {
 /* ---------------- Sticky Bottom Bar ---------------- */
 
 function StickyBottomBar() {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const reduced = useReducedMotion();
+  useGSAP(
+    () => {
+      if (!ref.current) return;
+      if (!reduced) {
+        gsap.from(ref.current, {
+          y: 60,
+          opacity: 0,
+          duration: 0.5,
+          delay: 0.2,
+          ease: "power2.out",
+        });
+      }
+    },
+    { scope: ref, dependencies: [reduced] },
+  );
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t-2 border-brand-gold bg-[#081A0F] shadow-[0_-6px_20px_rgba(0,0,0,0.6)]">
+    <div
+      ref={ref}
+      className="fixed inset-x-0 bottom-0 z-40 border-t-2 border-brand-gold bg-[#081A0F] shadow-[0_-6px_20px_rgba(0,0,0,0.6)]"
+    >
       <div className="mx-auto grid max-w-[440px] grid-cols-[auto_1fr_auto] items-center gap-2 px-3 py-2">
         <img
           src={drIqbalImg}
@@ -134,13 +154,16 @@ function StickyBottomBar() {
           height={40}
           className="h-10 w-10 shrink-0 rounded-full object-cover ring-2 ring-brand-gold"
         />
-        <a
+        <motion.a
           href={TEL}
-          className="flex min-w-0 items-center justify-center gap-1.5 rounded-md bg-gradient-to-r from-[color:var(--brand-blue)] to-[color:var(--brand-blue-2)] px-3 py-2.5 text-[14px] font-black tracking-wide text-white cta-glow-blue active:translate-y-[1px]"
+          whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.02 }}
+          transition={{ duration: 0.15, ease: "easeOut" }}
+          className="flex min-w-0 items-center justify-center gap-1.5 rounded-md bg-gradient-to-r from-[color:var(--brand-blue)] to-[color:var(--brand-blue-2)] px-3 py-2.5 text-[14px] font-black tracking-wide text-white cta-glow-blue"
         >
           <Phone size={16} className="shrink-0" />
           <span className="truncate">अभी कॉल करें</span>
-        </a>
+        </motion.a>
         <div className="flex shrink-0 items-center gap-1.5">
           <span className="pulse-dot inline-block h-2.5 w-2.5 rounded-full bg-brand-green" />
           <span className="pulse-text text-[11px] font-black leading-tight text-brand-green">
