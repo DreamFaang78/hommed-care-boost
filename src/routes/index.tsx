@@ -379,6 +379,17 @@ function AfterFormHero() {
           </p>
         </div>
 
+        <div className="mb-4 overflow-hidden rounded-md border-2 border-brand-gold shadow-hard-sm">
+          <img
+            src={clinicExteriorImg}
+            alt="HomMed Clinic — Dr. Iqbal's Homoeopathic Centre, Jajmau, Kanpur"
+            className="block h-auto w-full object-cover"
+            loading="lazy"
+          />
+        </div>
+
+
+
         <h2 className="text-[22px] font-black leading-[1.15] text-white">
           शून्य-कम शुक्राणु, नपुंसकता एवं गुप्त रोगों का{" "}
           <span className="text-brand-gold">जड़ से इलाज</span> मात्र{" "}
