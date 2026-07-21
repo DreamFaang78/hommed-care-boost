@@ -283,7 +283,9 @@ function LeadForm() {
   };
 
   const inputCls =
-    "w-full rounded-md border-2 border-[color:var(--card-border)] bg-[#0C2416] px-3.5 py-3 text-[15px] font-semibold text-white outline-none placeholder:text-[color:var(--body-dim)]/70 focus:border-brand-gold";
+    "w-full rounded-md border-2 border-[color:var(--card-border)] bg-[#0F2416] px-3.5 py-2.5 text-[15px] font-semibold text-white outline-none placeholder:text-[color:var(--body-dim)]/70 focus:border-brand-gold";
+  const labelCls =
+    "mb-1 block text-[12.5px] font-semibold text-[color:var(--body-dim)]";
 
   return (
     <section id="lead" className="bg-background px-3 py-4">
@@ -308,84 +310,96 @@ function LeadForm() {
           </div>
         ) : (
           <>
-            <h2 className="text-[19px] font-black leading-snug text-white">
-              क्या आप <span className="text-brand-gold">शून्य शुक्राणु</span> एवं गुप्त रोगों से परेशान हैं?
+            <h2 className="text-center text-[21px] font-black leading-snug text-white">
+              क्या आप शून्य शुक्राणु एवं गुप्त रोगों से परेशान हैं?
             </h2>
-            <p className="mt-1 text-[13px] font-semibold text-[color:var(--body-dim)]">
-              आज ही Dr. Iqbal से मुफ्त सलाह लें…
+            <p className="mt-1.5 text-center text-[13.5px] font-semibold text-[#A8C4B0]">
+              हमारे विशेषज्ञों से मुफ्त सलाह लें
             </p>
 
-            <div className="mt-3 grid grid-cols-2 gap-2">
+            <a
+              href={TEL}
+              className="mt-3 flex items-center justify-center gap-2 text-[26px] font-black tracking-tight text-brand-gold"
+            >
+              <Phone size={22} strokeWidth={2.5} className="fill-brand-gold" />
+              +91 87078 68504
+            </a>
+
+            <div className="mt-3 flex justify-center">
               <a
                 href={TEL}
-                className="flex items-center justify-center gap-1.5 rounded-md bg-gradient-to-r from-[color:var(--brand-blue)] to-[color:var(--brand-blue-2)] px-3 py-2.5 text-[13.5px] font-black tracking-wide text-white shadow-hard-sm"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[color:var(--brand-blue)] to-[color:var(--brand-blue-2)] px-8 py-2.5 text-[15px] font-black tracking-wide text-white shadow-hard-sm active:translate-y-[1px]"
               >
-                <Phone size={15} /> Call Now
-              </a>
-              <a
-                href={WHATSAPP}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-1.5 rounded-md bg-brand-green px-3 py-2.5 text-[13.5px] font-black tracking-wide text-white shadow-hard-sm"
-              >
-                <MessageCircle size={15} /> WhatsApp
+                <Phone size={16} strokeWidth={3} /> Call now
               </a>
             </div>
 
-            <form onSubmit={onSubmit} className="mt-4 space-y-2.5">
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="आपका नाम"
-                maxLength={80}
-                className={inputCls}
-              />
-              <input
-                type="tel"
-                value={mobile}
-                onChange={(e) =>
-                  setMobile(e.target.value.replace(/\D/g, "").slice(0, 10))
-                }
-                inputMode="numeric"
-                pattern="[6-9][0-9]{9}"
-                placeholder="मोबाइल नंबर (10 अंक)"
-                className={inputCls}
-              />
-              <select
-                value={duration}
-                onChange={(e) => setDuration(e.target.value)}
-                className={inputCls}
-              >
-                <option value="">आपको कितने दिनों से समस्या है?</option>
-                <option>1 महीने से कम</option>
-                <option>1–6 महीने</option>
-                <option>6 महीने – 1 साल</option>
-                <option>1 साल से ज़्यादा</option>
-              </select>
+            <form onSubmit={onSubmit} className="mt-5 space-y-3">
+              <div>
+                <label className={labelCls}>आपका नाम</label>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Your Name"
+                  maxLength={80}
+                  className={inputCls}
+                />
+              </div>
 
-              <div className="rounded-md border-2 border-[color:var(--card-border)] bg-[#0C2416] p-3">
-                <p className="mb-2 text-[13px] font-black text-white">
-                  आपकी समस्या (एक या अधिक चुनें)
+              <div>
+                <label className={labelCls}>आपका मोबाइल नंबर</label>
+                <input
+                  type="tel"
+                  value={mobile}
+                  onChange={(e) =>
+                    setMobile(e.target.value.replace(/\D/g, "").slice(0, 10))
+                  }
+                  inputMode="numeric"
+                  pattern="[6-9][0-9]{9}"
+                  placeholder="Your Mobile Number"
+                  className={inputCls}
+                />
+              </div>
+
+              <div>
+                <label className={labelCls}>
+                  आपको कितने दिनों से समस्या है?
+                </label>
+                <input
+                  type="text"
+                  value={duration}
+                  onChange={(e) => setDuration(e.target.value.slice(0, 60))}
+                  placeholder=""
+                  className={inputCls}
+                />
+              </div>
+
+              <div className="pt-1">
+                <p className="mb-2 text-[13.5px] font-bold text-white">
+                  इनमें से आपको क्या क्या समस्या है
                 </p>
-                <div className="flex flex-wrap gap-1.5">
+                <div className="grid grid-cols-2 gap-x-3 gap-y-2.5">
                   {PROBLEMS.map((p) => {
                     const active = problems.includes(p);
                     return (
-                      <button
-                        type="button"
+                      <label
                         key={p}
-                        onClick={() => toggle(p)}
-                        className={
-                          "rounded-md px-3 py-1.5 text-[12.5px] font-bold transition " +
-                          (active
-                            ? "bg-brand-gold text-[color:var(--primary-foreground)]"
-                            : "border border-[color:var(--card-border)] bg-card text-white")
-                        }
+                        className="flex cursor-pointer items-center gap-2 text-[13.5px] font-semibold text-white"
                       >
-                        {active ? "✓ " : ""}
-                        {p}
-                      </button>
+                        <span
+                          onClick={() => toggle(p)}
+                          className={
+                            "grid h-5 w-5 shrink-0 place-items-center rounded-[4px] border-2 transition " +
+                            (active
+                              ? "border-brand-gold bg-brand-gold text-[color:var(--primary-foreground)]"
+                              : "border-brand-gold bg-[#0F2416]")
+                          }
+                        >
+                          {active && <Check size={14} strokeWidth={4} />}
+                        </span>
+                        <span onClick={() => toggle(p)}>{p}</span>
+                      </label>
                     );
                   })}
                 </div>
@@ -399,14 +413,10 @@ function LeadForm() {
 
               <button
                 type="submit"
-                className="w-full rounded-md bg-brand-gold px-4 py-3.5 text-[16px] font-black tracking-wide text-[color:var(--primary-foreground)] shadow-hard active:translate-y-[1px]"
+                className="mt-1 w-full rounded-md bg-brand-gold px-4 py-3.5 text-[16px] font-black tracking-wide text-[color:var(--primary-foreground)] shadow-hard active:translate-y-[1px]"
               >
-                शुरुआत करें →
+                शुरुआत करें
               </button>
-
-              <p className="pt-1 text-center text-[11.5px] font-semibold leading-snug text-[color:var(--body-dim)]">
-                🔒 आपकी पहचान गुप्त रखी जायेगी — Yahan judgment nahi, sirf ilaaj hai.
-              </p>
             </form>
           </>
         )}
