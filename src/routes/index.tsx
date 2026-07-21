@@ -23,7 +23,7 @@ import {
   Droplet,
   FlaskConical,
 } from "lucide-react";
-import clinicImg from "@/assets/clinic-exterior.jpg";
+
 import drIqbalPortraitAsset from "@/assets/dr-iqbal-portrait.jpg.asset.json";
 import drIqbalClinicAsset from "@/assets/dr-iqbal-clinic.jpg.asset.json";
 const drIqbalImg = drIqbalPortraitAsset.url;
@@ -194,25 +194,10 @@ function OnlineNudge() {
 function Hero() {
   return (
     <section id="top" className="relative bg-background">
-      <div className="relative">
-        <img
-          src={clinicImg}
-          alt="HOMMED Clinic, Civil Lines, Kanpur"
-          width={1280}
-          height={800}
-          className="h-72 w-full object-cover"
-        />
-        <div className="absolute inset-x-0 top-0 bg-brand-gold px-3 py-2 text-center shadow-hard-sm">
-          <p className="text-[13px] font-black uppercase tracking-wider leading-tight text-[color:var(--primary-foreground)]">
-            कानपुर का सबसे भरोसेमंद होम्योपैथिक सेंटर
-          </p>
-        </div>
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#0A1F12] via-[#0A1F12]/85 to-transparent px-3 pb-3 pt-16">
-          <p className="flex items-center gap-1.5 text-[12.5px] font-bold text-white">
-            <MapPin size={14} className="text-brand-gold" />
-            Civil Lines, Kanpur, Uttar Pradesh – 208001
-          </p>
-        </div>
+      <div className="bg-brand-gold px-3 py-2.5 text-center shadow-hard-sm">
+        <p className="text-[13px] font-black uppercase tracking-wider leading-tight text-[color:var(--primary-foreground)]">
+          कानपुर का सबसे भरोसेमंद होम्योपैथिक सेंटर
+        </p>
       </div>
 
       <div className="px-4 pb-5 pt-5">
