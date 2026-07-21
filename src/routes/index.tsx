@@ -421,7 +421,7 @@ const BADGES_B = [
 function TrustBadges() {
   return (
     <section className="bg-section-alt px-3 py-5">
-      <h2 className="mb-3 text-center text-[22px] font-black leading-tight text-white">
+      <h2 className="mb-3 text-center text-[18px] font-black leading-tight text-white">
         क्यों हज़ारों मरीज़ हम पर <span className="text-brand-gold">भरोसा</span> करते हैं
       </h2>
       <BadgeList items={BADGES_A} />
