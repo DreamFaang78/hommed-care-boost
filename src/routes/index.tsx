@@ -56,6 +56,8 @@ function Landing() {
         <DepartmentBanner />
         <ProcessSteps />
         <WhyHommed />
+        <Testimonials />
+
         <DoctorProfile />
         <TrustSection />
       <Footer />
