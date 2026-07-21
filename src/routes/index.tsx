@@ -30,9 +30,12 @@ import drIqbalPortraitAsset from "@/assets/dr-iqbal-portrait-hq.jpg.asset.json";
 import drIqbalClinicAsset from "@/assets/dr-iqbal-clinic-v2.jpg.asset.json";
 import clinicExteriorAsset from "@/assets/hommed-clinic-exterior-v2.jpg.asset.json";
 import hommedLogoAsset from "@/assets/hommed-logo.jpg.asset.json";
+import testimonialSanjeevAsset from "@/assets/testimonial-sanjeev.jpg.asset.json";
+import testimonialRajeevAsset from "@/assets/testimonial-rajeev.jpg.asset.json";
 const drIqbalImg = drIqbalPortraitAsset.url;
 const drCertsImg = drIqbalClinicAsset.url;
 const clinicExteriorImg = clinicExteriorAsset.url;
+
 
 export const Route = createFileRoute("/")({
   component: Landing,
@@ -53,6 +56,8 @@ function Landing() {
         <DepartmentBanner />
         <ProcessSteps />
         <WhyHommed />
+        <Testimonials />
+
         <DoctorProfile />
         <TrustSection />
       <Footer />
@@ -800,7 +805,116 @@ const WHY = [
   { icon: Award, t: "10+ साल अनुभव", d: "10,000+ मरीज ठीक — प्रमाणित परिणाम।", color: "#E8A93C" },
 ];
 
+function Testimonials() {
+  const ref = useRef<HTMLElement | null>(null);
+  useRevealOnScroll(ref, { selector: ".reveal-card" });
+
+  const cases = [
+    {
+      img: testimonialSanjeevAsset.url,
+      name: "संजीव कुमार",
+      city: "कन्नौज, उत्तर प्रदेश",
+      problem: "शीघ्रपतन (Premature Ejaculation)",
+      duration: "इलाज अवधि: 4 महीने",
+      quote:
+        "पहले शर्म की वजह से किसी को बता नहीं पाता था। डॉ. इक़बाल सर ने बहुत आराम से समझाया, दवा शुरू की और 4 महीने में फ़र्क़ खुद महसूस हुआ। अब आत्मविश्वास वापस आ गया है।",
+    },
+    {
+      img: testimonialRajeevAsset.url,
+      name: "राजीव सिंह",
+      city: "रांची, झारखंड",
+      problem: "शुक्राणु की कमी (Low Sperm Count)",
+      duration: "इलाज अवधि: 5 महीने",
+      quote:
+        "शादी के 3 साल बाद भी बच्चा नहीं हो रहा था, रिपोर्ट में स्पर्म काउंट कम था। HOMMED से इलाज लिया, धीरे-धीरे रिपोर्ट सुधरी। परिवार में अब खुशखबरी है — डॉक्टर साहब का बहुत शुक्रिया।",
+    },
+  ];
+
+  return (
+    <section ref={ref} className="bg-section-alt px-3 py-6">
+      <div className="mb-4 text-center">
+        <span className="inline-block rounded-sm bg-brand-gold px-3 py-1 text-[11px] font-black uppercase tracking-wider text-[color:var(--brand-forest)] shadow-hard-sm">
+          Real Patient Stories
+        </span>
+        <h2 className="mt-3 text-[22px] font-black leading-tight text-white">
+          मरीज़ों की <span className="text-brand-gold">असली कहानियाँ</span>
+        </h2>
+        <p className="mt-1 text-[12.5px] font-medium text-[color:var(--body-dim)]">
+          सत्यापित मरीज़ · असली नाम व शहर के साथ
+        </p>
+      </div>
+
+      <div className="space-y-4">
+        {cases.map((c) => (
+          <article
+            key={c.name}
+            className="reveal-card overflow-hidden rounded-md border-2 border-brand-gold bg-card shadow-hard"
+          >
+            <div className="relative">
+              <img
+                src={c.img}
+                alt={`${c.name} — ${c.problem} — HOMMED consultation`}
+                width={1200}
+                height={800}
+                loading="lazy"
+                className="h-52 w-full object-cover"
+              />
+              <div className="absolute left-2 top-2 flex items-center gap-1 rounded-sm bg-[color:var(--brand-forest)]/95 px-2 py-1 shadow-hard-sm">
+                <CheckCircle2 size={14} className="text-[#22C55E]" fill="#22C55E" strokeWidth={2.5} />
+                <span className="text-[10.5px] font-black uppercase tracking-wide text-white">
+                  Verified Patient
+                </span>
+              </div>
+            </div>
+
+            <div className="p-4">
+              <div className="flex items-start justify-between gap-2">
+                <div className="min-w-0">
+                  <h3 className="text-[17px] font-black leading-tight text-white">{c.name}</h3>
+                  <p className="mt-0.5 flex items-center gap-1 text-[12px] font-semibold text-[color:var(--body-dim)]">
+                    <MapPin size={12} className="text-brand-gold" />
+                    {c.city}
+                  </p>
+                </div>
+                <div className="flex shrink-0 items-center gap-0.5">
+                  {[0, 1, 2, 3, 4].map((i) => (
+                    <Star key={i} size={14} className="text-brand-gold" fill="currentColor" strokeWidth={0} />
+                  ))}
+                </div>
+              </div>
+
+              <div className="mt-2 inline-flex items-center gap-1 rounded-sm border border-brand-gold bg-brand-gold/10 px-2 py-1">
+                <span className="text-[11.5px] font-black text-brand-gold">{c.problem}</span>
+              </div>
+
+              <blockquote className="mt-3 border-l-2 border-brand-gold pl-3 text-[13.5px] font-medium leading-relaxed text-white">
+                “{c.quote}”
+              </blockquote>
+
+              <div className="mt-3 flex items-center justify-between border-t border-[color:var(--card-border)] pt-2.5">
+                <span className="flex items-center gap-1 text-[11.5px] font-bold text-[color:var(--body-dim)]">
+                  <Clock size={12} className="text-brand-gold" />
+                  {c.duration}
+                </span>
+                <span className="flex items-center gap-1 text-[11.5px] font-black text-[#22C55E]">
+                  <CheckCircle2 size={12} fill="#22C55E" strokeWidth={2.5} className="text-white" />
+                  सफल परिणाम
+                </span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <p className="mt-3 text-center text-[10.5px] font-medium italic text-[color:var(--body-dim)]">
+        *परिणाम व्यक्ति और स्थिति पर निर्भर करते हैं। नाम मरीज़ की सहमति से प्रकाशित।
+      </p>
+    </section>
+  );
+}
+
 function WhyHommed() {
+
   const ref = useRef<HTMLElement | null>(null);
   useRevealOnScroll(ref);
   return (
