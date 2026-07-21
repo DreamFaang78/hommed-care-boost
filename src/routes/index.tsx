@@ -353,8 +353,26 @@ function LeadForm() {
 /* ---------------- After-Form Hero CTA ---------------- */
 
 function AfterFormHero() {
+  const ref = useRef<HTMLElement | null>(null);
+  const reduced = useReducedMotion();
+  useGSAP(
+    () => {
+      if (reduced || !ref.current) return;
+      const img = ref.current.querySelector<HTMLImageElement>(".clinic-img");
+      if (img) {
+        gsap.from(img, {
+          scale: 1.08,
+          opacity: 0,
+          duration: 0.9,
+          ease: "power2.out",
+          scrollTrigger: { trigger: img, start: "top 90%", toggleActions: "play none none none" },
+        });
+      }
+    },
+    { scope: ref, dependencies: [reduced] },
+  );
   return (
-    <section className="bg-background px-3 pb-2 pt-1">
+    <section ref={ref} className="bg-background px-3 pb-2 pt-1">
       <div className="rounded-md border-2 border-brand-gold bg-card p-3.5 shadow-hard">
         <div className="bg-brand-gold -mx-3.5 -mt-3.5 mb-4 rounded-t-md px-3 py-2.5 text-center shadow-hard-sm">
           <p className="text-[13px] font-black uppercase tracking-wider leading-tight text-[color:var(--primary-foreground)]">
@@ -366,12 +384,10 @@ function AfterFormHero() {
           <img
             src={clinicExteriorImg}
             alt="HomMed Clinic — Dr. Iqbal's Homoeopathic Centre, Jajmau, Kanpur"
-            className="block h-auto w-full object-cover"
+            className="clinic-img block h-auto w-full object-cover"
             loading="lazy"
           />
         </div>
-
-
 
         <h2 className="text-[22px] font-black leading-[1.15] text-white">
           शून्य-कम शुक्राणु, नपुंसकता एवं गुप्त रोगों का{" "}
@@ -384,7 +400,9 @@ function AfterFormHero() {
 
         <div className="mt-4 flex items-center gap-2.5 rounded-md border-2 border-brand-gold bg-[#0F2416] px-3.5 py-3 shadow-hard-sm">
           <div className="flex flex-col items-center border-r border-[color:var(--card-border)] pr-3">
-            <span className="text-2xl font-black leading-none text-brand-gold">4.9</span>
+            <span className="text-2xl font-black leading-none text-brand-gold">
+              <CountUp target={4.9} decimals={1} />
+            </span>
             <div className="mt-1 flex items-center gap-0.5 text-brand-gold">
               {[0, 1, 2, 3, 4].map((i) => (
                 <Star key={i} size={11} fill="currentColor" strokeWidth={0} />
@@ -396,7 +414,7 @@ function AfterFormHero() {
               Google Rating
             </p>
             <p className="text-[14px] font-black leading-tight text-white">
-              10,000+ मरीज ठीक हुए
+              <CountUp target={10000} suffix="+" /> मरीज ठीक हुए
             </p>
           </div>
         </div>
