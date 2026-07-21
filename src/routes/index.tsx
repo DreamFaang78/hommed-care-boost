@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import {
   Phone,
-  MessageCircle,
   Menu,
   X,
   Star,
@@ -36,9 +35,6 @@ export const Route = createFileRoute("/")({
 
 const TEL = "tel:+918707868504";
 const PHONE_DISPLAY = "+91 87078 68504";
-const WHATSAPP =
-  "https://wa.me/918707868504?text=Mujhe%20sexual%20wellness%20consultation%20chahiye";
-const WHATSAPP_PLAIN = "https://wa.me/918707868504";
 
 function Landing() {
   return (
@@ -54,9 +50,8 @@ function Landing() {
         <WhyHommed />
         <DoctorProfile />
         <TrustSection />
-        <Footer />
+      <Footer />
       </main>
-      <WhatsAppFab />
       <StickyBottomBar />
     </div>
   );
@@ -150,22 +145,6 @@ function StickyBottomBar() {
         </div>
       </div>
     </div>
-  );
-}
-
-/* ---------------- WhatsApp FAB ---------------- */
-
-function WhatsAppFab() {
-  return (
-    <a
-      href={WHATSAPP_PLAIN}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="WhatsApp पर संपर्क करें"
-      className="fixed bottom-20 right-3 z-50 grid h-12 w-12 place-items-center rounded-full bg-brand-green text-white shadow-hard ring-4 ring-[#081A0F] active:scale-95"
-    >
-      <MessageCircle size={22} fill="white" />
-    </a>
   );
 }
 
