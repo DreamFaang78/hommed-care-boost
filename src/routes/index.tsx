@@ -16,6 +16,12 @@ import {
   Mail,
   Clock,
   ChevronRight,
+  Activity,
+  Zap,
+  Moon,
+  Timer,
+  Droplet,
+  FlaskConical,
 } from "lucide-react";
 import clinicImg from "@/assets/clinic-exterior.jpg";
 import drIqbalImg from "@/assets/dr-iqbal.jpg";
@@ -65,44 +71,44 @@ function StickyHeader() {
     { href: "#contact", label: "संपर्क" },
   ];
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-border bg-white/95 backdrop-blur">
+    <header className="sticky top-0 z-40 w-full border-b border-[color:var(--card-border)] bg-[#081A0F]/95 backdrop-blur">
       <div className="mx-auto flex max-w-[440px] items-center justify-between gap-2 px-3 py-2.5">
         <a href="#top" className="flex items-center gap-1.5 shrink-0">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-brand-orange text-white font-black text-sm">
+          <span className="grid h-8 w-8 place-items-center rounded-md bg-brand-gold text-[color:var(--primary-foreground)] font-black text-sm shadow-hard-sm">
             H
           </span>
-          <span className="text-lg font-black tracking-tight text-foreground">
+          <span className="text-lg font-black tracking-tight text-white">
             HOMMED
           </span>
         </a>
         <div className="flex items-center gap-1.5">
           <a
             href="#lead"
-            className="rounded-full bg-brand-orange px-3.5 py-2 text-[13px] font-bold text-white shadow-sm active:scale-[0.98]"
+            className="rounded-md bg-brand-gold px-3.5 py-2 text-[13px] font-black tracking-wide text-[color:var(--primary-foreground)] shadow-hard-sm active:translate-y-[1px]"
           >
             अपॉइंटमेंट लें
           </a>
           <button
             aria-label="Menu"
             onClick={() => setOpen((v) => !v)}
-            className="grid h-9 w-9 place-items-center rounded-full border border-border bg-white text-foreground"
+            className="grid h-9 w-9 place-items-center rounded-md border border-[color:var(--card-border)] bg-card text-white"
           >
             {open ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
       </div>
       {open && (
-        <nav className="mx-auto max-w-[440px] border-t border-border bg-white px-3 py-2">
+        <nav className="mx-auto max-w-[440px] border-t border-[color:var(--card-border)] bg-card px-3 py-2">
           <ul className="flex flex-col">
             {links.map((l) => (
               <li key={l.href}>
                 <a
                   onClick={() => setOpen(false)}
                   href={l.href}
-                  className="flex items-center justify-between py-2.5 text-[15px] font-semibold text-foreground"
+                  className="flex items-center justify-between py-2.5 text-[15px] font-semibold text-white"
                 >
                   {l.label}
-                  <ChevronRight size={16} className="text-muted-foreground" />
+                  <ChevronRight size={16} className="text-[color:var(--body-dim)]" />
                 </a>
               </li>
             ))}
@@ -117,25 +123,25 @@ function StickyHeader() {
 
 function StickyBottomBar() {
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-white shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
+    <div className="fixed inset-x-0 bottom-0 z-40 border-t-2 border-brand-gold bg-[#081A0F] shadow-[0_-6px_20px_rgba(0,0,0,0.6)]">
       <div className="mx-auto grid max-w-[440px] grid-cols-[auto_1fr_auto] items-center gap-2 px-3 py-2">
         <img
           src={drIqbalImg}
           alt="Dr. Iqbal Quasim"
           width={40}
           height={40}
-          className="h-10 w-10 shrink-0 rounded-full object-cover ring-2 ring-brand-green"
+          className="h-10 w-10 shrink-0 rounded-full object-cover ring-2 ring-brand-gold"
         />
         <a
           href={TEL}
-          className="flex min-w-0 items-center justify-center gap-1.5 rounded-full bg-gradient-to-r from-[color:var(--brand-blue)] to-[color:var(--brand-blue-2)] px-3 py-2.5 text-[13px] font-bold text-white shadow-sm active:scale-[0.98]"
+          className="flex min-w-0 items-center justify-center gap-1.5 rounded-md bg-gradient-to-r from-[color:var(--brand-blue)] to-[color:var(--brand-blue-2)] px-3 py-2.5 text-[14px] font-black tracking-wide text-white shadow-hard-sm active:translate-y-[1px]"
         >
           <Phone size={16} className="shrink-0" />
           <span className="truncate">अभी कॉल करें</span>
         </a>
         <div className="flex shrink-0 items-center gap-1.5">
           <span className="pulse-dot inline-block h-2.5 w-2.5 rounded-full bg-brand-green" />
-          <span className="pulse-text text-[11px] font-bold leading-tight text-brand-green-dark">
+          <span className="pulse-text text-[11px] font-black leading-tight text-brand-green">
             डॉक्टर<br />ऑनलाइन
           </span>
         </div>
@@ -153,9 +159,30 @@ function WhatsAppFab() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="WhatsApp पर संपर्क करें"
-      className="fixed bottom-20 right-3 z-50 grid h-12 w-12 place-items-center rounded-full bg-brand-green text-white shadow-lg ring-4 ring-white active:scale-95"
+      className="fixed bottom-20 right-3 z-50 grid h-12 w-12 place-items-center rounded-full bg-brand-green text-white shadow-hard ring-4 ring-[#081A0F] active:scale-95"
     >
       <MessageCircle size={22} fill="white" />
+    </a>
+  );
+}
+
+/* ---------------- Online Nudge (reusable, bold gradient) ---------------- */
+
+function OnlineNudge() {
+  return (
+    <a
+      href={TEL}
+      className="my-3 flex items-center justify-between gap-2 rounded-md bg-gradient-to-r from-brand-green-dark via-[#3d7a2f] to-brand-gold p-[1.5px] shadow-hard-sm"
+    >
+      <div className="flex w-full items-center justify-between gap-2 rounded-md bg-[#0C2416] px-3 py-2.5">
+        <span className="flex items-center gap-2 text-[13.5px] font-black text-white">
+          <span className="pulse-dot h-3 w-3 rounded-full bg-brand-green ring-2 ring-brand-green/40" />
+          Dr. Iqbal अभी ऑनलाइन हैं
+        </span>
+        <span className="flex items-center gap-1 rounded-md bg-brand-gold px-3 py-1.5 text-[12.5px] font-black tracking-wide text-[color:var(--primary-foreground)]">
+          <Phone size={13} strokeWidth={3} /> कॉल करें
+        </span>
+      </div>
     </a>
   );
 }
@@ -164,51 +191,55 @@ function WhatsAppFab() {
 
 function Hero() {
   return (
-    <section id="top" className="relative bg-white">
+    <section id="top" className="relative bg-background">
       <div className="relative">
         <img
           src={clinicImg}
           alt="HOMMED Clinic, Civil Lines, Kanpur"
           width={1280}
           height={800}
-          className="h-56 w-full object-cover"
+          className="h-72 w-full object-cover"
         />
-        <div className="absolute inset-x-0 top-0 bg-[color:var(--brand-yellow)]/95 px-3 py-2 text-center">
-          <p className="text-[13px] font-extrabold leading-tight text-foreground">
+        <div className="absolute inset-x-0 top-0 bg-brand-gold px-3 py-2 text-center shadow-hard-sm">
+          <p className="text-[13px] font-black uppercase tracking-wider leading-tight text-[color:var(--primary-foreground)]">
             कानपुर का सबसे भरोसेमंद होम्योपैथिक सेंटर
           </p>
         </div>
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-3 pb-2 pt-8">
-          <p className="flex items-center gap-1 text-[12px] font-semibold text-white">
-            <MapPin size={13} /> Civil Lines, Kanpur, Uttar Pradesh – 208001
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#0A1F12] via-[#0A1F12]/85 to-transparent px-3 pb-3 pt-16">
+          <p className="flex items-center gap-1.5 text-[12.5px] font-bold text-white">
+            <MapPin size={14} className="text-brand-gold" />
+            Civil Lines, Kanpur, Uttar Pradesh – 208001
           </p>
         </div>
       </div>
 
-      <div className="px-4 pb-4 pt-5">
-        <h1 className="text-[22px] font-black leading-tight text-foreground">
-          शून्य-कम शुक्राणु, नपुंसकता एवं अन्य गुप्त रोगों का{" "}
-          <span className="text-brand-orange">जड़ से इलाज</span> मात्र{" "}
-          <span className="rounded-md bg-[color:var(--brand-yellow)] px-1.5 py-0.5">
+      <div className="px-4 pb-5 pt-5">
+        <h1 className="text-[24px] font-black leading-[1.15] text-white">
+          शून्य-कम शुक्राणु, नपुंसकता एवं गुप्त रोगों का{" "}
+          <span className="text-brand-gold">जड़ से इलाज</span> मात्र{" "}
+          <span className="rounded-md bg-brand-gold px-2 py-0.5 text-[color:var(--primary-foreground)]">
             ₹1599
           </span>{" "}
           में
         </h1>
 
-        <div className="mt-3 flex flex-wrap items-center gap-2 rounded-xl border border-border bg-section-alt px-3 py-2">
-          <div className="flex items-center gap-1 text-brand-orange">
-            <span className="text-base font-black text-foreground">4.9</span>
-            {[0, 1, 2, 3, 4].map((i) => (
-              <Star key={i} size={14} fill="currentColor" strokeWidth={0} />
-            ))}
+        <div className="mt-4 flex items-center gap-2.5 rounded-md border-2 border-brand-gold bg-card px-3.5 py-3 shadow-hard-sm">
+          <div className="flex flex-col items-center border-r border-[color:var(--card-border)] pr-3">
+            <span className="text-2xl font-black leading-none text-brand-gold">4.9</span>
+            <div className="mt-1 flex items-center gap-0.5 text-brand-gold">
+              {[0, 1, 2, 3, 4].map((i) => (
+                <Star key={i} size={11} fill="currentColor" strokeWidth={0} />
+              ))}
+            </div>
           </div>
-          <span className="text-[12px] font-semibold text-muted-foreground">
-            Google Rating
-          </span>
-          <span className="text-muted-foreground">|</span>
-          <span className="text-[12px] font-bold text-foreground">
-            10,000+ मरीज ठीक हुए
-          </span>
+          <div className="min-w-0">
+            <p className="text-[11px] font-bold uppercase tracking-wider text-[color:var(--body-dim)]">
+              Google Rating
+            </p>
+            <p className="text-[14px] font-black leading-tight text-white">
+              10,000+ मरीज ठीक हुए
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -244,54 +275,56 @@ function LeadForm() {
     if (!name.trim()) return setErr("कृपया अपना नाम भरें");
     if (!/^[6-9]\d{9}$/.test(mobile))
       return setErr("कृपया सही मोबाइल नंबर भरें (10 अंक)");
-    // Silence unused warnings while keeping fields captured for future backend
     void duration;
     void problems;
     setSubmitted(true);
   };
 
+  const inputCls =
+    "w-full rounded-md border-2 border-[color:var(--card-border)] bg-[#0C2416] px-3.5 py-3 text-[15px] font-semibold text-white outline-none placeholder:text-[color:var(--body-dim)]/70 focus:border-brand-gold";
+
   return (
-    <section id="lead" className="bg-white px-3 py-5">
-      <div className="rounded-2xl bg-[color:var(--brand-yellow)] p-4 shadow-sm ring-1 ring-black/5">
+    <section id="lead" className="bg-background px-3 py-4">
+      <div className="rounded-md border-2 border-brand-gold bg-card p-4 shadow-hard">
         {submitted ? (
-          <div className="text-center py-4">
-            <div className="mx-auto mb-3 grid h-14 w-14 place-items-center rounded-full bg-brand-green text-white">
+          <div className="py-4 text-center">
+            <div className="mx-auto mb-3 grid h-14 w-14 place-items-center rounded-full bg-brand-green text-white shadow-hard-sm">
               <Check size={28} strokeWidth={3} />
             </div>
-            <h2 className="text-lg font-black text-foreground">
+            <h2 className="text-lg font-black text-white">
               धन्यवाद! हमारी टीम जल्द सम्पर्क करेगी।
             </h2>
-            <p className="mt-1 text-sm text-muted-foreground">
+            <p className="mt-1 text-sm text-[color:var(--body-dim)]">
               आपकी पहचान गुप्त रखी जायेगी।
             </p>
             <a
               href={TEL}
-              className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-full bg-gradient-to-r from-[color:var(--brand-blue)] to-[color:var(--brand-blue-2)] px-5 py-2.5 text-sm font-bold text-white"
+              className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-md bg-gradient-to-r from-[color:var(--brand-blue)] to-[color:var(--brand-blue-2)] px-5 py-3 text-[14px] font-black tracking-wide text-white shadow-hard-sm"
             >
               <Phone size={16} /> अभी कॉल करें
             </a>
           </div>
         ) : (
           <>
-            <h2 className="text-[17px] font-black leading-snug text-foreground">
-              क्या आप शून्य शुक्राणु एवं अन्य गुप्त रोगों से परेशान हैं?
+            <h2 className="text-[19px] font-black leading-snug text-white">
+              क्या आप <span className="text-brand-gold">शून्य शुक्राणु</span> एवं गुप्त रोगों से परेशान हैं?
             </h2>
-            <p className="mt-1 text-[13px] text-muted-foreground">
+            <p className="mt-1 text-[13px] font-semibold text-[color:var(--body-dim)]">
               आज ही Dr. Iqbal से मुफ्त सलाह लें…
             </p>
 
             <div className="mt-3 grid grid-cols-2 gap-2">
               <a
                 href={TEL}
-                className="flex items-center justify-center gap-1.5 rounded-full bg-gradient-to-r from-[color:var(--brand-blue)] to-[color:var(--brand-blue-2)] px-3 py-2.5 text-[13px] font-bold text-white active:scale-[0.98]"
+                className="flex items-center justify-center gap-1.5 rounded-md bg-gradient-to-r from-[color:var(--brand-blue)] to-[color:var(--brand-blue-2)] px-3 py-2.5 text-[13.5px] font-black tracking-wide text-white shadow-hard-sm"
               >
-                <Phone size={15} /> Call now
+                <Phone size={15} /> Call Now
               </a>
               <a
                 href={WHATSAPP}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-1.5 rounded-full bg-brand-green px-3 py-2.5 text-[13px] font-bold text-white active:scale-[0.98]"
+                className="flex items-center justify-center gap-1.5 rounded-md bg-brand-green px-3 py-2.5 text-[13.5px] font-black tracking-wide text-white shadow-hard-sm"
               >
                 <MessageCircle size={15} /> WhatsApp
               </a>
@@ -304,7 +337,7 @@ function LeadForm() {
                 onChange={(e) => setName(e.target.value)}
                 placeholder="आपका नाम"
                 maxLength={80}
-                className="w-full rounded-xl border border-border bg-white px-3.5 py-3 text-[15px] font-medium outline-none placeholder:text-muted-foreground focus:border-brand-orange"
+                className={inputCls}
               />
               <input
                 type="tel"
@@ -315,12 +348,12 @@ function LeadForm() {
                 inputMode="numeric"
                 pattern="[6-9][0-9]{9}"
                 placeholder="मोबाइल नंबर (10 अंक)"
-                className="w-full rounded-xl border border-border bg-white px-3.5 py-3 text-[15px] font-medium outline-none focus:border-brand-orange"
+                className={inputCls}
               />
               <select
                 value={duration}
                 onChange={(e) => setDuration(e.target.value)}
-                className="w-full rounded-xl border border-border bg-white px-3.5 py-3 text-[15px] font-medium outline-none focus:border-brand-orange"
+                className={inputCls}
               >
                 <option value="">आपको कितने दिनों से समस्या है?</option>
                 <option>1 महीने से कम</option>
@@ -329,8 +362,8 @@ function LeadForm() {
                 <option>1 साल से ज़्यादा</option>
               </select>
 
-              <div className="rounded-xl border border-border bg-white p-3">
-                <p className="mb-2 text-[13px] font-bold text-foreground">
+              <div className="rounded-md border-2 border-[color:var(--card-border)] bg-[#0C2416] p-3">
+                <p className="mb-2 text-[13px] font-black text-white">
                   आपकी समस्या (एक या अधिक चुनें)
                 </p>
                 <div className="flex flex-wrap gap-1.5">
@@ -342,10 +375,10 @@ function LeadForm() {
                         key={p}
                         onClick={() => toggle(p)}
                         className={
-                          "rounded-full px-3 py-1.5 text-[12.5px] font-semibold transition " +
+                          "rounded-md px-3 py-1.5 text-[12.5px] font-bold transition " +
                           (active
-                            ? "bg-brand-orange text-white"
-                            : "border border-border bg-white text-foreground")
+                            ? "bg-brand-gold text-[color:var(--primary-foreground)]"
+                            : "border border-[color:var(--card-border)] bg-card text-white")
                         }
                       >
                         {active ? "✓ " : ""}
@@ -357,21 +390,20 @@ function LeadForm() {
               </div>
 
               {err && (
-                <p className="text-[12.5px] font-semibold text-destructive">
+                <p className="text-[12.5px] font-bold text-destructive">
                   {err}
                 </p>
               )}
 
               <button
                 type="submit"
-                className="w-full rounded-full bg-brand-orange px-4 py-3.5 text-[15px] font-black text-white shadow-md active:scale-[0.99]"
+                className="w-full rounded-md bg-brand-gold px-4 py-3.5 text-[16px] font-black tracking-wide text-[color:var(--primary-foreground)] shadow-hard active:translate-y-[1px]"
               >
                 शुरुआत करें →
               </button>
 
-              <p className="pt-1 text-center text-[11.5px] leading-snug text-muted-foreground">
-                🔒 आपकी पहचान गुप्त रखी जायेगी — Yahan judgment nahi, sirf ilaaj
-                hai.
+              <p className="pt-1 text-center text-[11.5px] font-semibold leading-snug text-[color:var(--body-dim)]">
+                🔒 आपकी पहचान गुप्त रखी जायेगी — Yahan judgment nahi, sirf ilaaj hai.
               </p>
             </form>
           </>
@@ -385,10 +417,10 @@ function LeadForm() {
 
 const BADGES_A = [
   "4.9★ Google Rating, 98% Permanent Relief",
-  "क्लीनिक एवं ऑनलाइन परामर्श की सुविधा (Kanpur में क्लिनिक, पूरे India में ऑनलाइन)",
+  "क्लीनिक एवं ऑनलाइन परामर्श की सुविधा",
   "₹1599 में 25 दिन की दवा",
   "3–5 महीने का Course* (T&C Apply)",
-  "शुक्राणु की कमी (Low Sperm Count) का इलाज",
+  "शुक्राणु की कमी (Low Sperm) का इलाज",
 ];
 const BADGES_B = [
   "नपुंसकता (Erectile Dysfunction) का इलाज",
@@ -400,14 +432,14 @@ const BADGES_B = [
 
 function TrustBadges() {
   return (
-    <section className="bg-section-alt px-3 py-6">
-      <h2 className="mb-3 text-center text-lg font-black text-foreground">
-        क्यों हज़ारों मरीज़ हम पर भरोसा करते हैं
+    <section className="bg-section-alt px-3 py-5">
+      <h2 className="mb-3 text-center text-[22px] font-black leading-tight text-white">
+        क्यों हज़ारों मरीज़ हम पर <span className="text-brand-gold">भरोसा</span> करते हैं
       </h2>
       <BadgeList items={BADGES_A} />
-      <MiniCallNudge />
+      <OnlineNudge />
       <BadgeList items={BADGES_B} />
-      <MiniCallNudge />
+      <OnlineNudge />
     </section>
   );
 }
@@ -418,12 +450,12 @@ function BadgeList({ items }: { items: string[] }) {
       {items.map((t) => (
         <li
           key={t}
-          className="flex items-start gap-2.5 rounded-xl bg-white p-3 shadow-sm ring-1 ring-black/5"
+          className="flex items-start gap-2.5 rounded-md border border-[color:var(--card-border)] bg-card p-3 shadow-hard-sm"
         >
-          <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-brand-green text-white">
+          <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-md bg-brand-green text-white">
             <Check size={14} strokeWidth={3} />
           </span>
-          <span className="text-[14px] font-semibold leading-snug text-foreground">
+          <span className="text-[14px] font-bold leading-snug text-white">
             {t}
           </span>
         </li>
@@ -432,94 +464,102 @@ function BadgeList({ items }: { items: string[] }) {
   );
 }
 
-function MiniCallNudge() {
-  return (
-    <a
-      href={TEL}
-      className="my-3 flex items-center justify-between gap-2 rounded-xl bg-white p-3 shadow-sm ring-1 ring-brand-green/30"
-    >
-      <span className="flex items-center gap-2 text-[13.5px] font-bold text-foreground">
-        <span className="pulse-dot h-2.5 w-2.5 rounded-full bg-brand-green" />
-        Dr. Iqbal अभी ऑनलाइन हैं
-      </span>
-      <span className="rounded-full bg-gradient-to-r from-[color:var(--brand-blue)] to-[color:var(--brand-blue-2)] px-3 py-1.5 text-[12px] font-bold text-white">
-        अभी कॉल करें
-      </span>
-    </a>
-  );
-}
-
-/* ---------------- Problem Grid ---------------- */
+/* ---------------- Problem Grid (1-col with vivid icons + gold accent) ---------------- */
 
 const PROBLEM_CARDS = [
   {
     t: "शुक्राणु की कमी",
-    en: "Low Sperm Count",
-    d: "टेस्टिकल्स में दर्द, सूजन, हार्मोन असामान्यता",
+    en: "LOW SPERM COUNT",
+    d: "टेस्टिकल्स में दर्द, सूजन, हार्मोन असामान्यता, चेहरे के बाल कम होना।",
+    icon: FlaskConical,
+    color: "#EC4899",
+    accent: "#EC4899",
   },
   {
     t: "स्तंभनदोष / नपुंसकता",
-    en: "Erectile Dysfunction",
-    d: "इरेक्शन बनाए रखने में असमर्थता",
+    en: "ERECTILE DYSFUNCTION",
+    d: "इरेक्शन बनाए रखने में असमर्थता, कमज़ोरी, आत्मविश्वास की कमी।",
+    icon: Zap,
+    color: "#F97316",
+    accent: "#F97316",
   },
   {
     t: "स्वप्नदोष",
-    en: "Nightfall",
-    d: "गीले सपने की समस्या",
+    en: "NIGHTFALL",
+    d: "गीले सपने, अनियंत्रित स्खलन एवं शारीरिक कमज़ोरी।",
+    icon: Moon,
+    color: "#8B5CF6",
+    accent: "#8B5CF6",
   },
   {
     t: "शीघ्रपतन",
-    en: "Premature Ejaculation",
-    d: "अपेक्षा से जल्दी स्खलन",
+    en: "PREMATURE EJACULATION",
+    d: "अपेक्षा से जल्दी स्खलन, संबंधों में असंतुष्टि।",
+    icon: Timer,
+    color: "#EF4444",
+    accent: "#EF4444",
   },
   {
     t: "प्रोस्टेट और मूत्राशय",
-    en: "Prostate & Urinary Bladder",
-    d: "मूत्र संबंधी परेशानी, जलन, बार-बार पेशाब",
+    en: "PROSTATE & URINARY BLADDER",
+    d: "मूत्र संबंधी परेशानी, जलन, बार-बार पेशाब आना।",
+    icon: Droplet,
+    color: "#14B8A6",
+    accent: "#14B8A6",
   },
   {
     t: "धातरोग",
-    en: "Spermatorrhoea",
-    d: "पेशाब के साथ धातु निकलना, कमज़ोरी",
+    en: "SPERMATORRHOEA",
+    d: "पेशाब के साथ धातु निकलना, गंभीर कमज़ोरी।",
+    icon: Activity,
+    color: "#3B82F6",
+    accent: "#3B82F6",
   },
 ];
 
 function ProblemGrid() {
-  const rows: (typeof PROBLEM_CARDS)[] = [];
-  for (let i = 0; i < PROBLEM_CARDS.length; i += 2) {
-    rows.push(PROBLEM_CARDS.slice(i, i + 2));
-  }
   return (
-    <section id="problems" className="bg-white px-3 py-6">
-      <h2 className="mb-4 text-center text-lg font-black text-foreground">
-        हम किन रोगों का इलाज करते हैं?
+    <section id="problems" className="bg-background px-3 py-6">
+      <h2 className="mb-4 text-center text-[22px] font-black leading-tight text-white">
+        हम किन <span className="text-brand-gold">रोगों</span> का इलाज करते हैं?
       </h2>
-      {rows.map((row, i) => (
-        <div key={i}>
-          <div className="mb-3 grid grid-cols-2 gap-2.5">
-            {row.map((c) => (
+      <div className="space-y-2.5">
+        {PROBLEM_CARDS.map((c, i) => {
+          const Icon = c.icon;
+          return (
+            <div key={c.t}>
               <div
-                key={c.t}
-                className="flex flex-col rounded-xl border border-border bg-section-alt p-3"
+                className="relative overflow-hidden rounded-md border border-[color:var(--card-border)] bg-card p-3 pl-4 shadow-hard-sm"
+                style={{ borderLeftWidth: 4, borderLeftColor: c.accent }}
               >
-                <div className="grid h-9 w-9 place-items-center rounded-lg bg-brand-orange/10 text-brand-orange">
-                  <Stethoscope size={18} />
+                <div className="flex items-start gap-3">
+                  <div
+                    className="grid h-14 w-14 shrink-0 place-items-center rounded-md text-white shadow-hard-sm"
+                    style={{ background: c.color }}
+                  >
+                    <Icon size={28} strokeWidth={2.4} />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <h3 className="text-[16px] font-black leading-tight text-white">
+                      {c.t}
+                    </h3>
+                    <p className="mt-0.5 text-[11px] font-black uppercase tracking-wider text-brand-gold">
+                      {c.en}
+                    </p>
+                    <p className="mt-1.5 text-[12.5px] font-medium leading-snug text-[color:var(--body-dim)]">
+                      {c.d}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="mt-2 text-[13.5px] font-black leading-tight text-foreground">
-                  {c.t}
-                </h3>
-                <p className="text-[10.5px] font-semibold uppercase tracking-wide text-brand-orange">
-                  {c.en}
-                </p>
-                <p className="mt-1 text-[11.5px] leading-snug text-muted-foreground">
-                  {c.d}
-                </p>
               </div>
-            ))}
-          </div>
-          <MiniCallNudge />
-        </div>
-      ))}
+              {i % 2 === 1 && i < PROBLEM_CARDS.length - 1 && <OnlineNudge />}
+            </div>
+          );
+        })}
+      </div>
+      <div className="mt-3">
+        <OnlineNudge />
+      </div>
     </section>
   );
 }
@@ -528,32 +568,31 @@ function ProblemGrid() {
 
 function DepartmentBanner() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[color:var(--brand-purple)] via-[#5b21b6] to-[color:var(--brand-teal)] px-4 py-7 text-white">
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#061309] via-[#0A1F12] to-[#000000] px-4 py-7 text-white">
+      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-brand-gold to-transparent" />
       <div className="text-center">
-        <p className="text-[11px] font-bold uppercase tracking-widest text-white/70">
-          Introducing
-        </p>
-        <h2 className="mt-1 text-xl font-black leading-tight">
-          HOMMED Men's Wellness Department
+        <h2 className="text-[24px] font-black leading-tight tracking-tight text-white">
+          HOMMED <span className="text-brand-gold">Men's Wellness</span>
+          <br />Department
         </h2>
+        <div className="mx-auto mt-2 h-[3px] w-16 bg-brand-gold" />
       </div>
       <div className="mx-auto mt-5 w-fit">
         <div className="relative">
-          <div className="absolute -inset-2 rounded-full bg-white/20 blur-xl" />
+          <div className="absolute -inset-3 rounded-full bg-brand-gold/25 blur-xl" />
           <img
             src={drIqbalImg}
             alt="Dr. Iqbal Quasim"
             width={240}
             height={240}
-            className="relative h-40 w-40 rounded-full object-cover ring-4 ring-white/70"
+            className="relative h-44 w-44 rounded-full object-cover ring-4 ring-brand-gold shadow-hard"
           />
         </div>
       </div>
       <div className="mt-4 text-center">
-        <p className="text-[15px] font-black">Dr. Iqbal Quasim</p>
-        <p className="mx-auto mt-1 max-w-[320px] text-[12px] font-medium text-white/85">
-          Chief Homoeopathic Consultant &amp; Founder | BHMS | 10+ Years
-          Experience
+        <p className="text-[17px] font-black text-white">Dr. Iqbal Quasim</p>
+        <p className="mx-auto mt-1 max-w-[320px] text-[12.5px] font-semibold text-[color:var(--body-dim)]">
+          Chief Homoeopathic Consultant &amp; Founder · BHMS · 10+ Years Experience
         </p>
       </div>
       <div className="mt-4 flex flex-wrap justify-center gap-1.5">
@@ -565,12 +604,18 @@ function DepartmentBanner() {
         ].map((c) => (
           <span
             key={c}
-            className="rounded-full bg-white/15 px-3 py-1.5 text-[11.5px] font-semibold ring-1 ring-white/25 backdrop-blur"
+            className="rounded-md border-2 border-brand-gold bg-brand-gold/10 px-3 py-1.5 text-[11.5px] font-black tracking-wide text-brand-gold"
           >
             {c}
           </span>
         ))}
       </div>
+      <a
+        href={TEL}
+        className="mt-5 flex items-center justify-center gap-2 rounded-md bg-brand-gold px-4 py-3 text-[15px] font-black tracking-wide text-[color:var(--primary-foreground)] shadow-hard"
+      >
+        <Phone size={16} strokeWidth={3} /> अभी कंसल्ट करें — {PHONE_DISPLAY}
+      </a>
     </section>
   );
 }
@@ -580,47 +625,50 @@ function DepartmentBanner() {
 const STEPS = [
   {
     t: "Call / WhatsApp करें",
-    d: `${PHONE_DISPLAY} पर सम्पर्क करें`,
+    d: `${PHONE_DISPLAY} पर सम्पर्क करें।`,
+    color: "#EC4899",
   },
   {
     t: "Appointment fix करें",
-    d: "Civil Lines clinic या Online — अपनी सुविधा अनुसार",
+    d: "Civil Lines clinic या Online — अपनी सुविधा अनुसार।",
+    color: "#F97316",
   },
   {
     t: "Dr. Iqbal personally केस देखेंगे",
-    d: "आपके symptoms, history को ध्यान से समझेंगे",
+    d: "आपके symptoms एवं history को ध्यान से समझेंगे।",
+    color: "#14B8A6",
   },
   {
     t: "दवाएं घर तक डिलीवर",
-    d: "पूरी गोपनीयता के साथ + follow-up भी",
+    d: "पूरी गोपनीयता के साथ + follow-up भी।",
+    color: "#3B82F6",
   },
 ];
 
 function ProcessSteps() {
   return (
     <section id="process" className="bg-section-alt px-4 py-6">
-      <h2 className="mb-5 text-center text-lg font-black text-foreground">
-        हमारा प्लान कैसे काम करता है?
+      <h2 className="mb-4 text-center text-[22px] font-black leading-tight text-white">
+        हमारा <span className="text-brand-gold">प्लान</span> कैसे काम करता है?
       </h2>
-      <ol className="relative space-y-3">
+      <ol className="space-y-2.5">
         {STEPS.map((s, i) => (
           <li
             key={s.t}
-            className="flex items-start gap-3 rounded-xl bg-white p-3.5 shadow-sm ring-1 ring-black/5"
+            className="flex items-start gap-3 rounded-md border border-[color:var(--card-border)] bg-card p-3 shadow-hard-sm"
+            style={{ borderLeftWidth: 4, borderLeftColor: s.color }}
           >
-            <div className="relative">
-              <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-brand-orange font-black text-white">
-                {i + 1}
-              </div>
-              <span className="absolute -right-1 -top-1 grid h-4 w-4 place-items-center rounded-full bg-brand-green text-white ring-2 ring-white">
-                <Check size={10} strokeWidth={3} />
-              </span>
+            <div
+              className="grid h-11 w-11 shrink-0 place-items-center rounded-md text-white font-black text-[17px] shadow-hard-sm"
+              style={{ background: s.color }}
+            >
+              {i + 1}
             </div>
             <div className="min-w-0">
-              <h3 className="text-[14.5px] font-black text-foreground">
+              <h3 className="text-[15px] font-black leading-tight text-white">
                 Step {i + 1}: {s.t}
               </h3>
-              <p className="mt-0.5 text-[12.5px] text-muted-foreground">
+              <p className="mt-0.5 text-[12.5px] font-medium text-[color:var(--body-dim)]">
                 {s.d}
               </p>
             </div>
@@ -629,9 +677,9 @@ function ProcessSteps() {
       </ol>
       <a
         href={TEL}
-        className="mt-4 flex items-center justify-center gap-2 rounded-full bg-brand-orange px-4 py-3 text-[14px] font-black text-white shadow-md"
+        className="mt-4 flex items-center justify-center gap-2 rounded-md bg-brand-gold px-4 py-3.5 text-[15px] font-black tracking-wide text-[color:var(--primary-foreground)] shadow-hard"
       >
-        <Phone size={16} /> अभी शुरुआत करें
+        <Phone size={16} strokeWidth={3} /> अभी शुरुआत करें
       </a>
     </section>
   );
@@ -640,31 +688,34 @@ function ProcessSteps() {
 /* ---------------- Why HOMMED ---------------- */
 
 const WHY = [
-  { icon: ShieldCheck, t: "पूर्ण रूप से गुप्त", d: "Privacy first — कोई पहचान लीक नहीं" },
-  { icon: Truck, t: "घर तक डिलीवरी", d: "पूरे भारत में गोपनीय पैकिंग" },
-  { icon: Stethoscope, t: "ऑनलाइन एवं क्लिनिक परामर्श", d: "आपकी सुविधा अनुसार" },
-  { icon: Leaf, t: "कोई केमिकल नहीं, कोई साइड इफेक्ट नहीं", d: "प्राकृतिक होम्योपैथी" },
-  { icon: Award, t: "10+ साल अनुभव, 10,000+ मरीज ठीक", d: "प्रमाणित परिणाम" },
+  { icon: ShieldCheck, t: "पूर्ण रूप से गुप्त", d: "Privacy first — कोई पहचान लीक नहीं।", color: "#22c55e" },
+  { icon: Truck, t: "घर तक डिलीवरी", d: "पूरे भारत में गोपनीय पैकिंग।", color: "#F97316" },
+  { icon: Stethoscope, t: "ऑनलाइन एवं क्लिनिक परामर्श", d: "आपकी सुविधा अनुसार।", color: "#3B82F6" },
+  { icon: Leaf, t: "कोई साइड इफेक्ट नहीं", d: "प्राकृतिक होम्योपैथी — केमिकल-मुक्त।", color: "#14B8A6" },
+  { icon: Award, t: "10+ साल अनुभव", d: "10,000+ मरीज ठीक — प्रमाणित परिणाम।", color: "#E8A93C" },
 ];
 
 function WhyHommed() {
   return (
-    <section className="bg-white px-3 py-6">
-      <h2 className="mb-4 text-center text-lg font-black text-foreground">
-        इलाज के लिए HOMMED क्यों चुनें?
+    <section className="bg-background px-3 py-6">
+      <h2 className="mb-4 text-center text-[22px] font-black leading-tight text-white">
+        इलाज के लिए <span className="text-brand-gold">HOMMED</span> क्यों चुनें?
       </h2>
-      <div className="space-y-2.5">
+      <div className="space-y-2">
         {WHY.map((w) => (
           <div
             key={w.t}
-            className="flex items-start gap-3 rounded-xl border border-border bg-section-alt p-3.5"
+            className="flex items-start gap-3 rounded-md border border-[color:var(--card-border)] bg-card p-3 shadow-hard-sm"
           >
-            <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand-orange/10 text-brand-orange">
-              <w.icon size={22} />
+            <div
+              className="grid h-12 w-12 shrink-0 place-items-center rounded-md text-white shadow-hard-sm"
+              style={{ background: w.color }}
+            >
+              <w.icon size={24} strokeWidth={2.4} />
             </div>
             <div className="min-w-0">
-              <h3 className="text-[14.5px] font-black text-foreground">{w.t}</h3>
-              <p className="mt-0.5 text-[12.5px] text-muted-foreground">{w.d}</p>
+              <h3 className="text-[15px] font-black text-white">{w.t}</h3>
+              <p className="mt-0.5 text-[12.5px] font-medium text-[color:var(--body-dim)]">{w.d}</p>
             </div>
           </div>
         ))}
@@ -678,39 +729,37 @@ function WhyHommed() {
 function DoctorProfile() {
   return (
     <section id="doctor" className="bg-section-alt px-3 py-6">
-      <h2 className="mb-4 text-center text-lg font-black text-foreground">
-        आपके डॉक्टर से मिलिए
+      <h2 className="mb-4 text-center text-[22px] font-black leading-tight text-white">
+        आपके <span className="text-brand-gold">डॉक्टर</span> से मिलिए
       </h2>
-      <div className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5">
+      <div className="overflow-hidden rounded-md border-2 border-brand-gold bg-card shadow-hard">
         <img
           src={drCertsImg}
           alt="Dr. Iqbal Quasim with framed certificates"
           width={1100}
           height={900}
           loading="lazy"
-          className="h-52 w-full object-cover"
+          className="h-56 w-full object-cover"
         />
         <div className="p-4">
-          <h3 className="text-lg font-black text-foreground">
-            Dr. Iqbal Quasim
-          </h3>
-          <p className="mt-0.5 text-[12.5px] font-semibold text-muted-foreground">
+          <h3 className="text-[20px] font-black text-white">Dr. Iqbal Quasim</h3>
+          <p className="mt-0.5 text-[12.5px] font-bold text-[color:var(--body-dim)]">
             BHMS (Bachelor of Homeopathic Medicine &amp; Surgery)
             <br />
             10+ Years Clinical Experience
           </p>
-          <div className="mt-3 flex items-start gap-2 rounded-xl bg-[color:var(--brand-yellow)] p-3 ring-1 ring-black/5">
-            <Award size={18} className="mt-0.5 shrink-0 text-brand-orange" />
-            <p className="text-[13px] font-bold leading-snug text-foreground">
+          <div className="mt-3 flex items-start gap-2 rounded-md bg-brand-gold/10 border border-brand-gold p-3">
+            <Award size={20} className="mt-0.5 shrink-0 text-brand-gold" />
+            <p className="text-[13.5px] font-black leading-snug text-white">
               Homoeopathic Icon Award 2025
-              <span className="block text-[11.5px] font-semibold text-muted-foreground">
+              <span className="mt-0.5 block text-[11.5px] font-semibold text-[color:var(--body-dim)]">
                 KGMU, Lucknow द्वारा सम्मानित
               </span>
             </p>
           </div>
           <a
             href="#lead"
-            className="mt-3 inline-flex text-[13px] font-bold text-brand-blue underline"
+            className="mt-3 inline-flex text-[13px] font-black text-brand-gold underline"
           >
             और पढ़ें…
           </a>
@@ -723,54 +772,62 @@ function DoctorProfile() {
 /* ---------------- Trust Section ---------------- */
 
 const STATS = [
-  { n: "10,000+", l: "संतुष्ट मरीज" },
-  { n: "4.9★", l: "Google Rating" },
-  { n: "98%", l: "Permanent Relief" },
-  { n: "10+ साल", l: "क्लिनिकल अनुभव" },
+  { n: "10,000+", l: "संतुष्ट मरीज", color: "#EC4899" },
+  { n: "4.9★", l: "Google Rating", color: "#E8A93C" },
+  { n: "98%", l: "Permanent Relief", color: "#22c55e" },
+  { n: "10+", l: "साल का अनुभव", color: "#3B82F6" },
 ];
 
 function TrustSection() {
   return (
-    <section className="bg-white px-3 py-6">
-      <h2 className="text-center text-lg font-black text-foreground">
-        10,000+ मरीजों का भरोसा
+    <section className="bg-background px-3 py-6">
+      <h2 className="text-center text-[24px] font-black leading-tight text-white">
+        <span className="text-brand-gold">10,000+</span> मरीजों का भरोसा
       </h2>
-      <p className="mt-1 text-center text-[12.5px] text-muted-foreground">
+      <p className="mt-1 text-center text-[12.5px] font-semibold text-[color:var(--body-dim)]">
         कानपुर से शुरू, पूरे भारत तक पहुँच
       </p>
 
-      <div className="mt-4 grid grid-cols-2 gap-2.5">
+      <div className="mt-4 grid grid-cols-2 gap-2">
         {STATS.map((s) => (
           <div
             key={s.l}
-            className="rounded-xl bg-section-alt p-3.5 text-center ring-1 ring-black/5"
+            className="rounded-md border border-[color:var(--card-border)] bg-card p-3.5 text-center shadow-hard-sm"
+            style={{ borderTopWidth: 3, borderTopColor: s.color }}
           >
-            <p className="text-xl font-black text-brand-orange">{s.n}</p>
-            <p className="mt-0.5 text-[11.5px] font-semibold text-muted-foreground">
+            <p
+              className="text-[28px] font-black leading-none tracking-tight"
+              style={{ color: s.color }}
+            >
+              {s.n}
+            </p>
+            <p className="mt-1.5 text-[11.5px] font-bold uppercase tracking-wide text-[color:var(--body-dim)]">
               {s.l}
             </p>
           </div>
         ))}
       </div>
 
-      <div className="mt-4 flex items-center gap-3 rounded-2xl bg-gradient-to-r from-white to-section-alt p-4 shadow-sm ring-1 ring-black/5">
-        <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-white ring-1 ring-border">
-          <span className="text-lg font-black">G</span>
+      <div className="mt-4 flex items-center gap-3 rounded-md border-2 border-brand-gold bg-card p-4 shadow-hard-sm">
+        <div className="grid h-12 w-12 shrink-0 place-items-center rounded-md bg-white">
+          <span className="text-xl font-black text-[#4285F4]">G</span>
         </div>
         <div className="min-w-0">
-          <div className="flex items-center gap-1 text-brand-orange">
-            <span className="text-base font-black text-foreground">4.9</span>
-            {[0, 1, 2, 3, 4].map((i) => (
-              <Star key={i} size={13} fill="currentColor" strokeWidth={0} />
-            ))}
+          <div className="flex items-center gap-1.5">
+            <span className="text-[20px] font-black leading-none text-white">4.9</span>
+            <div className="flex items-center gap-0.5 text-brand-gold">
+              {[0, 1, 2, 3, 4].map((i) => (
+                <Star key={i} size={13} fill="currentColor" strokeWidth={0} />
+              ))}
+            </div>
           </div>
-          <p className="text-[11.5px] font-semibold text-muted-foreground">
+          <p className="mt-1 text-[11.5px] font-bold text-[color:var(--body-dim)]">
             Google पर 1,200+ रिव्यू
           </p>
         </div>
       </div>
 
-      <p className="mt-4 rounded-xl border border-dashed border-border bg-section-alt p-3 text-center text-[11.5px] font-semibold text-muted-foreground">
+      <p className="mt-4 rounded-md border-2 border-dashed border-[color:var(--card-border)] bg-card p-3 text-center text-[11.5px] font-semibold text-[color:var(--body-dim)]">
         📹 Real patient video testimonials जल्द add होंगे
       </p>
     </section>
@@ -783,55 +840,51 @@ function Footer() {
   return (
     <footer id="contact" className="bg-section-alt px-4 py-6">
       <div className="flex items-center gap-2">
-        <span className="grid h-8 w-8 place-items-center rounded-lg bg-brand-orange text-white font-black">
+        <span className="grid h-9 w-9 place-items-center rounded-md bg-brand-gold text-[color:var(--primary-foreground)] font-black shadow-hard-sm">
           H
         </span>
-        <span className="text-lg font-black">HOMMED</span>
+        <span className="text-lg font-black text-white">HOMMED</span>
       </div>
-      <p className="mt-2 text-[12.5px] font-semibold text-muted-foreground">
+      <p className="mt-2 text-[12.5px] font-bold text-[color:var(--body-dim)]">
         Men's Wellness Department — Dr. Iqbal Quasim
       </p>
 
-      <div className="mt-4 space-y-3">
-        <div className="rounded-xl bg-white p-3 ring-1 ring-black/5">
-          <p className="flex items-center gap-1.5 text-[12px] font-bold text-brand-orange">
+      <div className="mt-4 space-y-2.5">
+        <div className="rounded-md border border-[color:var(--card-border)] bg-card p-3">
+          <p className="flex items-center gap-1.5 text-[11.5px] font-black uppercase tracking-wide text-brand-gold">
             <MapPin size={13} /> Civil Lines Branch
           </p>
-          <p className="mt-1 text-[13px] font-semibold text-foreground">
+          <p className="mt-1 text-[13.5px] font-bold text-white">
             Civil Lines, Kanpur, Uttar Pradesh – 208001
           </p>
         </div>
-        <div className="rounded-xl bg-white p-3 ring-1 ring-black/5">
-          <p className="flex items-center gap-1.5 text-[12px] font-bold text-brand-orange">
+        <div className="rounded-md border border-[color:var(--card-border)] bg-card p-3">
+          <p className="flex items-center gap-1.5 text-[11.5px] font-black uppercase tracking-wide text-brand-gold">
             <MapPin size={13} /> Jajmau Branch
           </p>
-          <p className="mt-1 text-[13px] font-semibold text-foreground">
+          <p className="mt-1 text-[13.5px] font-bold text-white">
             Jajmau, Kanpur, Uttar Pradesh
           </p>
         </div>
       </div>
 
-      <div className="mt-4 space-y-2 text-[13px]">
-        <a
-          href={TEL}
-          className="flex items-center gap-2 font-bold text-foreground"
-        >
-          <Phone size={14} className="text-brand-blue" /> {PHONE_DISPLAY}
+      <div className="mt-4 space-y-2 text-[13.5px]">
+        <a href={TEL} className="flex items-center gap-2 font-black text-white">
+          <Phone size={14} className="text-brand-gold" /> {PHONE_DISPLAY}
         </a>
         <a
           href="mailto:info@hommed.in"
-          className="flex items-center gap-2 font-semibold text-foreground"
+          className="flex items-center gap-2 font-bold text-white"
         >
-          <Mail size={14} className="text-brand-blue" /> info@hommed.in
+          <Mail size={14} className="text-brand-gold" /> info@hommed.in
         </a>
-        <p className="flex items-center gap-2 font-semibold text-muted-foreground">
-          <Clock size={14} className="text-brand-blue" /> Mon–Sat · 10AM–2PM
-          &amp; 5PM–8PM
+        <p className="flex items-center gap-2 font-bold text-[color:var(--body-dim)]">
+          <Clock size={14} className="text-brand-gold" /> Mon–Sat · 10AM–2PM &amp; 5PM–8PM
         </p>
       </div>
 
-      <div className="mt-5 flex items-center justify-between border-t border-border pt-3 text-[11.5px] text-muted-foreground">
-        <a href="#" className="font-semibold underline">
+      <div className="mt-5 flex items-center justify-between border-t border-[color:var(--card-border)] pt-3 text-[11.5px] text-[color:var(--body-dim)]">
+        <a href="#" className="font-bold underline">
           Privacy Policy
         </a>
         <span>© {new Date().getFullYear()} HOMMED</span>
