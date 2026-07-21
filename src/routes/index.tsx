@@ -84,12 +84,15 @@ function StickyHeader() {
           />
         </a>
         <div className="flex items-center gap-1.5">
-          <a
+          <motion.a
             href="#lead"
-            className="rounded-md bg-brand-gold px-3.5 py-2 text-[13px] font-black tracking-wide text-[color:var(--primary-foreground)] cta-glow-gold active:translate-y-[1px]"
+            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.03 }}
+            transition={{ duration: 0.15, ease: "easeOut" }}
+            className="rounded-md bg-brand-gold px-3.5 py-2 text-[13px] font-black tracking-wide text-[color:var(--primary-foreground)] cta-glow-gold"
           >
             अपॉइंटमेंट लें
-          </a>
+          </motion.a>
           <button
             aria-label="Menu"
             onClick={() => setOpen((v) => !v)}
