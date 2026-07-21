@@ -77,14 +77,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "HOMMED — पुरुष स्वास्थ्य विशेषज्ञ | Dr. Iqbal Quasim, Kanpur" },
+      { name: "description", content: "कानपुर का सबसे भरोसेमंद होम्योपैथिक सेंटर — शून्य/कम शुक्राणु, नपुंसकता, शीघ्रपतन एवं गुप्त रोगों का जड़ से इलाज मात्र ₹1599 में। Dr. Iqbal Quasim (BHMS), 10,000+ मरीज ठीक।" },
+      { name: "author", content: "HOMMED" },
+      { property: "og:title", content: "HOMMED — पुरुष स्वास्थ्य विशेषज्ञ | Dr. Iqbal Quasim" },
+      { property: "og:description", content: "गुप्त रोगों का जड़ से इलाज — मात्र ₹1599 में। कानपुर का सबसे भरोसेमंद होम्योपैथिक सेंटर।" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
@@ -92,6 +91,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800;900&family=Inter:wght@500;600;700&display=swap" },
     ],
   }),
   shellComponent: RootShell,
@@ -102,7 +104,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="hi">
       <head>
         <HeadContent />
       </head>
