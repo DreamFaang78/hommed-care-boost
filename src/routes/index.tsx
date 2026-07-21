@@ -44,7 +44,6 @@ function Landing() {
     <div className="min-h-screen bg-background text-foreground font-hindi">
       <StickyHeader />
       <main className="mx-auto max-w-[440px] pb-40">
-        <Hero />
         <LeadForm />
         <AfterFormHero />
         <TrustBadges />
@@ -187,50 +186,6 @@ function OnlineNudge() {
         </span>
       </div>
     </a>
-  );
-}
-
-/* ---------------- Hero ---------------- */
-
-function Hero() {
-  return (
-    <section id="top" className="relative bg-background">
-      <div className="bg-brand-gold px-3 py-2.5 text-center shadow-hard-sm">
-        <p className="text-[13px] font-black uppercase tracking-wider leading-tight text-[color:var(--primary-foreground)]">
-          कानपुर का सबसे भरोसेमंद होम्योपैथिक सेंटर
-        </p>
-      </div>
-
-      <div className="px-4 pb-5 pt-5">
-        <h1 className="text-[24px] font-black leading-[1.15] text-white">
-          शून्य-कम शुक्राणु, नपुंसकता एवं गुप्त रोगों का{" "}
-          <span className="text-brand-gold">जड़ से इलाज</span> मात्र{" "}
-          <span className="rounded-md bg-brand-gold px-2 py-0.5 text-[color:var(--primary-foreground)]">
-            ₹1599
-          </span>{" "}
-          में
-        </h1>
-
-        <div className="mt-4 flex items-center gap-2.5 rounded-md border-2 border-brand-gold bg-card px-3.5 py-3 shadow-hard-sm">
-          <div className="flex flex-col items-center border-r border-[color:var(--card-border)] pr-3">
-            <span className="text-2xl font-black leading-none text-brand-gold">4.9</span>
-            <div className="mt-1 flex items-center gap-0.5 text-brand-gold">
-              {[0, 1, 2, 3, 4].map((i) => (
-                <Star key={i} size={11} fill="currentColor" strokeWidth={0} />
-              ))}
-            </div>
-          </div>
-          <div className="min-w-0">
-            <p className="text-[11px] font-bold uppercase tracking-wider text-[color:var(--body-dim)]">
-              Google Rating
-            </p>
-            <p className="text-[14px] font-black leading-tight text-white">
-              10,000+ मरीज ठीक हुए
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
   );
 }
 
