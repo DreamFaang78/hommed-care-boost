@@ -231,7 +231,14 @@ function LeadForm() {
 
   return (
     <section id="lead" className="bg-background px-3 py-4">
-      <div className="rounded-md border-2 border-brand-gold bg-card p-4 shadow-hard">
+      <div className="relative rounded-md border-2 border-brand-gold bg-card p-4 shadow-hard">
+        {!submitted && (
+          <img
+            src={trustedBrandImg}
+            alt="100% Trusted Brand"
+            className="pointer-events-none absolute -top-3 -right-3 h-20 w-20 rotate-12 drop-shadow-[0_2px_6px_rgba(0,0,0,0.5)] sm:h-24 sm:w-24"
+          />
+        )}
         {submitted ? (
           <div className="py-4 text-center">
             <div className="mx-auto mb-3 grid h-14 w-14 place-items-center rounded-full bg-brand-green text-white shadow-hard-sm">
