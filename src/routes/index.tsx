@@ -193,7 +193,7 @@ function OnlineNudge() {
 function TrustSeal() {
   return (
     <div
-      className="pointer-events-none absolute -right-3 -top-3 z-10 h-[60px] w-[60px] -rotate-12 drop-shadow-[0_3px_8px_rgba(0,0,0,0.45)] sm:h-[64px] sm:w-[64px]"
+      className="pointer-events-none absolute -right-1.5 -top-2.5 z-10 h-[54px] w-[54px] -rotate-6 drop-shadow-[0_3px_8px_rgba(0,0,0,0.45)] sm:h-[60px] sm:w-[60px]"
       aria-label="100% भरोसेमंद क्लिनिक"
     >
       <svg viewBox="0 0 100 100" className="h-full w-full">
