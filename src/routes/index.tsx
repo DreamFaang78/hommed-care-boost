@@ -23,7 +23,7 @@ import {
   Droplet,
   FlaskConical,
 } from "lucide-react";
-import clinicImg from "@/assets/clinic-exterior.jpg";
+
 import drIqbalPortraitAsset from "@/assets/dr-iqbal-portrait.jpg.asset.json";
 import drIqbalClinicAsset from "@/assets/dr-iqbal-clinic.jpg.asset.json";
 const drIqbalImg = drIqbalPortraitAsset.url;
