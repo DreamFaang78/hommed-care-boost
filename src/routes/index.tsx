@@ -25,8 +25,10 @@ import {
 
 import drIqbalPortraitAsset from "@/assets/dr-iqbal-portrait.jpg.asset.json";
 import drIqbalClinicAsset from "@/assets/dr-iqbal-clinic.jpg.asset.json";
+import clinicExteriorAsset from "@/assets/hommed-clinic-exterior.jpg.asset.json";
 const drIqbalImg = drIqbalPortraitAsset.url;
 const drCertsImg = drIqbalClinicAsset.url;
+const clinicExteriorImg = clinicExteriorAsset.url;
 
 export const Route = createFileRoute("/")({
   component: Landing,
@@ -376,6 +378,17 @@ function AfterFormHero() {
             कानपुर का सबसे भरोसेमंद होम्योपैथिक सेंटर
           </p>
         </div>
+
+        <div className="mb-4 overflow-hidden rounded-md border-2 border-brand-gold shadow-hard-sm">
+          <img
+            src={clinicExteriorImg}
+            alt="HomMed Clinic — Dr. Iqbal's Homoeopathic Centre, Jajmau, Kanpur"
+            className="block h-auto w-full object-cover"
+            loading="lazy"
+          />
+        </div>
+
+
 
         <h2 className="text-[22px] font-black leading-[1.15] text-white">
           शून्य-कम शुक्राणु, नपुंसकता एवं गुप्त रोगों का{" "}
