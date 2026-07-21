@@ -44,7 +44,6 @@ function Landing() {
     <div className="min-h-screen bg-background text-foreground font-hindi">
       <StickyHeader />
       <main className="mx-auto max-w-[440px] pb-40">
-        <Hero />
         <LeadForm />
         <AfterFormHero />
         <TrustBadges />
