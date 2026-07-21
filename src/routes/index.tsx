@@ -16,12 +16,11 @@ import {
   Mail,
   Clock,
   ChevronRight,
-  Activity,
-  Zap,
-  Moon,
-  Timer,
-  Droplet,
-  FlaskConical,
+  Microscope,
+  HeartPulse,
+  MoonStar,
+  TimerReset,
+  Waves,
 } from "lucide-react";
 
 import drIqbalPortraitAsset from "@/assets/dr-iqbal-portrait.jpg.asset.json";
