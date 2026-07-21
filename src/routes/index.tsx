@@ -26,6 +26,7 @@ import {
 import drIqbalPortraitAsset from "@/assets/dr-iqbal-portrait.jpg.asset.json";
 import drIqbalClinicAsset from "@/assets/dr-iqbal-clinic.jpg.asset.json";
 import clinicExteriorAsset from "@/assets/hommed-clinic-exterior.jpg.asset.json";
+import hommedLogoAsset from "@/assets/hommed-logo.jpg.asset.json";
 const drIqbalImg = drIqbalPortraitAsset.url;
 const drCertsImg = drIqbalClinicAsset.url;
 const clinicExteriorImg = clinicExteriorAsset.url;
@@ -72,13 +73,12 @@ function StickyHeader() {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-[color:var(--card-border)] bg-[#081A0F]/95 backdrop-blur">
       <div className="mx-auto flex max-w-[440px] items-center justify-between gap-2 px-3 py-2.5">
-        <a href="#top" className="flex items-center gap-1.5 shrink-0">
-          <span className="grid h-8 w-8 place-items-center rounded-md bg-brand-gold text-[color:var(--primary-foreground)] font-black text-sm shadow-hard-sm">
-            H
-          </span>
-          <span className="text-lg font-black tracking-tight text-white">
-            HOMMED
-          </span>
+        <a href="#top" className="flex items-center gap-2 shrink-0">
+          <img
+            src={hommedLogoAsset.url}
+            alt="HomMed - Dr. Iqbal's Homoeopathic Centre"
+            className="h-10 w-auto rounded-md bg-white p-0.5 shadow-hard-sm"
+          />
         </a>
         <div className="flex items-center gap-1.5">
           <a
