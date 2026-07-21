@@ -236,7 +236,7 @@ function LeadForm() {
           <img
             src={trustedBrandImg}
             alt="100% Trusted Brand"
-            className="pointer-events-none absolute -top-3 -right-3 h-20 w-20 rotate-12 drop-shadow-[0_2px_6px_rgba(0,0,0,0.5)] sm:h-24 sm:w-24"
+            className="pointer-events-none absolute right-2 top-1/2 z-10 h-20 w-20 -translate-y-1/2 rotate-12 drop-shadow-[0_2px_6px_rgba(0,0,0,0.5)] sm:h-24 sm:w-24"
           />
         )}
         {submitted ? (
