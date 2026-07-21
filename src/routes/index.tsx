@@ -304,7 +304,7 @@ function LeadForm() {
                 className="mt-3 flex items-center justify-center gap-2 text-[26px] font-black tracking-tight text-brand-gold"
               >
                 <Phone size={22} strokeWidth={2.5} className="fill-brand-gold" />
-                +91 87078 68504
+                {PHONE_DISPLAY}
               </motion.a>
 
               <div className="mt-3 flex justify-center">
