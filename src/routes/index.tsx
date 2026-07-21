@@ -423,8 +423,10 @@ const BADGES_B = [
 ];
 
 function TrustBadges() {
+  const ref = useRef<HTMLElement | null>(null);
+  useRevealOnScroll(ref, { selector: "li.badge" });
   return (
-    <section className="bg-section-alt px-3 py-5">
+    <section ref={ref} className="bg-section-alt px-3 py-5">
       <h2 className="mb-3 text-center text-[18px] font-black leading-tight text-white">
         क्यों हज़ारों मरीज़ हम पर <span className="text-brand-gold">भरोसा</span> करते हैं
       </h2>
@@ -442,7 +444,7 @@ function BadgeList({ items }: { items: string[] }) {
       {items.map((t) => (
         <li
           key={t}
-          className="flex items-start gap-2.5 rounded-md border border-[color:var(--card-border)] bg-card p-3 shadow-hard-sm"
+          className="badge flex items-start gap-2.5 rounded-md border border-[color:var(--card-border)] bg-card p-3 shadow-hard-sm"
         >
           <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-md bg-brand-green text-white">
             <Check size={14} strokeWidth={3} />
