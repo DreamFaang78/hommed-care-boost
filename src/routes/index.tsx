@@ -523,7 +523,7 @@ function ProblemGrid() {
           return (
             <div key={c.t}>
               <div
-                className="relative overflow-hidden rounded-md border border-[color:var(--card-border)] bg-card p-3 pl-4 shadow-hard-sm"
+                className="reveal-card relative overflow-hidden rounded-md border border-[color:var(--card-border)] bg-card p-3 pl-4 shadow-hard-sm"
                 style={{ borderLeftWidth: 4, borderLeftColor: c.accent }}
               >
                 <div className="flex items-start gap-3">
