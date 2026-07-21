@@ -529,7 +529,12 @@ function ProblemGrid() {
                     <Icon size={30} strokeWidth={2.5} />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <h3 className="text-[16px] font-black leading-tight text-white">
+                    <h3 className="flex items-center gap-1.5 text-[16px] font-black leading-tight text-white">
+                      <CheckCircle2
+                        size={18}
+                        className="shrink-0 text-white"
+                        fill="#22C55E"
+                      />
                       {c.t}
                     </h3>
                     <p className="mt-0.5 text-[11px] font-black uppercase tracking-wider text-brand-gold">
