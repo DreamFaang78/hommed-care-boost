@@ -46,6 +46,7 @@ function Landing() {
       <main className="mx-auto max-w-[440px] pb-40">
         <Hero />
         <LeadForm />
+        <AfterFormHero />
         <TrustBadges />
         <ProblemGrid />
         <DepartmentBanner />
