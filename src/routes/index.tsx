@@ -25,10 +25,8 @@ import {
 
 import drIqbalPortraitAsset from "@/assets/dr-iqbal-portrait.jpg.asset.json";
 import drIqbalClinicAsset from "@/assets/dr-iqbal-clinic.jpg.asset.json";
-import trustedBrandAsset from "@/assets/trusted-brand.png.asset.json";
 const drIqbalImg = drIqbalPortraitAsset.url;
 const drCertsImg = drIqbalClinicAsset.url;
-const trustedBrandImg = trustedBrandAsset.url;
 
 export const Route = createFileRoute("/")({
   component: Landing,
