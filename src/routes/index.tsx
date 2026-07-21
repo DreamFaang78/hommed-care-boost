@@ -533,7 +533,7 @@ function ProblemGrid() {
                     className="grid h-14 w-14 shrink-0 place-items-center rounded-md text-white shadow-hard-sm"
                     style={{ background: c.color }}
                   >
-                    <Icon size={28} strokeWidth={2.4} />
+                    <Icon size={30} strokeWidth={2.5} />
                   </div>
                   <div className="min-w-0 flex-1">
                     <h3 className="text-[16px] font-black leading-tight text-white">
