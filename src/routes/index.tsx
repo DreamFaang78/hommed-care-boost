@@ -693,16 +693,18 @@ const WHY = [
 ];
 
 function WhyHommed() {
+  const ref = useRef<HTMLElement | null>(null);
+  useRevealOnScroll(ref);
   return (
-    <section className="bg-background px-3 py-6">
-      <h2 className="mb-4 text-center text-[22px] font-black leading-tight text-white">
+    <section ref={ref} className="bg-background px-3 py-6">
+      <h2 className="reveal mb-4 text-center text-[22px] font-black leading-tight text-white">
         इलाज के लिए <span className="text-brand-gold">HOMMED</span> क्यों चुनें?
       </h2>
       <div className="space-y-2">
         {WHY.map((w) => (
           <div
             key={w.t}
-            className="flex items-start gap-3 rounded-md border border-[color:var(--card-border)] bg-card p-3 shadow-hard-sm"
+            className="reveal flex items-start gap-3 rounded-md border border-[color:var(--card-border)] bg-card p-3 shadow-hard-sm"
           >
             <div
               className="grid h-12 w-12 shrink-0 place-items-center rounded-md text-white shadow-hard-sm"
