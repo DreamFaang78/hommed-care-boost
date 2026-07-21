@@ -85,7 +85,7 @@ function StickyHeader() {
         <div className="flex items-center gap-1.5">
           <a
             href="#lead"
-            className="rounded-md bg-brand-gold px-3.5 py-2 text-[13px] font-black tracking-wide text-[color:var(--primary-foreground)] shadow-hard-sm active:translate-y-[1px]"
+            className="rounded-md bg-brand-gold px-3.5 py-2 text-[13px] font-black tracking-wide text-[color:var(--primary-foreground)] cta-glow-gold active:translate-y-[1px]"
           >
             अपॉइंटमेंट लें
           </a>
@@ -135,7 +135,7 @@ function StickyBottomBar() {
         />
         <a
           href={TEL}
-          className="flex min-w-0 items-center justify-center gap-1.5 rounded-md bg-gradient-to-r from-[color:var(--brand-blue)] to-[color:var(--brand-blue-2)] px-3 py-2.5 text-[14px] font-black tracking-wide text-white shadow-hard-sm active:translate-y-[1px]"
+          className="flex min-w-0 items-center justify-center gap-1.5 rounded-md bg-gradient-to-r from-[color:var(--brand-blue)] to-[color:var(--brand-blue-2)] px-3 py-2.5 text-[14px] font-black tracking-wide text-white cta-glow-blue active:translate-y-[1px]"
         >
           <Phone size={16} className="shrink-0" />
           <span className="truncate">अभी कॉल करें</span>
@@ -268,7 +268,7 @@ function LeadForm() {
             <div className="mt-3 flex justify-center">
               <a
                 href={TEL}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[color:var(--brand-blue)] to-[color:var(--brand-blue-2)] px-8 py-2.5 text-[15px] font-black tracking-wide text-white shadow-hard-sm active:translate-y-[1px]"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[color:var(--brand-blue)] to-[color:var(--brand-blue-2)] px-8 py-2.5 text-[15px] font-black tracking-wide text-white cta-glow-blue active:translate-y-[1px]"
               >
                 <Phone size={16} strokeWidth={3} /> Call now
               </a>
