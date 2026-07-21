@@ -20,6 +20,7 @@ import {
   MoonStar,
   TimerReset,
   Waves,
+  CheckCircle2,
 } from "lucide-react";
 
 import drIqbalPortraitAsset from "@/assets/dr-iqbal-portrait.jpg.asset.json";
