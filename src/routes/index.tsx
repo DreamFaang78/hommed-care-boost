@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { gsap, useGSAP, useRevealOnScroll, useReducedMotion, CountUp } from "@/lib/motion";
 import {
   Phone,
   Menu,
@@ -21,6 +23,7 @@ import {
   TimerReset,
   Waves,
   CheckCircle2,
+  Loader2,
 } from "lucide-react";
 
 import drIqbalPortraitAsset from "@/assets/dr-iqbal-portrait.jpg.asset.json";
@@ -81,12 +84,15 @@ function StickyHeader() {
           />
         </a>
         <div className="flex items-center gap-1.5">
-          <a
+          <motion.a
             href="#lead"
-            className="rounded-md bg-brand-gold px-3.5 py-2 text-[13px] font-black tracking-wide text-[color:var(--primary-foreground)] cta-glow-gold active:translate-y-[1px]"
+            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.03 }}
+            transition={{ duration: 0.15, ease: "easeOut" }}
+            className="rounded-md bg-brand-gold px-3.5 py-2 text-[13px] font-black tracking-wide text-[color:var(--primary-foreground)] cta-glow-gold"
           >
             अपॉइंटमेंट लें
-          </a>
+          </motion.a>
           <button
             aria-label="Menu"
             onClick={() => setOpen((v) => !v)}
@@ -121,8 +127,28 @@ function StickyHeader() {
 /* ---------------- Sticky Bottom Bar ---------------- */
 
 function StickyBottomBar() {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const reduced = useReducedMotion();
+  useGSAP(
+    () => {
+      if (!ref.current) return;
+      if (!reduced) {
+        gsap.from(ref.current, {
+          y: 60,
+          opacity: 0,
+          duration: 0.5,
+          delay: 0.2,
+          ease: "power2.out",
+        });
+      }
+    },
+    { scope: ref, dependencies: [reduced] },
+  );
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t-2 border-brand-gold bg-[#081A0F] shadow-[0_-6px_20px_rgba(0,0,0,0.6)]">
+    <div
+      ref={ref}
+      className="fixed inset-x-0 bottom-0 z-40 border-t-2 border-brand-gold bg-[#081A0F] shadow-[0_-6px_20px_rgba(0,0,0,0.6)]"
+    >
       <div className="mx-auto grid max-w-[440px] grid-cols-[auto_1fr_auto] items-center gap-2 px-3 py-2">
         <img
           src={drIqbalImg}
@@ -131,13 +157,16 @@ function StickyBottomBar() {
           height={40}
           className="h-10 w-10 shrink-0 rounded-full object-cover ring-2 ring-brand-gold"
         />
-        <a
+        <motion.a
           href={TEL}
-          className="flex min-w-0 items-center justify-center gap-1.5 rounded-md bg-gradient-to-r from-[color:var(--brand-blue)] to-[color:var(--brand-blue-2)] px-3 py-2.5 text-[14px] font-black tracking-wide text-white cta-glow-blue active:translate-y-[1px]"
+          whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.02 }}
+          transition={{ duration: 0.15, ease: "easeOut" }}
+          className="flex min-w-0 items-center justify-center gap-1.5 rounded-md bg-gradient-to-r from-[color:var(--brand-blue)] to-[color:var(--brand-blue-2)] px-3 py-2.5 text-[14px] font-black tracking-wide text-white cta-glow-blue"
         >
           <Phone size={16} className="shrink-0" />
           <span className="truncate">अभी कॉल करें</span>
-        </a>
+        </motion.a>
         <div className="flex shrink-0 items-center gap-1.5">
           <span className="pulse-dot inline-block h-2.5 w-2.5 rounded-full bg-brand-green" />
           <span className="pulse-text text-[11px] font-black leading-tight text-brand-green">
@@ -153,8 +182,13 @@ function StickyBottomBar() {
 
 function OnlineNudge() {
   return (
-    <a
+    <motion.a
       href={TEL}
+      initial={{ opacity: 0, x: -14 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, amount: 0.6 }}
+      whileTap={{ scale: 0.97 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
       className="my-3 flex items-center justify-between gap-2 rounded-md bg-gradient-to-r from-brand-green-dark via-[#3d7a2f] to-brand-gold p-[1.5px] shadow-hard-sm"
     >
       <div className="flex w-full items-center justify-between gap-2 rounded-md bg-[#0C2416] px-3 py-2.5">
@@ -166,7 +200,7 @@ function OnlineNudge() {
           <Phone size={13} strokeWidth={3} /> कॉल करें
         </span>
       </div>
-    </a>
+    </motion.a>
   );
 }
 
@@ -182,6 +216,7 @@ const PROBLEMS = [
 
 function LeadForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
   const [duration, setDuration] = useState("");
@@ -201,147 +236,196 @@ function LeadForm() {
       return setErr("कृपया सही मोबाइल नंबर भरें (10 अंक)");
     void duration;
     void problems;
-    setSubmitted(true);
+    setSubmitting(true);
+    window.setTimeout(() => {
+      setSubmitting(false);
+      setSubmitted(true);
+    }, 700);
   };
 
   const inputCls =
-    "w-full rounded-md border-2 border-[color:var(--card-border)] bg-[#0F2416] px-3.5 py-2.5 text-[15px] font-semibold text-white outline-none placeholder:text-[color:var(--body-dim)]/70 focus:border-brand-gold";
+    "w-full rounded-md border-2 border-[color:var(--card-border)] bg-[#0F2416] px-3.5 py-2.5 text-[15px] font-semibold text-white outline-none placeholder:text-[color:var(--body-dim)]/70 focus:border-brand-gold transition-colors";
   const labelCls =
     "mb-1 block text-[12.5px] font-semibold text-[color:var(--body-dim)]";
 
   return (
     <section id="lead" className="bg-background px-3 py-4">
       <div className="relative rounded-md border-2 border-brand-gold bg-card p-4 shadow-hard">
-        {submitted ? (
-          <div className="py-4 text-center">
-            <div className="mx-auto mb-3 grid h-14 w-14 place-items-center rounded-full bg-brand-green text-white shadow-hard-sm">
-              <Check size={28} strokeWidth={3} />
-            </div>
-            <h2 className="text-lg font-black text-white">
-              धन्यवाद! हमारी टीम जल्द सम्पर्क करेगी।
-            </h2>
-            <p className="mt-1 text-sm text-[color:var(--body-dim)]">
-              आपकी पहचान गुप्त रखी जायेगी।
-            </p>
-            <a
-              href={TEL}
-              className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-md bg-gradient-to-r from-[color:var(--brand-blue)] to-[color:var(--brand-blue-2)] px-5 py-3 text-[14px] font-black tracking-wide text-white shadow-hard-sm"
+        <AnimatePresence mode="wait" initial={false}>
+          {submitted ? (
+            <motion.div
+              key="ok"
+              initial={{ opacity: 0, y: 8, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+              className="py-4 text-center"
             >
-              <Phone size={16} /> अभी कॉल करें
-            </a>
-          </div>
-        ) : (
-          <>
-            <h2 className="text-center text-[21px] font-black leading-snug text-white">
-              क्या आप शून्य शुक्राणु एवं गुप्त रोगों से परेशान हैं?
-            </h2>
-            <p className="mt-1.5 text-center text-[13.5px] font-semibold text-[#A8C4B0]">
-              हमारे विशेषज्ञों से मुफ्त सलाह लें
-            </p>
-
-            <a
-              href={TEL}
-              className="mt-3 flex items-center justify-center gap-2 text-[26px] font-black tracking-tight text-brand-gold"
-            >
-              <Phone size={22} strokeWidth={2.5} className="fill-brand-gold" />
-              +91 87078 68504
-            </a>
-
-            <div className="mt-3 flex justify-center">
-              <a
+              <motion.div
+                initial={{ scale: 0.5, rotate: -20 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ type: "spring", stiffness: 260, damping: 16, delay: 0.05 }}
+                className="mx-auto mb-3 grid h-14 w-14 place-items-center rounded-full bg-brand-green text-white shadow-hard-sm"
+              >
+                <Check size={28} strokeWidth={3} />
+              </motion.div>
+              <h2 className="text-lg font-black text-white">
+                धन्यवाद! हमारी टीम जल्द सम्पर्क करेगी।
+              </h2>
+              <p className="mt-1 text-sm text-[color:var(--body-dim)]">
+                आपकी पहचान गुप्त रखी जायेगी।
+              </p>
+              <motion.a
                 href={TEL}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[color:var(--brand-blue)] to-[color:var(--brand-blue-2)] px-8 py-2.5 text-[15px] font-black tracking-wide text-white cta-glow-blue active:translate-y-[1px]"
+                whileTap={{ scale: 0.96 }}
+                whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.18, ease: "easeOut" }}
+                className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-md bg-gradient-to-r from-[color:var(--brand-blue)] to-[color:var(--brand-blue-2)] px-5 py-3 text-[14px] font-black tracking-wide text-white shadow-hard-sm"
               >
-                <Phone size={16} strokeWidth={3} /> Call now
-              </a>
-            </div>
+                <Phone size={16} /> अभी कॉल करें
+              </motion.a>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="form"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.25 }}
+            >
+              <h2 className="text-center text-[21px] font-black leading-snug text-white">
+                क्या आप शून्य शुक्राणु एवं गुप्त रोगों से परेशान हैं?
+              </h2>
+              <p className="mt-1.5 text-center text-[13.5px] font-semibold text-[#A8C4B0]">
+                हमारे विशेषज्ञों से मुफ्त सलाह लें
+              </p>
 
-            <form onSubmit={onSubmit} className="mt-5 space-y-3">
-              <div>
-                <label className={labelCls}>आपका नाम</label>
-                <input
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Your Name"
-                  maxLength={80}
-                  className={inputCls}
-                />
+              <motion.a
+                href={TEL}
+                whileTap={{ scale: 0.97 }}
+                className="mt-3 flex items-center justify-center gap-2 text-[26px] font-black tracking-tight text-brand-gold"
+              >
+                <Phone size={22} strokeWidth={2.5} className="fill-brand-gold" />
+                +91 87078 68504
+              </motion.a>
+
+              <div className="mt-3 flex justify-center">
+                <motion.a
+                  href={TEL}
+                  whileTap={{ scale: 0.95 }}
+                  whileHover={{ scale: 1.03 }}
+                  transition={{ duration: 0.18, ease: "easeOut" }}
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[color:var(--brand-blue)] to-[color:var(--brand-blue-2)] px-8 py-2.5 text-[15px] font-black tracking-wide text-white cta-glow-blue"
+                >
+                  <Phone size={16} strokeWidth={3} /> Call now
+                </motion.a>
               </div>
 
-              <div>
-                <label className={labelCls}>आपका मोबाइल नंबर</label>
-                <input
-                  type="tel"
-                  value={mobile}
-                  onChange={(e) =>
-                    setMobile(e.target.value.replace(/\D/g, "").slice(0, 10))
-                  }
-                  inputMode="numeric"
-                  pattern="[6-9][0-9]{9}"
-                  placeholder="Your Mobile Number"
-                  className={inputCls}
-                />
-              </div>
-
-              <div>
-                <label className={labelCls}>
-                  आपको कितने दिनों से समस्या है?
-                </label>
-                <input
-                  type="text"
-                  value={duration}
-                  onChange={(e) => setDuration(e.target.value.slice(0, 60))}
-                  placeholder=""
-                  className={inputCls}
-                />
-              </div>
-
-              <div className="pt-1">
-                <p className="mb-2 text-[13.5px] font-bold text-white">
-                  इनमें से आपको क्या क्या समस्या है
-                </p>
-                <div className="grid grid-cols-2 gap-x-3 gap-y-2.5">
-                  {PROBLEMS.map((p) => {
-                    const active = problems.includes(p);
-                    return (
-                      <label
-                        key={p}
-                        className="flex cursor-pointer items-center gap-2 text-[13.5px] font-semibold text-white"
-                      >
-                        <span
-                          onClick={() => toggle(p)}
-                          className={
-                            "grid h-5 w-5 shrink-0 place-items-center rounded-[4px] border-2 transition " +
-                            (active
-                              ? "border-brand-gold bg-brand-gold text-[color:var(--primary-foreground)]"
-                              : "border-brand-gold bg-[#0F2416]")
-                          }
-                        >
-                          {active && <Check size={14} strokeWidth={4} />}
-                        </span>
-                        <span onClick={() => toggle(p)}>{p}</span>
-                      </label>
-                    );
-                  })}
+              <form onSubmit={onSubmit} className="mt-5 space-y-3">
+                <div>
+                  <label className={labelCls}>आपका नाम</label>
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Your Name"
+                    maxLength={80}
+                    className={inputCls}
+                  />
                 </div>
-              </div>
 
-              {err && (
-                <p className="text-[12.5px] font-bold text-destructive">
-                  {err}
-                </p>
-              )}
+                <div>
+                  <label className={labelCls}>आपका मोबाइल नंबर</label>
+                  <input
+                    type="tel"
+                    value={mobile}
+                    onChange={(e) =>
+                      setMobile(e.target.value.replace(/\D/g, "").slice(0, 10))
+                    }
+                    inputMode="numeric"
+                    pattern="[6-9][0-9]{9}"
+                    placeholder="Your Mobile Number"
+                    className={inputCls}
+                  />
+                </div>
 
-              <button
-                type="submit"
-                className="mt-1 w-full rounded-md bg-brand-gold px-4 py-3.5 text-[16px] font-black tracking-wide text-[color:var(--primary-foreground)] shadow-hard active:translate-y-[1px]"
-              >
-                शुरुआत करें
-              </button>
-            </form>
-          </>
-        )}
+                <div>
+                  <label className={labelCls}>
+                    आपको कितने दिनों से समस्या है?
+                  </label>
+                  <input
+                    type="text"
+                    value={duration}
+                    onChange={(e) => setDuration(e.target.value.slice(0, 60))}
+                    placeholder=""
+                    className={inputCls}
+                  />
+                </div>
+
+                <div className="pt-1">
+                  <p className="mb-2 text-[13.5px] font-bold text-white">
+                    इनमें से आपको क्या क्या समस्या है
+                  </p>
+                  <div className="grid grid-cols-2 gap-x-3 gap-y-2.5">
+                    {PROBLEMS.map((p) => {
+                      const active = problems.includes(p);
+                      return (
+                        <label
+                          key={p}
+                          className="flex cursor-pointer items-center gap-2 text-[13.5px] font-semibold text-white"
+                        >
+                          <motion.span
+                            onClick={() => toggle(p)}
+                            animate={active ? { scale: [1, 1.25, 1] } : { scale: 1 }}
+                            transition={{ duration: 0.28, ease: "easeOut" }}
+                            className={
+                              "grid h-5 w-5 shrink-0 place-items-center rounded-[4px] border-2 transition-colors " +
+                              (active
+                                ? "border-brand-gold bg-brand-gold text-[color:var(--primary-foreground)]"
+                                : "border-brand-gold bg-[#0F2416]")
+                            }
+                          >
+                            {active && <Check size={14} strokeWidth={4} />}
+                          </motion.span>
+                          <span onClick={() => toggle(p)}>{p}</span>
+                        </label>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <AnimatePresence>
+                  {err && (
+                    <motion.p
+                      initial={{ opacity: 0, x: -8 }}
+                      animate={{ opacity: 1, x: [-8, 8, -6, 6, 0] }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.4 }}
+                      className="text-[12.5px] font-bold text-destructive"
+                    >
+                      {err}
+                    </motion.p>
+                  )}
+                </AnimatePresence>
+
+                <motion.button
+                  type="submit"
+                  disabled={submitting}
+                  whileTap={{ scale: 0.97 }}
+                  whileHover={{ scale: 1.015 }}
+                  transition={{ duration: 0.15, ease: "easeOut" }}
+                  className="mt-1 flex w-full items-center justify-center gap-2 rounded-md bg-brand-gold px-4 py-3.5 text-[16px] font-black tracking-wide text-[color:var(--primary-foreground)] shadow-hard disabled:opacity-80"
+                >
+                  {submitting ? (
+                    <>
+                      <Loader2 size={18} className="animate-spin" /> भेज रहे हैं…
+                    </>
+                  ) : (
+                    "शुरुआत करें"
+                  )}
+                </motion.button>
+              </form>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );
@@ -350,8 +434,26 @@ function LeadForm() {
 /* ---------------- After-Form Hero CTA ---------------- */
 
 function AfterFormHero() {
+  const ref = useRef<HTMLElement | null>(null);
+  const reduced = useReducedMotion();
+  useGSAP(
+    () => {
+      if (reduced || !ref.current) return;
+      const img = ref.current.querySelector<HTMLImageElement>(".clinic-img");
+      if (img) {
+        gsap.from(img, {
+          scale: 1.08,
+          opacity: 0,
+          duration: 0.9,
+          ease: "power2.out",
+          scrollTrigger: { trigger: img, start: "top 90%", toggleActions: "play none none none" },
+        });
+      }
+    },
+    { scope: ref, dependencies: [reduced] },
+  );
   return (
-    <section className="bg-background px-3 pb-2 pt-1">
+    <section ref={ref} className="bg-background px-3 pb-2 pt-1">
       <div className="rounded-md border-2 border-brand-gold bg-card p-3.5 shadow-hard">
         <div className="bg-brand-gold -mx-3.5 -mt-3.5 mb-4 rounded-t-md px-3 py-2.5 text-center shadow-hard-sm">
           <p className="text-[13px] font-black uppercase tracking-wider leading-tight text-[color:var(--primary-foreground)]">
@@ -363,12 +465,10 @@ function AfterFormHero() {
           <img
             src={clinicExteriorImg}
             alt="HomMed Clinic — Dr. Iqbal's Homoeopathic Centre, Jajmau, Kanpur"
-            className="block h-auto w-full object-cover"
+            className="clinic-img block h-auto w-full object-cover"
             loading="lazy"
           />
         </div>
-
-
 
         <h2 className="text-[22px] font-black leading-[1.15] text-white">
           शून्य-कम शुक्राणु, नपुंसकता एवं गुप्त रोगों का{" "}
@@ -381,7 +481,9 @@ function AfterFormHero() {
 
         <div className="mt-4 flex items-center gap-2.5 rounded-md border-2 border-brand-gold bg-[#0F2416] px-3.5 py-3 shadow-hard-sm">
           <div className="flex flex-col items-center border-r border-[color:var(--card-border)] pr-3">
-            <span className="text-2xl font-black leading-none text-brand-gold">4.9</span>
+            <span className="text-2xl font-black leading-none text-brand-gold">
+              <CountUp target={4.9} decimals={1} />
+            </span>
             <div className="mt-1 flex items-center gap-0.5 text-brand-gold">
               {[0, 1, 2, 3, 4].map((i) => (
                 <Star key={i} size={11} fill="currentColor" strokeWidth={0} />
@@ -393,7 +495,7 @@ function AfterFormHero() {
               Google Rating
             </p>
             <p className="text-[14px] font-black leading-tight text-white">
-              10,000+ मरीज ठीक हुए
+              <CountUp target={10000} suffix="+" /> मरीज ठीक हुए
             </p>
           </div>
         </div>
@@ -420,8 +522,10 @@ const BADGES_B = [
 ];
 
 function TrustBadges() {
+  const ref = useRef<HTMLElement | null>(null);
+  useRevealOnScroll(ref, { selector: "li.badge" });
   return (
-    <section className="bg-section-alt px-3 py-5">
+    <section ref={ref} className="bg-section-alt px-3 py-5">
       <h2 className="mb-3 text-center text-[18px] font-black leading-tight text-white">
         क्यों हज़ारों मरीज़ हम पर <span className="text-brand-gold">भरोसा</span> करते हैं
       </h2>
@@ -439,7 +543,7 @@ function BadgeList({ items }: { items: string[] }) {
       {items.map((t) => (
         <li
           key={t}
-          className="flex items-start gap-2.5 rounded-md border border-[color:var(--card-border)] bg-card p-3 shadow-hard-sm"
+          className="badge flex items-start gap-2.5 rounded-md border border-[color:var(--card-border)] bg-card p-3 shadow-hard-sm"
         >
           <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-md bg-brand-green text-white">
             <Check size={14} strokeWidth={3} />
@@ -507,8 +611,10 @@ const PROBLEM_CARDS = [
 ];
 
 function ProblemGrid() {
+  const ref = useRef<HTMLElement | null>(null);
+  useRevealOnScroll(ref, { selector: ".reveal-card" });
   return (
-    <section id="problems" className="bg-background px-3 py-6">
+    <section ref={ref} id="problems" className="bg-background px-3 py-6">
       <h2 className="mb-4 text-center text-[22px] font-black leading-tight text-white">
         हम किन <span className="text-brand-gold">रोगों</span> का इलाज करते हैं?
       </h2>
@@ -518,7 +624,7 @@ function ProblemGrid() {
           return (
             <div key={c.t}>
               <div
-                className="relative overflow-hidden rounded-md border border-[color:var(--card-border)] bg-card p-3 pl-4 shadow-hard-sm"
+                className="reveal-card relative overflow-hidden rounded-md border border-[color:var(--card-border)] bg-card p-3 pl-4 shadow-hard-sm"
                 style={{ borderLeftWidth: 4, borderLeftColor: c.accent }}
               >
                 <div className="flex items-start gap-3">
@@ -640,16 +746,18 @@ const STEPS = [
 ];
 
 function ProcessSteps() {
+  const ref = useRef<HTMLElement | null>(null);
+  useRevealOnScroll(ref);
   return (
-    <section id="process" className="bg-section-alt px-4 py-6">
-      <h2 className="mb-4 text-center text-[22px] font-black leading-tight text-white">
+    <section ref={ref} id="process" className="bg-section-alt px-4 py-6">
+      <h2 className="reveal mb-4 text-center text-[22px] font-black leading-tight text-white">
         हमारा <span className="text-brand-gold">प्लान</span> कैसे काम करता है?
       </h2>
       <ol className="space-y-2.5">
         {STEPS.map((s, i) => (
           <li
             key={s.t}
-            className="flex items-start gap-3 rounded-md border border-[color:var(--card-border)] bg-card p-3 shadow-hard-sm"
+            className="reveal flex items-start gap-3 rounded-md border border-[color:var(--card-border)] bg-card p-3 shadow-hard-sm"
             style={{ borderLeftWidth: 4, borderLeftColor: s.color }}
           >
             <div
@@ -669,12 +777,15 @@ function ProcessSteps() {
           </li>
         ))}
       </ol>
-      <a
+      <motion.a
         href={TEL}
-        className="mt-4 flex items-center justify-center gap-2 rounded-md bg-brand-gold px-4 py-3.5 text-[15px] font-black tracking-wide text-[color:var(--primary-foreground)] shadow-hard"
+        whileTap={{ scale: 0.96 }}
+        whileHover={{ scale: 1.02 }}
+        transition={{ duration: 0.18, ease: "easeOut" }}
+        className="reveal mt-4 flex items-center justify-center gap-2 rounded-md bg-brand-gold px-4 py-3.5 text-[15px] font-black tracking-wide text-[color:var(--primary-foreground)] shadow-hard"
       >
         <Phone size={16} strokeWidth={3} /> अभी शुरुआत करें
-      </a>
+      </motion.a>
     </section>
   );
 }
@@ -690,16 +801,18 @@ const WHY = [
 ];
 
 function WhyHommed() {
+  const ref = useRef<HTMLElement | null>(null);
+  useRevealOnScroll(ref);
   return (
-    <section className="bg-background px-3 py-6">
-      <h2 className="mb-4 text-center text-[22px] font-black leading-tight text-white">
+    <section ref={ref} className="bg-background px-3 py-6">
+      <h2 className="reveal mb-4 text-center text-[22px] font-black leading-tight text-white">
         इलाज के लिए <span className="text-brand-gold">HOMMED</span> क्यों चुनें?
       </h2>
       <div className="space-y-2">
         {WHY.map((w) => (
           <div
             key={w.t}
-            className="flex items-start gap-3 rounded-md border border-[color:var(--card-border)] bg-card p-3 shadow-hard-sm"
+            className="reveal flex items-start gap-3 rounded-md border border-[color:var(--card-border)] bg-card p-3 shadow-hard-sm"
           >
             <div
               className="grid h-12 w-12 shrink-0 place-items-center rounded-md text-white shadow-hard-sm"
@@ -765,18 +878,29 @@ function DoctorProfile() {
 
 /* ---------------- Trust Section ---------------- */
 
-const STATS = [
-  { n: "10,000+", l: "संतुष्ट मरीज", color: "#EC4899" },
-  { n: "4.9★", l: "Google Rating", color: "#E8A93C" },
-  { n: "98%", l: "Permanent Relief", color: "#22c55e" },
-  { n: "10+", l: "साल का अनुभव", color: "#3B82F6" },
+type Stat = {
+  l: string;
+  color: string;
+  target: number;
+  prefix?: string;
+  suffix?: string;
+  decimals?: number;
+};
+
+const STATS: Stat[] = [
+  { l: "संतुष्ट मरीज", color: "#EC4899", target: 10000, suffix: "+" },
+  { l: "Google Rating", color: "#E8A93C", target: 4.9, suffix: "★", decimals: 1 },
+  { l: "Permanent Relief", color: "#22c55e", target: 98, suffix: "%" },
+  { l: "साल का अनुभव", color: "#3B82F6", target: 10, suffix: "+" },
 ];
 
 function TrustSection() {
+  const ref = useRef<HTMLElement | null>(null);
+  useRevealOnScroll(ref, { selector: ".reveal-stat" });
   return (
-    <section className="bg-background px-3 py-6">
+    <section ref={ref} className="bg-background px-3 py-6">
       <h2 className="text-center text-[24px] font-black leading-tight text-white">
-        <span className="text-brand-gold">10,000+</span> मरीजों का भरोसा
+        <CountUp target={10000} suffix="+" className="text-brand-gold" /> मरीजों का भरोसा
       </h2>
       <p className="mt-1 text-center text-[12.5px] font-semibold text-[color:var(--body-dim)]">
         कानपुर से शुरू, पूरे भारत तक पहुँच
@@ -786,14 +910,19 @@ function TrustSection() {
         {STATS.map((s) => (
           <div
             key={s.l}
-            className="rounded-md border border-[color:var(--card-border)] bg-card p-3.5 text-center shadow-hard-sm"
+            className="reveal-stat rounded-md border border-[color:var(--card-border)] bg-card p-3.5 text-center shadow-hard-sm"
             style={{ borderTopWidth: 3, borderTopColor: s.color }}
           >
             <p
               className="text-[28px] font-black leading-none tracking-tight"
               style={{ color: s.color }}
             >
-              {s.n}
+              <CountUp
+                target={s.target}
+                suffix={s.suffix}
+                prefix={s.prefix}
+                decimals={s.decimals}
+              />
             </p>
             <p className="mt-1.5 text-[11.5px] font-bold uppercase tracking-wide text-[color:var(--body-dim)]">
               {s.l}
@@ -802,13 +931,15 @@ function TrustSection() {
         ))}
       </div>
 
-      <div className="mt-4 flex items-center gap-3 rounded-md border-2 border-brand-gold bg-card p-4 shadow-hard-sm">
+      <div className="reveal-stat mt-4 flex items-center gap-3 rounded-md border-2 border-brand-gold bg-card p-4 shadow-hard-sm">
         <div className="grid h-12 w-12 shrink-0 place-items-center rounded-md bg-white">
           <span className="text-xl font-black text-[#4285F4]">G</span>
         </div>
         <div className="min-w-0">
           <div className="flex items-center gap-1.5">
-            <span className="text-[20px] font-black leading-none text-white">4.9</span>
+            <span className="text-[20px] font-black leading-none text-white">
+              <CountUp target={4.9} decimals={1} />
+            </span>
             <div className="flex items-center gap-0.5 text-brand-gold">
               {[0, 1, 2, 3, 4].map((i) => (
                 <Star key={i} size={13} fill="currentColor" strokeWidth={0} />
@@ -816,12 +947,12 @@ function TrustSection() {
             </div>
           </div>
           <p className="mt-1 text-[11.5px] font-bold text-[color:var(--body-dim)]">
-            Google पर 1,200+ रिव्यू
+            Google पर <CountUp target={1200} suffix="+" /> रिव्यू
           </p>
         </div>
       </div>
 
-      <p className="mt-4 rounded-md border-2 border-dashed border-[color:var(--card-border)] bg-card p-3 text-center text-[11.5px] font-semibold text-[color:var(--body-dim)]">
+      <p className="reveal-stat mt-4 rounded-md border-2 border-dashed border-[color:var(--card-border)] bg-card p-3 text-center text-[11.5px] font-semibold text-[color:var(--body-dim)]">
         📹 Real patient video testimonials जल्द add होंगे
       </p>
     </section>
