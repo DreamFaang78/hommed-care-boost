@@ -16,12 +16,11 @@ import {
   Mail,
   Clock,
   ChevronRight,
-  Activity,
-  Zap,
-  Moon,
-  Timer,
-  Droplet,
-  FlaskConical,
+  Microscope,
+  HeartPulse,
+  MoonStar,
+  TimerReset,
+  Waves,
 } from "lucide-react";
 
 import drIqbalPortraitAsset from "@/assets/dr-iqbal-portrait.jpg.asset.json";
@@ -468,7 +467,7 @@ const PROBLEM_CARDS = [
     t: "शुक्राणु की कमी",
     en: "LOW SPERM COUNT",
     d: "टेस्टिकल्स में दर्द, सूजन, हार्मोन असामान्यता, चेहरे के बाल कम होना।",
-    icon: FlaskConical,
+    icon: Microscope,
     color: "#EC4899",
     accent: "#EC4899",
   },
@@ -476,7 +475,7 @@ const PROBLEM_CARDS = [
     t: "स्तंभनदोष / नपुंसकता",
     en: "ERECTILE DYSFUNCTION",
     d: "इरेक्शन बनाए रखने में असमर्थता, कमज़ोरी, आत्मविश्वास की कमी।",
-    icon: Zap,
+    icon: HeartPulse,
     color: "#F97316",
     accent: "#F97316",
   },
@@ -484,15 +483,15 @@ const PROBLEM_CARDS = [
     t: "स्वप्नदोष",
     en: "NIGHTFALL",
     d: "गीले सपने, अनियंत्रित स्खलन एवं शारीरिक कमज़ोरी।",
-    icon: Moon,
-    color: "#8B5CF6",
-    accent: "#8B5CF6",
+    icon: MoonStar,
+    color: "#A855F7",
+    accent: "#A855F7",
   },
   {
     t: "शीघ्रपतन",
     en: "PREMATURE EJACULATION",
     d: "अपेक्षा से जल्दी स्खलन, संबंधों में असंतुष्टि।",
-    icon: Timer,
+    icon: TimerReset,
     color: "#EF4444",
     accent: "#EF4444",
   },
@@ -500,7 +499,7 @@ const PROBLEM_CARDS = [
     t: "प्रोस्टेट और मूत्राशय",
     en: "PROSTATE & URINARY BLADDER",
     d: "मूत्र संबंधी परेशानी, जलन, बार-बार पेशाब आना।",
-    icon: Droplet,
+    icon: Stethoscope,
     color: "#14B8A6",
     accent: "#14B8A6",
   },
@@ -508,7 +507,7 @@ const PROBLEM_CARDS = [
     t: "धातरोग",
     en: "SPERMATORRHOEA",
     d: "पेशाब के साथ धातु निकलना, गंभीर कमज़ोरी।",
-    icon: Activity,
+    icon: Waves,
     color: "#3B82F6",
     accent: "#3B82F6",
   },
@@ -534,7 +533,7 @@ function ProblemGrid() {
                     className="grid h-14 w-14 shrink-0 place-items-center rounded-md text-white shadow-hard-sm"
                     style={{ background: c.color }}
                   >
-                    <Icon size={28} strokeWidth={2.4} />
+                    <Icon size={30} strokeWidth={2.5} />
                   </div>
                   <div className="min-w-0 flex-1">
                     <h3 className="text-[16px] font-black leading-tight text-white">
