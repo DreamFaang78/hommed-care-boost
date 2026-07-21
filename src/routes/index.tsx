@@ -30,9 +30,12 @@ import drIqbalPortraitAsset from "@/assets/dr-iqbal-portrait-hq.jpg.asset.json";
 import drIqbalClinicAsset from "@/assets/dr-iqbal-clinic-v2.jpg.asset.json";
 import clinicExteriorAsset from "@/assets/hommed-clinic-exterior-v2.jpg.asset.json";
 import hommedLogoAsset from "@/assets/hommed-logo.jpg.asset.json";
+import testimonialSanjeevAsset from "@/assets/testimonial-sanjeev.jpg.asset.json";
+import testimonialRajeevAsset from "@/assets/testimonial-rajeev.jpg.asset.json";
 const drIqbalImg = drIqbalPortraitAsset.url;
 const drCertsImg = drIqbalClinicAsset.url;
 const clinicExteriorImg = clinicExteriorAsset.url;
+
 
 export const Route = createFileRoute("/")({
   component: Landing,
