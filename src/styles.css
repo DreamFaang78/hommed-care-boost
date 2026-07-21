@@ -115,6 +115,34 @@
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
 }
+@keyframes cta-glow-blue {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(37,99,235,0.55),
+                0 2px 0 0 rgba(0,0,0,0.3),
+                0 4px 10px -4px rgba(0,0,0,0.5);
+  }
+  50% {
+    transform: scale(1.04);
+    box-shadow: 0 0 24px 6px rgba(37,99,235,0.45),
+                0 2px 0 0 rgba(0,0,0,0.3),
+                0 4px 10px -4px rgba(0,0,0,0.5);
+  }
+}
+@keyframes cta-glow-gold {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(232,169,60,0.55),
+                0 2px 0 0 rgba(0,0,0,0.3),
+                0 4px 10px -4px rgba(0,0,0,0.5);
+  }
+  50% {
+    transform: scale(1.04);
+    box-shadow: 0 0 24px 6px rgba(232,169,60,0.45),
+                0 2px 0 0 rgba(0,0,0,0.3),
+                0 4px 10px -4px rgba(0,0,0,0.5);
+  }
+}
 
 @utility pulse-dot {
   animation: hommed-pulse 1.4s ease-in-out infinite;
@@ -127,4 +155,12 @@
 }
 @utility shadow-hard-sm {
   box-shadow: 0 2px 0 0 rgba(0,0,0,0.3), 0 4px 10px -4px rgba(0,0,0,0.5);
+}
+@utility cta-glow-blue {
+  animation: cta-glow-blue 1.8s ease-in-out infinite;
+  will-change: transform, box-shadow;
+}
+@utility cta-glow-gold {
+  animation: cta-glow-gold 1.8s ease-in-out infinite;
+  will-change: transform, box-shadow;
 }
