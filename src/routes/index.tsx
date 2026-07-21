@@ -768,18 +768,29 @@ function DoctorProfile() {
 
 /* ---------------- Trust Section ---------------- */
 
-const STATS = [
-  { n: "10,000+", l: "संतुष्ट मरीज", color: "#EC4899" },
-  { n: "4.9★", l: "Google Rating", color: "#E8A93C" },
-  { n: "98%", l: "Permanent Relief", color: "#22c55e" },
-  { n: "10+", l: "साल का अनुभव", color: "#3B82F6" },
+type Stat = {
+  l: string;
+  color: string;
+  target: number;
+  prefix?: string;
+  suffix?: string;
+  decimals?: number;
+};
+
+const STATS: Stat[] = [
+  { l: "संतुष्ट मरीज", color: "#EC4899", target: 10000, suffix: "+" },
+  { l: "Google Rating", color: "#E8A93C", target: 4.9, suffix: "★", decimals: 1 },
+  { l: "Permanent Relief", color: "#22c55e", target: 98, suffix: "%" },
+  { l: "साल का अनुभव", color: "#3B82F6", target: 10, suffix: "+" },
 ];
 
 function TrustSection() {
+  const ref = useRef<HTMLElement | null>(null);
+  useRevealOnScroll(ref, { selector: ".reveal-stat" });
   return (
-    <section className="bg-background px-3 py-6">
+    <section ref={ref} className="bg-background px-3 py-6">
       <h2 className="text-center text-[24px] font-black leading-tight text-white">
-        <span className="text-brand-gold">10,000+</span> मरीजों का भरोसा
+        <CountUp target={10000} suffix="+" className="text-brand-gold" /> मरीजों का भरोसा
       </h2>
       <p className="mt-1 text-center text-[12.5px] font-semibold text-[color:var(--body-dim)]">
         कानपुर से शुरू, पूरे भारत तक पहुँच
@@ -789,14 +800,19 @@ function TrustSection() {
         {STATS.map((s) => (
           <div
             key={s.l}
-            className="rounded-md border border-[color:var(--card-border)] bg-card p-3.5 text-center shadow-hard-sm"
+            className="reveal-stat rounded-md border border-[color:var(--card-border)] bg-card p-3.5 text-center shadow-hard-sm"
             style={{ borderTopWidth: 3, borderTopColor: s.color }}
           >
             <p
               className="text-[28px] font-black leading-none tracking-tight"
               style={{ color: s.color }}
             >
-              {s.n}
+              <CountUp
+                target={s.target}
+                suffix={s.suffix}
+                prefix={s.prefix}
+                decimals={s.decimals}
+              />
             </p>
             <p className="mt-1.5 text-[11.5px] font-bold uppercase tracking-wide text-[color:var(--body-dim)]">
               {s.l}
@@ -805,13 +821,15 @@ function TrustSection() {
         ))}
       </div>
 
-      <div className="mt-4 flex items-center gap-3 rounded-md border-2 border-brand-gold bg-card p-4 shadow-hard-sm">
+      <div className="reveal-stat mt-4 flex items-center gap-3 rounded-md border-2 border-brand-gold bg-card p-4 shadow-hard-sm">
         <div className="grid h-12 w-12 shrink-0 place-items-center rounded-md bg-white">
           <span className="text-xl font-black text-[#4285F4]">G</span>
         </div>
         <div className="min-w-0">
           <div className="flex items-center gap-1.5">
-            <span className="text-[20px] font-black leading-none text-white">4.9</span>
+            <span className="text-[20px] font-black leading-none text-white">
+              <CountUp target={4.9} decimals={1} />
+            </span>
             <div className="flex items-center gap-0.5 text-brand-gold">
               {[0, 1, 2, 3, 4].map((i) => (
                 <Star key={i} size={13} fill="currentColor" strokeWidth={0} />
@@ -819,12 +837,12 @@ function TrustSection() {
             </div>
           </div>
           <p className="mt-1 text-[11.5px] font-bold text-[color:var(--body-dim)]">
-            Google पर 1,200+ रिव्यू
+            Google पर <CountUp target={1200} suffix="+" /> रिव्यू
           </p>
         </div>
       </div>
 
-      <p className="mt-4 rounded-md border-2 border-dashed border-[color:var(--card-border)] bg-card p-3 text-center text-[11.5px] font-semibold text-[color:var(--body-dim)]">
+      <p className="reveal-stat mt-4 rounded-md border-2 border-dashed border-[color:var(--card-border)] bg-card p-3 text-center text-[11.5px] font-semibold text-[color:var(--body-dim)]">
         📹 Real patient video testimonials जल्द add होंगे
       </p>
     </section>
