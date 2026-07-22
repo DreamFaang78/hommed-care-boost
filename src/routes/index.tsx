@@ -19,22 +19,22 @@ import {
   ChevronRight,
   Microscope,
   HeartPulse,
-  MoonStar,
   TimerReset,
-  Waves,
   CheckCircle2,
   Loader2,
+  Bed,
+  Droplet,
+  Activity,
 } from "lucide-react";
 
-import drIqbalPortraitAsset from "@/assets/dr-iqbal-portrait-hq.jpg.asset.json";
-import drIqbalClinicAsset from "@/assets/dr-iqbal-clinic-v2.jpg.asset.json";
-import clinicExteriorAsset from "@/assets/hommed-clinic-exterior-v2.jpg.asset.json";
-import hommedLogoAsset from "@/assets/hommed-logo.jpg.asset.json";
-import testimonialSanjeevAsset from "@/assets/testimonial-sanjeev.jpg.asset.json";
-import testimonialRajeevAsset from "@/assets/testimonial-rajeev.jpg.asset.json";
-const drIqbalImg = drIqbalPortraitAsset.url;
-const drCertsImg = drIqbalClinicAsset.url;
-const clinicExteriorImg = clinicExteriorAsset.url;
+import drIqbalImg from "@/assets/dr-iqbal-portrait.jpg";
+import drCertsImg from "@/assets/dr-iqbal-stethoscope.jpg";
+import clinicExteriorImg from "@/assets/clinic-exterior.jpg";
+import hommedLogoImg from "@/assets/hommed-logo.png";
+import testimonialSanjeevImg from "@/assets/dr-iqbal-consultation.jpg";
+import testimonialRajeevImg from "@/assets/dr-iqbal-consultation-patient.jpg";
+
+
 
 
 export const Route = createFileRoute("/")({
@@ -83,7 +83,7 @@ function StickyHeader() {
       <div className="mx-auto flex max-w-[440px] items-center justify-between gap-2 px-3 py-2.5">
         <a href="#top" className="flex items-center gap-2 shrink-0">
           <img
-            src={hommedLogoAsset.url}
+            src={hommedLogoImg}
             alt="HomMed - Dr. Iqbal's Homoeopathic Centre"
             className="h-10 w-auto rounded-md bg-white p-0.5 shadow-hard-sm"
           />
@@ -94,7 +94,7 @@ function StickyHeader() {
             whileTap={{ scale: 0.95 }}
             whileHover={{ scale: 1.03 }}
             transition={{ duration: 0.15, ease: "easeOut" }}
-            className="rounded-md bg-brand-gold px-3.5 py-2 text-[13px] font-black tracking-wide text-[color:var(--primary-foreground)] cta-glow-gold"
+            className="rounded-md bg-brand-gold px-3.5 py-2 text-[14.5px] font-black tracking-wide text-[color:var(--primary-foreground)] cta-glow-gold"
           >
             अपॉइंटमेंट लें
           </motion.a>
@@ -154,7 +154,7 @@ function StickyBottomBar() {
       ref={ref}
       className="fixed inset-x-0 bottom-0 z-40 border-t-2 border-brand-gold bg-[#081A0F] shadow-[0_-6px_20px_rgba(0,0,0,0.6)]"
     >
-      <div className="mx-auto grid max-w-[440px] grid-cols-[auto_1fr_auto] items-center gap-2 px-3 py-2">
+      <div className="mx-auto flex max-w-[440px] items-center justify-between gap-2.5 px-3 py-2">
         <img
           src={drIqbalImg}
           alt="Dr. Iqbal Quasim"
@@ -162,19 +162,35 @@ function StickyBottomBar() {
           height={40}
           className="h-10 w-10 shrink-0 rounded-full object-cover ring-2 ring-brand-gold"
         />
-        <motion.a
-          href={TEL}
-          whileTap={{ scale: 0.95 }}
-          whileHover={{ scale: 1.02 }}
-          transition={{ duration: 0.15, ease: "easeOut" }}
-          className="flex min-w-0 items-center justify-center gap-1.5 rounded-md bg-gradient-to-r from-[color:var(--brand-blue)] to-[color:var(--brand-blue-2)] px-3 py-2.5 text-[14px] font-black tracking-wide text-white cta-glow-blue"
-        >
-          <Phone size={16} className="shrink-0" />
-          <span className="truncate">अभी कॉल करें</span>
-        </motion.a>
-        <div className="flex shrink-0 items-center gap-1.5">
+        <div className="flex flex-1 items-center gap-2">
+          <motion.a
+            href={TEL}
+            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.15, ease: "easeOut" }}
+            className="flex-1 flex items-center justify-center gap-1.5 rounded-md bg-gradient-to-r from-[color:var(--brand-blue)] to-[color:var(--brand-blue-2)] py-2 text-[15.5px] font-black tracking-wide text-white cta-glow-blue"
+          >
+            <Phone size={14} className="shrink-0" />
+            <span>अभी कॉल करें</span>
+          </motion.a>
+          <motion.a
+            href="https://wa.me/916306988550"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.15, ease: "easeOut" }}
+            className="flex-1 flex items-center justify-center gap-1.5 rounded-md bg-[#25D366] py-2 text-[15.5px] font-black tracking-wide text-white shadow-sm"
+          >
+            <svg className="h-3.5 w-3.5 fill-white shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.66.986 3.292 1.48 4.966 1.481 5.45-.001 9.885-4.417 9.888-9.867.002-2.64-1.019-5.12-2.877-6.982C16.766 1.924 14.288.9 11.647.9 6.202.9 1.768 5.314 1.765 10.766c-.002 1.8.486 3.56 1.413 5.12L2.174 21.8l6.02-1.579c1.558.85 3.112 1.298 4.453 1.298z"/>
+            </svg>
+            <span>व्हाट्सएप</span>
+          </motion.a>
+        </div>
+        <div className="flex shrink-0 items-center gap-1">
           <span className="pulse-dot inline-block h-2.5 w-2.5 rounded-full bg-brand-green" />
-          <span className="pulse-text text-[11px] font-black leading-tight text-brand-green">
+          <span className="pulse-text text-[10px] font-black leading-tight text-brand-green">
             डॉक्टर<br />ऑनलाइन
           </span>
         </div>
@@ -233,19 +249,41 @@ function LeadForm() {
       prev.includes(p) ? prev.filter((x) => x !== p) : [...prev, p],
     );
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setErr("");
     if (!name.trim()) return setErr("कृपया अपना नाम भरें");
     if (!/^[6-9]\d{9}$/.test(mobile))
       return setErr("कृपया सही मोबाइल नंबर भरें (10 अंक)");
-    void duration;
-    void problems;
+
     setSubmitting(true);
-    window.setTimeout(() => {
-      setSubmitting(false);
+    try {
+      const apiBase =
+        (import.meta.env.VITE_API_BASE_URL as string | undefined) ?? "";
+      const res = await fetch(`${apiBase}/api/leads`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim(),
+          phone: mobile.trim(),
+          inquiry:
+            problems.length > 0
+              ? problems.join(", ")
+              : "General Inquiry",
+          lead_source: "landing-page",
+          notes: duration ? `Duration: ${duration}` : undefined,
+        }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error((data as { message?: string }).message ?? "Server error");
+      }
       setSubmitted(true);
-    }, 700);
+    } catch {
+      setErr("कुछ गड़बड़ हो गई। कृपया पुनः प्रयास करें।");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const inputCls =
@@ -284,7 +322,7 @@ function LeadForm() {
                 whileTap={{ scale: 0.96 }}
                 whileHover={{ scale: 1.03 }}
                 transition={{ duration: 0.18, ease: "easeOut" }}
-                className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-md bg-gradient-to-r from-[color:var(--brand-blue)] to-[color:var(--brand-blue-2)] px-5 py-3 text-[14px] font-black tracking-wide text-white shadow-hard-sm"
+                className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-md bg-gradient-to-r from-[color:var(--brand-blue)] to-[color:var(--brand-blue-2)] px-5 py-3 text-[16px] font-black tracking-wide text-white shadow-hard-sm"
               >
                 <Phone size={16} /> अभी कॉल करें
               </motion.a>
@@ -312,15 +350,29 @@ function LeadForm() {
                 {PHONE_DISPLAY}
               </motion.a>
 
-              <div className="mt-3 flex justify-center">
+              <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
                 <motion.a
                   href={TEL}
                   whileTap={{ scale: 0.95 }}
                   whileHover={{ scale: 1.03 }}
                   transition={{ duration: 0.18, ease: "easeOut" }}
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[color:var(--brand-blue)] to-[color:var(--brand-blue-2)] px-8 py-2.5 text-[15px] font-black tracking-wide text-white cta-glow-blue"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[color:var(--brand-blue)] to-[color:var(--brand-blue-2)] px-6 py-2.5 text-[17px] font-black tracking-wide text-white cta-glow-blue"
                 >
                   <Phone size={16} strokeWidth={3} /> Call now
+                </motion.a>
+                <motion.a
+                  href="https://wa.me/916306988550"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileTap={{ scale: 0.95 }}
+                  whileHover={{ scale: 1.03 }}
+                  transition={{ duration: 0.18, ease: "easeOut" }}
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-2.5 text-[17px] font-black tracking-wide text-white shadow-md hover:bg-[#20ba5a]"
+                >
+                  <svg className="h-4 w-4 fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.66.986 3.292 1.48 4.966 1.481 5.45-.001 9.885-4.417 9.888-9.867.002-2.64-1.019-5.12-2.877-6.982C16.766 1.924 14.288.9 11.647.9 6.202.9 1.768 5.314 1.765 10.766c-.002 1.8.486 3.56 1.413 5.12L2.174 21.8l6.02-1.579c1.558.85 3.112 1.298 4.453 1.298z"/>
+                  </svg>
+                  व्हाट्सएप पर पूछें
                 </motion.a>
               </div>
 
@@ -331,7 +383,7 @@ function LeadForm() {
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="Your Name"
+                    placeholder="अपना नाम लिखें"
                     maxLength={80}
                     className={inputCls}
                   />
@@ -347,7 +399,7 @@ function LeadForm() {
                     }
                     inputMode="numeric"
                     pattern="[6-9][0-9]{9}"
-                    placeholder="Your Mobile Number"
+                    placeholder="मोबाइल नंबर डालें"
                     className={inputCls}
                   />
                 </div>
@@ -417,7 +469,7 @@ function LeadForm() {
                   whileTap={{ scale: 0.97 }}
                   whileHover={{ scale: 1.015 }}
                   transition={{ duration: 0.15, ease: "easeOut" }}
-                  className="mt-1 flex w-full items-center justify-center gap-2 rounded-md bg-brand-gold px-4 py-3.5 text-[16px] font-black tracking-wide text-[color:var(--primary-foreground)] shadow-hard disabled:opacity-80"
+                  className="mt-1 flex w-full items-center justify-center gap-2 rounded-md bg-brand-gold px-4 py-3.5 text-[18px] font-black tracking-wide text-[color:var(--primary-foreground)] shadow-hard disabled:opacity-80"
                 >
                   {submitting ? (
                     <>
@@ -550,7 +602,7 @@ function BadgeList({ items }: { items: string[] }) {
           key={t}
           className="badge flex items-start gap-2.5 rounded-md border border-[color:var(--card-border)] bg-card p-3 shadow-hard-sm"
         >
-          <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-md bg-brand-green text-white">
+          <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-md bg-brand-gold text-white">
             <Check size={14} strokeWidth={3} />
           </span>
           <span className="text-[14px] font-bold leading-snug text-white">
@@ -570,7 +622,7 @@ const PROBLEM_CARDS = [
     en: "LOW SPERM COUNT",
     d: "टेस्टिकल्स में दर्द, सूजन, हार्मोन असामान्यता, चेहरे के बाल कम होना।",
     icon: Microscope,
-    color: "#EC4899",
+    color: "#E8A93C",
     accent: "#EC4899",
   },
   {
@@ -578,15 +630,15 @@ const PROBLEM_CARDS = [
     en: "ERECTILE DYSFUNCTION",
     d: "इरेक्शन बनाए रखने में असमर्थता, कमज़ोरी, आत्मविश्वास की कमी।",
     icon: HeartPulse,
-    color: "#F97316",
+    color: "#E8A93C",
     accent: "#F97316",
   },
   {
     t: "स्वप्नदोष",
     en: "NIGHTFALL",
     d: "गीले सपने, अनियंत्रित स्खलन एवं शारीरिक कमज़ोरी।",
-    icon: MoonStar,
-    color: "#A855F7",
+    icon: Bed,
+    color: "#E8A93C",
     accent: "#A855F7",
   },
   {
@@ -594,23 +646,23 @@ const PROBLEM_CARDS = [
     en: "PREMATURE EJACULATION",
     d: "अपेक्षा से जल्दी स्खलन, संबंधों में असंतुष्टि।",
     icon: TimerReset,
-    color: "#EF4444",
+    color: "#E8A93C",
     accent: "#EF4444",
   },
   {
     t: "प्रोस्टेट और मूत्राशय",
     en: "PROSTATE & URINARY BLADDER",
     d: "मूत्र संबंधी परेशानी, जलन, बार-बार पेशाब आना।",
-    icon: Stethoscope,
-    color: "#14B8A6",
+    icon: Activity,
+    color: "#E8A93C",
     accent: "#14B8A6",
   },
   {
     t: "धातरोग",
     en: "SPERMATORRHOEA",
     d: "पेशाब के साथ धातु निकलना, गंभीर कमज़ोरी।",
-    icon: Waves,
-    color: "#3B82F6",
+    icon: Droplet,
+    color: "#E8A93C",
     accent: "#3B82F6",
   },
 ];
@@ -648,7 +700,7 @@ function ProblemGrid() {
                       />
                       {c.t}
                     </h3>
-                    <p className="mt-0.5 text-[11px] font-black uppercase tracking-wider text-brand-gold">
+                    <p className="mt-0.5 text-[9px] font-bold uppercase tracking-wider text-brand-gold/60">
                       {c.en}
                     </p>
                     <p className="mt-1.5 text-[12.5px] font-medium leading-snug text-[color:var(--body-dim)]">
@@ -717,7 +769,7 @@ function DepartmentBanner() {
       </div>
       <a
         href={TEL}
-        className="mt-5 flex items-center justify-center gap-2 rounded-md bg-brand-gold px-4 py-3 text-[15px] font-black tracking-wide text-[color:var(--primary-foreground)] shadow-hard"
+        className="mt-5 flex items-center justify-center gap-2 rounded-md bg-brand-gold px-4 py-3 text-[16.5px] font-black tracking-wide text-[color:var(--primary-foreground)] shadow-hard"
       >
         <Phone size={16} strokeWidth={3} /> अभी कंसल्ट करें — {PHONE_DISPLAY}
       </a>
@@ -787,7 +839,7 @@ function ProcessSteps() {
         whileTap={{ scale: 0.96 }}
         whileHover={{ scale: 1.02 }}
         transition={{ duration: 0.18, ease: "easeOut" }}
-        className="reveal mt-4 flex items-center justify-center gap-2 rounded-md bg-brand-gold px-4 py-3.5 text-[15px] font-black tracking-wide text-[color:var(--primary-foreground)] shadow-hard"
+        className="reveal mt-4 flex items-center justify-center gap-2 rounded-md bg-brand-gold px-4 py-3.5 text-[16.5px] font-black tracking-wide text-[color:var(--primary-foreground)] shadow-hard"
       >
         <Phone size={16} strokeWidth={3} /> अभी शुरुआत करें
       </motion.a>
@@ -811,7 +863,7 @@ function Testimonials() {
 
   const cases = [
     {
-      img: testimonialSanjeevAsset.url,
+      img: testimonialSanjeevImg,
       name: "संजीव कुमार",
       city: "कन्नौज, उत्तर प्रदेश",
       problem: "शीघ्रपतन (Premature Ejaculation)",
@@ -820,7 +872,7 @@ function Testimonials() {
         "पहले शर्म की वजह से किसी को बता नहीं पाता था। डॉ. इक़बाल सर ने बहुत आराम से समझाया, दवा शुरू की और 4 महीने में फ़र्क़ खुद महसूस हुआ। अब आत्मविश्वास वापस आ गया है।",
     },
     {
-      img: testimonialRajeevAsset.url,
+      img: testimonialRajeevImg,
       name: "राजीव सिंह",
       city: "रांची, झारखंड",
       problem: "शुक्राणु की कमी (Low Sperm Count)",
@@ -956,19 +1008,22 @@ function DoctorProfile() {
       <div className="overflow-hidden rounded-md border-2 border-brand-gold bg-card shadow-hard">
         <img
           src={drCertsImg}
-          alt="Dr. Iqbal Quasim with framed certificates"
+          alt="Dr. Iqbal Quasim — Classical Homoeopath"
           width={1100}
           height={900}
           loading="lazy"
-          className="h-56 w-full object-cover"
+          className="w-full h-auto max-h-[440px] object-cover object-[center_25%]"
         />
         <div className="p-4">
           <h3 className="text-[20px] font-black text-white">Dr. Iqbal Quasim</h3>
-          <p className="mt-0.5 text-[12.5px] font-bold text-[color:var(--body-dim)]">
-            BHMS (Bachelor of Homeopathic Medicine &amp; Surgery)
-            <br />
-            10+ Years Clinical Experience
-          </p>
+          <div className="mt-0.5 flex flex-wrap items-center gap-2">
+            <span className="text-[12.5px] font-bold text-[color:var(--body-dim)]">
+              BHMS (Bachelor of Homeopathic Medicine &amp; Surgery) · 10+ Years Clinical Experience
+            </span>
+            <span className="inline-block rounded bg-[#E8A93C]/20 border border-[#E8A93C]/40 px-2 py-0.5 text-[10.5px] font-black tracking-wide text-[#E8A93C]">
+              BHMS रजिस्टर्ड चिकित्सक
+            </span>
+          </div>
           <div className="mt-3 flex items-start gap-2 rounded-md bg-brand-gold/10 border border-brand-gold p-3">
             <Award size={20} className="mt-0.5 shrink-0 text-brand-gold" />
             <p className="text-[13.5px] font-black leading-snug text-white">
@@ -1045,30 +1100,6 @@ function TrustSection() {
         ))}
       </div>
 
-      <div className="reveal-stat mt-4 flex items-center gap-3 rounded-md border-2 border-brand-gold bg-card p-4 shadow-hard-sm">
-        <div className="grid h-12 w-12 shrink-0 place-items-center rounded-md bg-white">
-          <span className="text-xl font-black text-[#4285F4]">G</span>
-        </div>
-        <div className="min-w-0">
-          <div className="flex items-center gap-1.5">
-            <span className="text-[20px] font-black leading-none text-white">
-              <CountUp target={4.9} decimals={1} />
-            </span>
-            <div className="flex items-center gap-0.5 text-brand-gold">
-              {[0, 1, 2, 3, 4].map((i) => (
-                <Star key={i} size={13} fill="currentColor" strokeWidth={0} />
-              ))}
-            </div>
-          </div>
-          <p className="mt-1 text-[11.5px] font-bold text-[color:var(--body-dim)]">
-            Google पर <CountUp target={1200} suffix="+" /> रिव्यू
-          </p>
-        </div>
-      </div>
-
-      <p className="reveal-stat mt-4 rounded-md border-2 border-dashed border-[color:var(--card-border)] bg-card p-3 text-center text-[11.5px] font-semibold text-[color:var(--body-dim)]">
-        📹 Real patient video testimonials जल्द add होंगे
-      </p>
     </section>
   );
 }
