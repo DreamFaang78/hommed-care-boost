@@ -83,6 +83,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:title", content: "HOMMED — पुरुष स्वास्थ्य विशेषज्ञ | Dr. Iqbal Quasim" },
       { property: "og:description", content: "गुप्त रोगों का जड़ से इलाज — मात्र ₹1599 में। कानपुर का सबसे भरोसेमंद होम्योपैथिक सेंटर।" },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://kit.hommed.org" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
@@ -90,6 +91,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
+      { rel: "canonical", href: "https://kit.hommed.org" },
       { rel: "icon", href: "/favicon.png", type: "image/png" },
       { rel: "shortcut icon", href: "/favicon.png", type: "image/png" },
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
