@@ -327,7 +327,7 @@ function Hero() {
 }
 
 /* ═══════════════════════════════════════
-   3. DOCTOR BLOCK (merged)
+   3. DOCTOR BLOCK
 ═══════════════════════════════════════ */
 function DoctorBlock() {
   return (
@@ -338,36 +338,13 @@ function DoctorBlock() {
       <p className="mb-4 text-center text-[13.5px] font-semibold leading-snug text-[color:var(--body-dim)]">
         कानपुर के डॉक्टर — सीधे आपसे बात करेंगे।
       </p>
-      <div className="overflow-hidden rounded-xl border-2 border-[color:var(--brand-trust)] bg-white shadow-card">
-        {/* Clinic storefront photo with location caption overlay */}
-        <div className="relative">
-          <img
-            src={clinicExteriorImg}
-            alt="HomMed Clinic — Dr. Iqbal's Homoeopathic Centre, Jajmau, Kanpur"
-            className="h-64 w-full object-cover"
-            style={{ objectPosition: "center 35%" }}
-            loading="lazy"
-          />
-
-        </div>
-        <div className="p-4">
-          {/* Clinic tagline — primary line */}
-          <h2 className="text-[17px] font-black leading-snug text-[color:var(--brand-trust)]">
-            होम्योपैथिक क्लिनिक, कानपुर
-          </h2>
-
-          {/* Doctor sub-line */}
-          <p className="mt-1.5 text-[12.5px] font-semibold text-[color:var(--body-dim)]">
-            Dr. Iqbal Quasim (BHMS) के नेतृत्व में
-          </p>
-
-          {/* Stats */}
-          <p className="mt-2.5 text-[13px] font-black text-[color:var(--brand-trust)]">
-            4.9★ Google Rating · 10,000+ मरीज़ ठीक हुए
-          </p>
-
-          <LeadFormInline source="doctor-block" />
-        </div>
+      <div className="overflow-hidden rounded-xl border-2 border-[color:var(--brand-trust)] shadow-card">
+        <img
+          src={clinicExteriorImg}
+          alt="HomMed Clinic — Dr. Iqbal's Homoeopathic Centre, Jajmau, Kanpur"
+          className="w-full h-auto block"
+          loading="lazy"
+        />
       </div>
     </section>
   );
