@@ -156,26 +156,26 @@ function Hero() {
     <section id="hero" className="bg-[color:var(--brand-trust)] px-4 pt-7 pb-8 text-white">
       {/* Headline */}
       <h1 className="text-[22px] font-black leading-[1.25] tracking-tight">
-        क्या आपको <span className="border-b-2 border-[color:var(--brand-cta)] text-[color:var(--brand-cta)]">मर्दाना तकलीफ़</span> है?
+        क्या आपको <span className="border-b-2 border-white/30 text-white">मर्दाना तकलीफ़</span> है?
       </h1>
       <p className="mt-3 text-[14px] font-medium leading-relaxed text-white/80">
         सही इलाज होता है — बस एक बार बात करें।
       </p>
 
       {/* Call Now pill button */}
-      <div className="mt-5 mb-2 flex justify-center">
+      <div className="mt-4 mb-2 flex justify-center">
         <a
           href={TEL}
           id="hero-call-now"
-          className="flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#1a7bbf] to-[#0d5fa0] px-7 py-3 text-[15px] font-black text-white shadow-[0_4px_18px_rgba(13,95,160,0.55)] transition-all duration-150 active:scale-95 hover:scale-105 hover:shadow-[0_6px_24px_rgba(13,95,160,0.70)]"
+          className="flex items-center gap-2 rounded-full bg-[#183B52] border border-white/20 px-6 py-2.5 text-[14px] font-bold text-white/95 shadow-sm transition-all duration-150 active:scale-95 hover:bg-[#122E40]"
         >
-          <Phone size={17} strokeWidth={2.5} />
+          <Phone size={15} strokeWidth={2.2} />
           Call Now
         </a>
       </div>
 
       {/* Inline lead form card */}
-      <div className="mt-3 rounded-xl border border-[color:var(--brand-trust)]/30 bg-white shadow-card">
+      <div className="mt-3 rounded-xl border border-white/20 bg-white shadow-card-sm">
         <AnimatePresence mode="wait" initial={false}>
           {heroSubmitted ? (
             <motion.div
@@ -189,7 +189,7 @@ function Hero() {
                 <Check size={28} strokeWidth={3} />
               </div>
               <h3 className="text-[18px] font-black text-[color:var(--brand-trust)]">
-                धन्यवाद!
+                धन्यवाद
               </h3>
               <p className="mt-2 text-[13.5px] font-semibold leading-relaxed text-[color:var(--body-dim)]">
                 डॉक्टर जल्द कॉल करेंगे।
@@ -200,7 +200,7 @@ function Hero() {
                 className="mt-5 flex items-center justify-center gap-2 rounded-lg border-2 border-[color:var(--brand-trust)] bg-white py-3 text-[15px] font-black text-[color:var(--brand-trust)]"
               >
                 <Phone size={15} strokeWidth={2.5} />
-                अभी कॉल करें
+                कॉल करें
               </a>
             </motion.div>
           ) : (
@@ -303,7 +303,7 @@ function Hero() {
                 type="submit"
                 disabled={heroSubmitting}
                 id="hero-submit"
-                className="flex w-full items-center justify-center gap-2 rounded-lg bg-[color:var(--brand-cta)] py-3.5 text-[16px] font-black tracking-wide text-white disabled:opacity-70 cta-pulse form-submit-button"
+                className="flex w-full items-center justify-center gap-2 rounded-lg bg-[color:var(--brand-cta)] py-3 text-[15.5px] font-bold tracking-wide text-white disabled:opacity-70 hover:opacity-90 transition-opacity"
               >
                 {heroSubmitting ? (
                   <>
@@ -315,8 +315,8 @@ function Hero() {
               </button>
 
               {/* Trust line */}
-              <p className="text-center text-[11.5px] font-semibold text-[color:var(--body-dim)]">
-                आपकी बात कोई नहीं जानेगा।
+              <p className="text-center text-[11.5px] font-medium text-[color:var(--body-dim)]">
+                आपकी जानकारी सुरक्षित रखी जाएगी।
               </p>
             </motion.form>
           )}
@@ -536,38 +536,38 @@ function LeadFormInline({ source }: { source: string }) {
   };
 
   const inputCls =
-    "w-full rounded-lg border border-[color:var(--card-border)] bg-white px-3.5 py-2.5 text-[14.5px] font-semibold text-foreground outline-none placeholder:text-[color:var(--body-dim)]/60 focus:border-[color:var(--brand-cta)] transition-colors";
+    "w-full rounded-lg border border-[color:var(--card-border)] bg-white px-3.5 py-2.5 text-[14.5px] font-medium text-foreground outline-none placeholder:text-[color:var(--body-dim)]/60 focus:border-[color:var(--brand-trust)] transition-colors";
 
   if (done) {
     return (
-      <div className="mt-4 rounded-xl border-2 border-[color:var(--brand-cta)] bg-white p-5 text-center shadow-card">
+      <div className="mt-4 rounded-xl border border-[color:var(--card-border)] bg-white p-5 text-center shadow-card-sm">
         <div className="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-full bg-[#22c55e] text-white">
           <Check size={24} strokeWidth={3} />
         </div>
-        <p className="text-[15px] font-black text-[color:var(--brand-trust)]">धन्यवाद!</p>
-        <p className="mt-1 text-[13px] font-semibold text-[color:var(--body-dim)]">
+        <p className="text-[15px] font-bold text-[color:var(--brand-trust)]">धन्यवाद</p>
+        <p className="mt-1 text-[13px] text-[color:var(--body-dim)]">
           डॉक्टर जल्द कॉल करेंगे।
         </p>
         <a
           href={TEL}
-          className="mt-4 flex items-center justify-center gap-2 rounded-lg border-2 border-[color:var(--brand-trust)] bg-white py-2.5 text-[14px] font-black text-[color:var(--brand-trust)]"
+          className="mt-4 flex items-center justify-center gap-2 rounded-lg border border-[color:var(--brand-trust)] bg-white py-2.5 text-[14px] font-bold text-[color:var(--brand-trust)] hover:bg-[color:var(--section-alt)] transition-colors"
         >
-          <Phone size={14} strokeWidth={2.5} />
-          अभी कॉल करें
+          <Phone size={14} strokeWidth={2.2} />
+          कॉल करें
         </a>
       </div>
     );
   }
 
   return (
-    <div className="mt-4 overflow-hidden rounded-xl border-2 border-[color:var(--brand-cta)] bg-white shadow-card">
-      {/* Green header band */}
-      <div className="bg-[color:var(--brand-cta)] px-4 py-3">
-        <p className="text-center text-[14px] font-black text-white">
-          🩺 नाम-नंबर दें — डॉक्टर कॉल करेंगे
+    <div className="mt-4 overflow-hidden rounded-xl border border-[color:var(--card-border)] bg-white shadow-card-sm">
+      {/* Sober clinic header */}
+      <div className="border-b border-[color:var(--card-border)] bg-[color:var(--section-alt)] px-4 py-3">
+        <p className="text-center text-[14px] font-bold text-[color:var(--brand-trust)]">
+          नाम-नंबर दें — डॉक्टर कॉल करेंगे
         </p>
-        <p className="mt-0.5 text-center text-[11.5px] font-semibold text-white/80">
-          गुप्त बात · फ्री में बात करें
+        <p className="mt-0.5 text-center text-[11.5px] text-[color:var(--body-dim)]">
+          गोपनीय परामर्श
         </p>
       </div>
       <form onSubmit={onSubmit} className="space-y-3 p-4">
@@ -608,7 +608,7 @@ function LeadFormInline({ source }: { source: string }) {
               initial={{ opacity: 0, x: -6 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0 }}
-              className="text-[12px] font-bold text-destructive"
+              className="text-[12px] font-medium text-destructive"
             >
               {err}
             </motion.p>
@@ -617,7 +617,7 @@ function LeadFormInline({ source }: { source: string }) {
         <button
           type="submit"
           disabled={loading}
-          className="flex w-full items-center justify-center gap-2 rounded-lg bg-[color:var(--brand-cta)] py-3.5 text-[16px] font-black tracking-wide text-white disabled:opacity-70 cta-pulse"
+          className="flex w-full items-center justify-center gap-2 rounded-lg bg-[color:var(--brand-cta)] py-3 text-[15px] font-bold tracking-wide text-white disabled:opacity-70 hover:opacity-90 transition-opacity"
         >
           {loading ? (
             <>
@@ -627,8 +627,8 @@ function LeadFormInline({ source }: { source: string }) {
             "भेजें"
           )}
         </button>
-        <p className="text-center text-[11px] font-semibold text-[color:var(--body-dim)]">
-          🔒 बात किसी को नहीं पता चलेगी
+        <p className="text-center text-[11px] text-[color:var(--body-dim)]">
+          आपकी जानकारी सुरक्षित रखी जाएगी
         </p>
       </form>
     </div>
@@ -905,7 +905,6 @@ function ProcessSteps() {
           </li>
         ))}
       </ol>
-      <LeadFormInline source="process" />
     </section>
   );
 }
@@ -916,8 +915,8 @@ function ProcessSteps() {
 const WHY = [
   {
     icon: ShieldCheck,
-    t: "गुप्त रहेगा",
-    d: "किसी को पता नहीं चलेगा।",
+    t: "गोपनीय परामर्श",
+    d: "आपकी जानकारी सुरक्षित रखी जाती है।",
   },
   {
     icon: Truck,
@@ -926,18 +925,18 @@ const WHY = [
   },
   {
     icon: Leaf,
-    t: "कोई साइड इफेक्ट नहीं",
-    d: "देसी दवा है, कोई नुकसान नहीं।",
+    t: "साइड इफेक्ट की संभावना कम",
+    d: "प्राकृतिक होम्योपैथिक दवा — शरीर के अनुकूल।",
   },
   {
     icon: Stethoscope,
-    t: "10+ साल अनुभव",
-    d: "डॉ. इक़बाल 10+ साल से इलाज कर रहे हैं।",
+    t: "10+ साल का अनुभव",
+    d: "डॉ. इक़बाल 10 से अधिक वर्षों से परामर्श दे रहे हैं।",
   },
   {
     icon: Award,
-    t: "10,000+ मरीज़ ठीक हुए",
-    d: "कानपुर से शुरू, पूरे भारत तक।",
+    t: "10,000+ मरीज़ों का परामर्श",
+    d: "कानपुर एवं अन्य शहरों में विश्वसनीय सेवा।",
   },
 ];
 
@@ -1006,7 +1005,7 @@ function Testimonials() {
           लोग क्या कह रहे हैं?
         </h2>
         <p className="mt-1 text-[12.5px] font-medium text-[color:var(--body-dim)]">
-          असली मरीज़ · असली नाम
+          सत्यापित मरीज़ · असली नाम
         </p>
       </div>
 
@@ -1070,9 +1069,9 @@ function Testimonials() {
                   <Clock size={11} className="text-[color:var(--brand-trust)]" />
                   {c.duration}
                 </span>
-                <span className="flex items-center gap-1 text-[11.5px] font-black text-[#15803d]">
+                <span className="flex items-center gap-1 text-[11.5px] font-bold text-[#15803d]">
                   <CheckCircle2 size={12} className="text-[#22c55e]" strokeWidth={2.5} />
-                  ठीक हो गए
+                  आराम मिला
                 </span>
               </div>
             </div>
@@ -1081,7 +1080,7 @@ function Testimonials() {
       </div>
 
       <p className="mt-3 text-center text-[10.5px] font-medium italic text-[color:var(--body-dim)]">
-        *नतीजे हर इंसान पर अलग हो सकते हैं।
+        *परिणाम प्रत्येक व्यक्ति की स्थिति के अनुसार भिन्न हो सकते हैं।
       </p>
     </section>
   );
@@ -1099,9 +1098,9 @@ type Stat = {
 };
 
 const STATS: Stat[] = [
-  { l: "मरीज़ ठीक हुए", target: 10000, suffix: "+" },
+  { l: "परामर्श दिए गए", target: 10000, suffix: "+" },
   { l: "Google Rating", target: 4.9, suffix: "★", decimals: 1 },
-  { l: "राहत मिली", target: 98, suffix: "%" },
+  { l: "संतुष्ट अनुभव", target: 98, suffix: "%" },
   { l: "साल का अनुभव", target: 10, suffix: "+" },
 ];
 
