@@ -156,12 +156,10 @@ function Hero() {
     <section id="hero" className="bg-[color:var(--brand-trust)] px-4 pt-7 pb-8 text-white">
       {/* Headline */}
       <h1 className="text-[22px] font-black leading-[1.25] tracking-tight">
-        शर्माने की ज़रूरत नहीं —<br />
-        गुप्त समस्याओं का सही इलाज,{" "}
-        <span className="border-b-2 border-[color:var(--brand-cta)] text-[color:var(--brand-cta)]">पूरी गोपनीयता</span> के साथ
+        क्या आपको <span className="border-b-2 border-[color:var(--brand-cta)] text-[color:var(--brand-cta)]">मर्दाना तकलीफ़</span> है?
       </h1>
       <p className="mt-3 text-[14px] font-medium leading-relaxed text-white/80">
-        जल्दी डिस्चार्ज होना, टाइमिंग की कमी, रात में गीले सपने, शुक्राणु की कमी — ये कमज़ोरी नहीं, एक आम समस्या है जो सही इलाज से ठीक होती है
+        सही इलाज होता है — बस एक बार बात करें।
       </p>
 
       {/* Inline lead form card */}
@@ -182,8 +180,7 @@ function Hero() {
                 धन्यवाद!
               </h3>
               <p className="mt-2 text-[13.5px] font-semibold leading-relaxed text-[color:var(--body-dim)]">
-                हमारी टीम जल्द सम्पर्क करेगी।<br />
-                आपकी पहचान गुप्त रखी जाएगी।
+                डॉक्टर जल्द कॉल करेंगे।
               </p>
               <a
                 href={TEL}
@@ -205,7 +202,7 @@ function Hero() {
             >
               {/* Name */}
               <div>
-                <label className={labelCls}>आपका नाम</label>
+                <label className={labelCls}>नाम</label>
                 <input
                   type="text"
                   value={heroName}
@@ -218,7 +215,7 @@ function Hero() {
 
               {/* Mobile */}
               <div>
-                <label className={labelCls}>आपका मोबाइल नंबर</label>
+                <label className={labelCls}>मोबाइल नंबर</label>
                 <input
                   type="tel"
                   value={heroMobile}
@@ -234,7 +231,7 @@ function Hero() {
 
               {/* Duration */}
               <div>
-                <label className={labelCls}>आपको कितने दिनों से ये तकलीफ़ है?</label>
+                <label className={labelCls}>कितने दिन से?</label>
                 <input
                   type="text"
                   value={heroDuration}
@@ -247,7 +244,7 @@ function Hero() {
               {/* Problem checkboxes */}
               <div>
                 <p className="mb-2 text-[12px] font-bold uppercase tracking-wide text-[color:var(--body-dim)]">
-                  इनमें से आपको क्या समस्या है?
+                  क्या तकलीफ़ है?
                 </p>
                 <div className="grid grid-cols-2 gap-x-3 gap-y-2.5">
                   {HERO_PROBLEMS.map((p) => {
@@ -307,7 +304,7 @@ function Hero() {
 
               {/* Trust line */}
               <p className="text-center text-[11.5px] font-semibold text-[color:var(--body-dim)]">
-                आपकी जानकारी पूरी तरह गुप्त रहेगी — दवा भी सादे पैकेट में, बिना किसी नाम के
+                आपकी बात कोई नहीं जानेगा।
               </p>
             </motion.form>
           )}
@@ -327,7 +324,7 @@ function DoctorBlock() {
       className="bg-background px-4 py-7"
     >
       <p className="mb-4 text-center text-[13.5px] font-semibold leading-snug text-[color:var(--body-dim)]">
-        कानपुर के डॉक्टर, आपकी भाषा में बात — कोई कॉल-सेंटर नहीं, कोई अनजान नंबर नहीं
+        कानपुर के डॉक्टर — सीधे आपसे बात करेंगे।
       </p>
       <div className="overflow-hidden rounded-xl border-2 border-[color:var(--brand-trust)] bg-white shadow-card">
         {/* Clinic storefront photo with location caption overlay */}
@@ -344,7 +341,7 @@ function DoctorBlock() {
         <div className="p-4">
           {/* Clinic tagline — primary line */}
           <h2 className="text-[17px] font-black leading-snug text-[color:var(--brand-trust)]">
-            आपका भरोसेमंद होम्योपैथिक क्लिनिक — कानपुर
+            होम्योपैथिक क्लिनिक, कानपुर
           </h2>
 
           {/* Doctor sub-line */}
@@ -371,31 +368,31 @@ const PROBLEM_CARDS = [
   {
     t: "शुक्राणु की कमी",
     en: "Low Sperm Count",
-    d: "बच्चे में देरी की वजह बन रही है? घबराइए मत — सही इलाज से सुधार संभव है",
+    d: "बच्चा नहीं हो रहा? इसका इलाज होता है।",
     icon: Microscope,
   },
   {
     t: "मर्दाना कमज़ोरी / टाइमिंग की समस्या",
     en: "Erectile Dysfunction",
-    d: "बिस्तर पर आत्मविश्वास खोना, रिश्ते में दूरी। ये अकेले आप नहीं झेल रहे",
+    d: "बिस्तर पर कमज़ोरी आ रही है? आप अकेले नहीं हैं।",
     icon: HeartPulse,
   },
   {
     t: "शीघ्रपतन / जल्दी डिस्चार्ज",
     en: "Premature Ejaculation",
-    d: "जल्दी डिस्चार्ज हो जाने का डर, पार्टनर को संतुष्ट न कर पाने की चिंता — होम्योपैथी से धीरे-धीरे समय बढ़ाना संभव",
+    d: "जल्दी डिस्चार्ज होता है? होम्योपैथी से ठीक होता है।",
     icon: TimerReset,
   },
   {
     t: "स्वप्नदोष",
     en: "Nightfall",
-    d: "नाइटफॉल / धात बार-बार हो रहा है और शरीर कमज़ोर लग रहा है? इसका इलाज है",
+    d: "रात में बार-बार हो रहा है? इलाज होता है।",
     icon: Bed,
   },
   {
     t: "प्रोस्टेट और मूत्राशय",
     en: "Prostate & Urinary",
-    d: "बार-बार पेशाब, जलन, मूत्र संबंधी परेशानी।",
+    d: "बार-बार पेशाब आता है या जलन होती है?",
     icon: Activity,
   },
 ];
@@ -404,7 +401,7 @@ function ProblemGrid() {
   return (
     <section id="problems" className="bg-[color:var(--section-alt)] px-4 py-7">
       <h2 className="mb-5 text-center text-[21px] font-black leading-tight text-[color:var(--brand-trust)]">
-        हम किन रोगों का इलाज करते हैं?
+        किस तकलीफ़ का इलाज होता है?
       </h2>
       <div className="space-y-3">
         {PROBLEM_CARDS.map((c) => {
@@ -444,7 +441,7 @@ function Pricing() {
   return (
     <section id="pricing" className="bg-background px-4 py-7">
       <h2 className="mb-5 text-center text-[21px] font-black leading-tight text-[color:var(--brand-trust)]">
-        इलाज की कीमत
+        दवा की कीमत
       </h2>
       <div className="overflow-hidden rounded-xl border-2 border-[color:var(--brand-trust)] bg-white shadow-card">
         {/* Price highlight */}
@@ -461,7 +458,7 @@ function Pricing() {
             <div className="flex items-start gap-2.5">
               <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[color:var(--brand-trust)]" fill="var(--accent)" />
               <p className="text-[14px] font-semibold leading-snug text-foreground">
-                25 दिन की होम्योपैथी दवा — घर तक गोपनीय डिलीवरी
+                25 दिन की दवा — घर पर गुप्त डिलीवरी
               </p>
             </div>
           </div>
@@ -469,7 +466,7 @@ function Pricing() {
             <div className="flex items-start gap-2.5">
               <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[color:var(--brand-trust)]" fill="var(--accent)" />
               <p className="text-[14px] font-semibold leading-snug text-foreground">
-                ऑनलाइन या क्लिनिक — दोनों में परामर्श
+                ऑनलाइन या क्लिनिक — जैसे चाहें
               </p>
             </div>
           </div>
@@ -477,7 +474,7 @@ function Pricing() {
             <div className="flex items-start gap-2.5">
               <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[color:var(--brand-trust)]" fill="var(--accent)" />
               <p className="text-[14px] font-semibold leading-snug text-foreground">
-                Follow-up कंसल्टेशन शामिल
+                Follow-up भी शामिल
               </p>
             </div>
           </div>
@@ -485,7 +482,7 @@ function Pricing() {
         {/* Honest disclaimer */}
         <div className="mx-5 mb-5 rounded-lg bg-[color:var(--section-alt)] px-4 py-3">
           <p className="text-[13px] font-medium leading-relaxed text-[color:var(--body-dim)]">
-            पहला महीना — ₹1599 (25 दिन की Total Vitality Kit)। कोई छुपी शर्त नहीं। ज़्यादातर मरीज़ों को <strong className="text-foreground">3–5 महीने का कोर्स</strong> चाहिए होता है — डॉक्टर जांच के बाद खुद बताएंगे, पहले से पूरी जानकारी मिलेगी
+            पहला महीना ₹1599। ज़्यादातर लोगों को <strong className="text-foreground">3–5 महीने</strong> लगते हैं — डॉक्टर खुद बताएंगे।
           </p>
         </div>
         <div className="px-5 pb-5">
@@ -560,7 +557,7 @@ function LeadFormInline({ source }: { source: string }) {
         </div>
         <p className="text-[15px] font-black text-[color:var(--brand-trust)]">धन्यवाद!</p>
         <p className="mt-1 text-[13px] font-semibold text-[color:var(--body-dim)]">
-          डॉक्टर जल्द कॉल करेंगे — पहचान गुप्त रहेगी।
+          डॉक्टर जल्द कॉल करेंगे।
         </p>
         <a
           href={TEL}
@@ -578,10 +575,10 @@ function LeadFormInline({ source }: { source: string }) {
       {/* Green header band */}
       <div className="bg-[color:var(--brand-cta)] px-4 py-3">
         <p className="text-center text-[14px] font-black text-white">
-          🩺 अभी फॉर्म भरें — डॉक्टर खुद कॉल करेंगे
+          🩺 नाम-नंबर दें — डॉक्टर कॉल करेंगे
         </p>
         <p className="mt-0.5 text-center text-[11.5px] font-semibold text-white/80">
-          पूरी गोपनीयता · कोई शुल्क नहीं
+          गुप्त बात · फ्री में बात करें
         </p>
       </div>
       <form onSubmit={onSubmit} className="space-y-3 p-4">
@@ -638,11 +635,11 @@ function LeadFormInline({ source }: { source: string }) {
               <Loader2 size={17} className="animate-spin" /> भेज रहे हैं…
             </>
           ) : (
-            "परामर्श के लिए नाम-नंबर भेजें →"
+            "भेजें"
           )}
         </button>
         <p className="text-center text-[11px] font-semibold text-[color:var(--body-dim)]">
-          🔒 आपकी जानकारी पूरी तरह गुप्त रहेगी
+          🔒 बात किसी को नहीं पता चलेगी
         </p>
       </form>
     </div>
@@ -722,7 +719,7 @@ function LeadForm() {
         अपना नाम और नंबर दें
       </h2>
       <p className="mb-5 text-center text-[13px] font-medium text-[color:var(--body-dim)]">
-        डॉक्टर खुद कॉल करेंगे — पूरी गोपनीयता
+        डॉक्टर खुद कॉल करेंगे — गुप्त बात
       </p>
 
       <div className="rounded-xl border border-[color:var(--card-border)] bg-white p-5 shadow-card">
@@ -742,7 +739,7 @@ function LeadForm() {
                 धन्यवाद!
               </h3>
               <p className="mt-1.5 text-[14px] font-semibold text-[color:var(--body-dim)]">
-                हमारी टीम जल्द सम्पर्क करेगी। आपकी पहचान गुप्त रखी जायेगी।
+                डॉक्टर जल्द कॉल करेंगे।
               </p>
               <div className="mt-5">
                 <a
@@ -764,7 +761,7 @@ function LeadForm() {
               className="space-y-4"
             >
               <div>
-                <label className={labelCls}>आपका नाम</label>
+                <label className={labelCls}>नाम</label>
                 <input
                   type="text"
                   value={name}
@@ -791,7 +788,7 @@ function LeadForm() {
               </div>
 
               <div>
-                <label className={labelCls}>कितने समय से समस्या है?</label>
+                <label className={labelCls}>कितने दिन से?</label>
                 <input
                   type="text"
                   value={duration}
@@ -803,7 +800,7 @@ function LeadForm() {
 
               <div>
                 <p className="mb-2.5 text-[13px] font-bold text-foreground">
-                  आपकी क्या समस्या है? (एक या अधिक चुनें)
+                  क्या तकलीफ़ है?
                 </p>
                 <div className="grid grid-cols-2 gap-x-3 gap-y-3">
                   {PROBLEMS_LIST.map((p) => {
@@ -855,12 +852,12 @@ function LeadForm() {
                     <Loader2 size={18} className="animate-spin" /> भेज रहे हैं…
                   </>
                 ) : (
-                  "अभी बात करें →"
+                  "अभी बात करें"
                 )}
               </button>
 
               <p className="text-center text-[11px] font-medium text-[color:var(--body-dim)]">
-                🔒 आपकी जानकारी पूरी तरह सुरक्षित है
+                🔒 बात किसी को नहीं पता चलेगी
               </p>
             </motion.form>
           )}
@@ -875,20 +872,20 @@ function LeadForm() {
 ═══════════════════════════════════════ */
 const STEPS = [
   {
-    t: "व्हाट्सएप या कॉल करें",
+    t: "फॉर्म भरें या कॉल करें",
     d: "बस अपनी तकलीफ़ बताइए",
   },
   {
-    t: "Appointment fix करें",
+    t: "वक्त तय करें",
     d: "क्लिनिक में या ऑनलाइन, जैसा आपको सही लगे",
   },
   {
     t: "डॉक्टर खुद आपकी बात सुनेंगे",
-    d: "पूरी गोपनीयता के साथ",
+    d: "पूरी गुप्त बात",
   },
   {
     t: "दवाएं घर तक डिलीवर",
-    d: "पूरी गोपनीयता के साथ + follow-up भी",
+    d: "सादे पैकेट में + follow-up भी",
   },
 ];
 
@@ -896,7 +893,7 @@ function ProcessSteps() {
   return (
     <section id="process" className="bg-[color:var(--section-alt)] px-4 py-7">
       <h2 className="mb-5 text-center text-[21px] font-black leading-tight text-[color:var(--brand-trust)]">
-        हमारा प्लान कैसे काम करता है?
+        कैसे शुरू करें?
       </h2>
       <ol className="space-y-3">
         {STEPS.map((s, i) => (
@@ -930,8 +927,8 @@ function ProcessSteps() {
 const WHY = [
   {
     icon: ShieldCheck,
-    t: "गोपनीयता",
-    d: "कोई पहचान लीक नहीं — डिलीवरी भी गुप्त।",
+    t: "गुप्त रहेगा",
+    d: "किसी को पता नहीं चलेगा।",
   },
   {
     icon: Truck,
@@ -941,12 +938,12 @@ const WHY = [
   {
     icon: Leaf,
     t: "कोई साइड इफेक्ट नहीं",
-    d: "प्राकृतिक होम्योपैथी — केमिकल-मुक्त।",
+    d: "देसी दवा है, कोई नुकसान नहीं।",
   },
   {
     icon: Stethoscope,
     t: "10+ साल अनुभव",
-    d: "डॉ. इक़बाल का दशकों का क्लिनिकल अनुभव।",
+    d: "डॉ. इक़बाल 10+ साल से इलाज कर रहे हैं।",
   },
   {
     icon: Award,
@@ -959,7 +956,7 @@ function WhyHommed() {
   return (
     <section className="bg-background px-4 py-7">
       <h2 className="mb-5 text-center text-[21px] font-black leading-tight text-[color:var(--brand-trust)]">
-        HOMMED क्यों चुनें?
+        HOMMED क्यों?
       </h2>
       <div className="space-y-3">
         {WHY.map((w) => (
@@ -1017,10 +1014,10 @@ function Testimonials() {
           असली मरीज़
         </span>
         <h2 className="mt-2.5 text-[21px] font-black leading-tight text-[color:var(--brand-trust)]">
-          मरीज़ों की असली कहानियाँ
+          लोग क्या कह रहे हैं?
         </h2>
         <p className="mt-1 text-[12.5px] font-medium text-[color:var(--body-dim)]">
-          सत्यापित मरीज़ · असली नाम व शहर के साथ
+          असली मरीज़ · असली नाम
         </p>
       </div>
 
@@ -1086,7 +1083,7 @@ function Testimonials() {
                 </span>
                 <span className="flex items-center gap-1 text-[11.5px] font-black text-[#15803d]">
                   <CheckCircle2 size={12} className="text-[#22c55e]" strokeWidth={2.5} />
-                  सफल परिणाम
+                  ठीक हो गए
                 </span>
               </div>
             </div>
@@ -1095,7 +1092,7 @@ function Testimonials() {
       </div>
 
       <p className="mt-3 text-center text-[10.5px] font-medium italic text-[color:var(--body-dim)]">
-        *परिणाम व्यक्ति और स्थिति पर निर्भर करते हैं। नाम मरीज़ की सहमति से प्रकाशित।
+        *नतीजे हर इंसान पर अलग हो सकते हैं।
       </p>
     </section>
   );
@@ -1113,9 +1110,9 @@ type Stat = {
 };
 
 const STATS: Stat[] = [
-  { l: "संतुष्ट मरीज़", target: 10000, suffix: "+" },
+  { l: "मरीज़ ठीक हुए", target: 10000, suffix: "+" },
   { l: "Google Rating", target: 4.9, suffix: "★", decimals: 1 },
-  { l: "स्थायी राहत", target: 98, suffix: "%" },
+  { l: "राहत मिली", target: 98, suffix: "%" },
   { l: "साल का अनुभव", target: 10, suffix: "+" },
 ];
 
