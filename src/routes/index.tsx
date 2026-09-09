@@ -162,6 +162,18 @@ function Hero() {
         सही इलाज होता है — बस एक बार बात करें।
       </p>
 
+      {/* Call Now pill button */}
+      <div className="mt-5 mb-2 flex justify-center">
+        <a
+          href={TEL}
+          id="hero-call-now"
+          className="flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#1a7bbf] to-[#0d5fa0] px-7 py-3 text-[15px] font-black text-white shadow-[0_4px_18px_rgba(13,95,160,0.55)] transition-all duration-150 active:scale-95 hover:scale-105 hover:shadow-[0_6px_24px_rgba(13,95,160,0.70)]"
+        >
+          <Phone size={17} strokeWidth={2.5} />
+          Call Now
+        </a>
+      </div>
+
       {/* Inline lead form card */}
       <div className="mt-3 rounded-xl border border-[color:var(--brand-trust)]/30 bg-white shadow-card">
         <AnimatePresence mode="wait" initial={false}>
