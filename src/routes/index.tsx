@@ -35,86 +35,7 @@ export const Route = createFileRoute("/")(({
 }));
 
 const TEL = "tel:+916306988550";
-const WA = "https://wa.me/916306988550?text=नमस्ते%20डॉक्टर%20साहब%2C%20मुझे%20अपनी%20समस्या%20के%20बारे%20में%20बात%20करनी%20है।";
 const PHONE_DISPLAY = "+91 63069 88550";
-
-/* ───────── WhatsApp SVG icon (bubble outline — used in buttons/CTAs) ───────── */
-function WaIcon({ size = 16 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.66.986 3.292 1.48 4.966 1.481 5.45-.001 9.885-4.417 9.888-9.867.002-2.64-1.019-5.12-2.877-6.982C16.766 1.924 14.288.9 11.647.9 6.202.9 1.768 5.314 1.765 10.766c-.002 1.8.486 3.56 1.413 5.12L2.174 21.8l6.02-1.579c1.558.85 3.112 1.298 4.453 1.298z" />
-    </svg>
-  );
-}
-
-/* ───────── WhatsApp official brand icon (phone-in-bubble — header) ───────── */
-function WaOfficialIcon({ size = 16 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 448 512"
-      fill="currentColor"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" />
-    </svg>
-  );
-}
-
-/* ───────── CTA Button Variants ───────── */
-function WaButton({
-  href = WA,
-  label = "व्हाट्सएप पर बात करें",
-  fullWidth = false,
-  size = "md",
-}: {
-  href?: string;
-  label?: string;
-  fullWidth?: boolean;
-  size?: "sm" | "md" | "lg";
-}) {
-  const padCls = size === "lg" ? "py-4 text-[17px]" : size === "sm" ? "py-2.5 text-[14px]" : "py-3 text-[15.5px]";
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      id="wa-cta"
-      className={`flex items-center justify-center gap-2 rounded-lg bg-[#25D366] font-black tracking-wide text-white cta-pulse ${padCls} ${fullWidth ? "w-full" : ""}`}
-    >
-      <WaIcon size={size === "sm" ? 14 : 18} />
-      {label}
-    </a>
-  );
-}
-
-function CallButton({
-  fullWidth = false,
-  label = "कॉल करें",
-}: {
-  fullWidth?: boolean;
-  label?: string;
-}) {
-  return (
-    <a
-      href={TEL}
-      id="call-cta"
-      className={`flex items-center justify-center gap-1.5 rounded-lg border-2 border-[color:var(--brand-trust)] bg-white py-2.5 text-[14px] font-black tracking-wide text-[color:var(--brand-trust)] ${fullWidth ? "w-full" : ""}`}
-    >
-      <Phone size={14} strokeWidth={2.5} />
-      {label}
-    </a>
-  );
-}
 
 /* ───────── Landing ───────── */
 function Landing() {
@@ -157,18 +78,9 @@ function StickyHeader() {
         <div className="flex items-center gap-2 text-right">
           <a
             href={TEL}
-            className="text-[11.5px] font-bold text-white/80 hidden xs:block"
+            className="text-[11.5px] font-bold text-white/80"
           >
             {PHONE_DISPLAY}
-          </a>
-          <a
-            href={WA}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 rounded-lg bg-[#25D366] px-3 py-2 text-[13.5px] font-black text-white"
-          >
-            <WaOfficialIcon size={15} />
-            व्हाट्सएप
           </a>
         </div>
       </div>
@@ -251,27 +163,6 @@ function Hero() {
       <p className="mt-3 text-[14px] font-medium leading-relaxed text-white/80">
         जल्दी डिस्चार्ज होना, टाइमिंग की कमी, रात में गीले सपने, शुक्राणु की कमी — ये कमज़ोरी नहीं, एक आम समस्या है जो सही इलाज से ठीक होती है
       </p>
-
-      {/* Secondary WhatsApp option above form */}
-      <div className="mt-5">
-        <a
-          href={WA}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2 rounded-lg bg-[#25D366] py-2.5 text-[14px] font-black text-white whatsapp-cta-button"
-        >
-          <WaIcon size={15} />
-          व्हाट्सएप पर बात करें
-        </a>
-        <div className="mt-3 flex items-center gap-2">
-          <div className="flex-1 h-px bg-white/20" />
-          <span className="text-[12px] font-semibold text-white/50">या फॉर्म भरें</span>
-          <div className="flex-1 h-px bg-white/20" />
-        </div>
-        <p className="mt-2 text-center text-[12px] font-semibold text-white/70">
-          सिर्फ एक कॉल या मैसेज दूर — अपनी तकलीफ़ बताइए, डॉक्टर खुद रास्ता बताएंगे
-        </p>
-      </div>
 
       {/* Inline lead form card */}
       <div className="mt-3 rounded-xl border border-[color:var(--brand-trust)]/30 bg-white shadow-card">
@@ -466,10 +357,7 @@ function DoctorBlock() {
             4.9★ Google Rating · 10,000+ मरीज़ ठीक हुए
           </p>
 
-          {/* CTA */}
-          <div className="mt-3">
-            <WaButton label="अभी बात करें" fullWidth />
-          </div>
+          <LeadFormInline source="doctor-block" />
         </div>
       </div>
     </section>
@@ -601,10 +489,163 @@ function Pricing() {
           </p>
         </div>
         <div className="px-5 pb-5">
-          <WaButton label="कीमत के बारे में पूछें" fullWidth />
+          <LeadFormInline source="pricing" />
         </div>
       </div>
     </section>
+  );
+}
+
+/* ═══════════════════════════════════════
+   INLINE LEAD FORM (reusable compact CTA — replaces all WaButtons)
+═══════════════════════════════════════ */
+const INLINE_CONDITIONS = [
+  "मर्दाना कमज़ोरी",
+  "शीघ्रपतन / जल्दी डिस्चार्ज",
+  "नाइटफॉल / स्वप्नदोष",
+  "शुक्राणु की कमी",
+  "प्रोस्टेट / मूत्र समस्या",
+  "अन्य गुप्त समस्या",
+];
+
+function LeadFormInline({ source }: { source: string }) {
+  const [done, setDone] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [condition, setCondition] = useState("");
+  const [err, setErr] = useState("");
+
+  const onSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setErr("");
+    if (!name.trim()) return setErr("कृपया अपना नाम भरें");
+    if (!/^[6-9]\d{9}$/.test(phone))
+      return setErr("कृपया सही मोबाइल नंबर भरें (10 अंक)");
+
+    setLoading(true);
+    try {
+      const apiBase =
+        (import.meta.env.VITE_API_BASE_URL as string | undefined) ?? "";
+      const res = await fetch(`${apiBase}/api/leads`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim(),
+          phone: phone.trim(),
+          inquiry: condition || "General Inquiry",
+          lead_source: source,
+        }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error((data as { message?: string }).message ?? "Server error");
+      }
+      setDone(true);
+    } catch {
+      setErr("कुछ गड़बड़ हो गई। कृपया पुनः प्रयास करें।");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const inputCls =
+    "w-full rounded-lg border border-[color:var(--card-border)] bg-white px-3.5 py-2.5 text-[14.5px] font-semibold text-foreground outline-none placeholder:text-[color:var(--body-dim)]/60 focus:border-[color:var(--brand-cta)] transition-colors";
+
+  if (done) {
+    return (
+      <div className="mt-4 rounded-xl border-2 border-[color:var(--brand-cta)] bg-white p-5 text-center shadow-card">
+        <div className="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-full bg-[#22c55e] text-white">
+          <Check size={24} strokeWidth={3} />
+        </div>
+        <p className="text-[15px] font-black text-[color:var(--brand-trust)]">धन्यवाद!</p>
+        <p className="mt-1 text-[13px] font-semibold text-[color:var(--body-dim)]">
+          डॉक्टर जल्द कॉल करेंगे — पहचान गुप्त रहेगी।
+        </p>
+        <a
+          href={TEL}
+          className="mt-4 flex items-center justify-center gap-2 rounded-lg border-2 border-[color:var(--brand-trust)] bg-white py-2.5 text-[14px] font-black text-[color:var(--brand-trust)]"
+        >
+          <Phone size={14} strokeWidth={2.5} />
+          अभी कॉल करें
+        </a>
+      </div>
+    );
+  }
+
+  return (
+    <div className="mt-4 overflow-hidden rounded-xl border-2 border-[color:var(--brand-cta)] bg-white shadow-card">
+      {/* Green header band */}
+      <div className="bg-[color:var(--brand-cta)] px-4 py-3">
+        <p className="text-center text-[14px] font-black text-white">
+          🩺 अभी फॉर्म भरें — डॉक्टर खुद कॉल करेंगे
+        </p>
+        <p className="mt-0.5 text-center text-[11.5px] font-semibold text-white/80">
+          पूरी गोपनीयता · कोई शुल्क नहीं
+        </p>
+      </div>
+      <form onSubmit={onSubmit} className="space-y-3 p-4">
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="आपका नाम"
+          maxLength={80}
+          className={inputCls}
+        />
+        <input
+          type="tel"
+          value={phone}
+          onChange={(e) =>
+            setPhone(e.target.value.replace(/\D/g, "").slice(0, 10))
+          }
+          inputMode="numeric"
+          pattern="[6-9][0-9]{9}"
+          placeholder="मोबाइल नंबर (10 अंक)"
+          className={inputCls}
+        />
+        <select
+          value={condition}
+          onChange={(e) => setCondition(e.target.value)}
+          className={`${inputCls} appearance-none`}
+        >
+          <option value="">समस्या चुनें (वैकल्पिक)</option>
+          {INLINE_CONDITIONS.map((c) => (
+            <option key={c} value={c}>
+              {c}
+            </option>
+          ))}
+        </select>
+        <AnimatePresence>
+          {err && (
+            <motion.p
+              initial={{ opacity: 0, x: -6 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0 }}
+              className="text-[12px] font-bold text-destructive"
+            >
+              {err}
+            </motion.p>
+          )}
+        </AnimatePresence>
+        <button
+          type="submit"
+          disabled={loading}
+          className="flex w-full items-center justify-center gap-2 rounded-lg bg-[color:var(--brand-cta)] py-3.5 text-[16px] font-black tracking-wide text-white disabled:opacity-70 cta-pulse"
+        >
+          {loading ? (
+            <>
+              <Loader2 size={17} className="animate-spin" /> भेज रहे हैं…
+            </>
+          ) : (
+            "परामर्श के लिए नाम-नंबर भेजें →"
+          )}
+        </button>
+        <p className="text-center text-[11px] font-semibold text-[color:var(--body-dim)]">
+          🔒 आपकी जानकारी पूरी तरह गुप्त रहेगी
+        </p>
+      </form>
+    </div>
   );
 }
 
@@ -704,7 +745,13 @@ function LeadForm() {
                 हमारी टीम जल्द सम्पर्क करेगी। आपकी पहचान गुप्त रखी जायेगी।
               </p>
               <div className="mt-5">
-                <WaButton label="अभी बात करें" fullWidth />
+                <a
+                  href={TEL}
+                  className="flex items-center justify-center gap-2 rounded-lg border-2 border-[color:var(--brand-trust)] bg-white py-3 text-[15px] font-black text-[color:var(--brand-trust)]"
+                >
+                  <Phone size={15} strokeWidth={2.5} />
+                  अभी कॉल करें
+                </a>
               </div>
             </motion.div>
           ) : (
@@ -872,9 +919,7 @@ function ProcessSteps() {
           </li>
         ))}
       </ol>
-      <div className="mt-5">
-        <WaButton label="अभी बात करें" fullWidth />
-      </div>
+      <LeadFormInline source="process" />
     </section>
   );
 }
@@ -1153,14 +1198,6 @@ function Footer() {
       <div className="mt-5 space-y-2.5">
         <a href={TEL} className="flex items-center gap-2 text-[14px] font-bold text-white">
           <Phone size={14} className="text-white/70" /> {PHONE_DISPLAY}
-        </a>
-        <a
-          href={WA}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 text-[14px] font-bold text-white"
-        >
-          <WaIcon size={14} /> व्हाट्सएप पर बात करें
         </a>
         <a
           href="mailto:info@hommed.in"
