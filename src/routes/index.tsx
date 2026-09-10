@@ -39,18 +39,20 @@ export const Route = createFileRoute("/")(({
   component: Landing,
 }));
 
+declare let fbq: any;
+
 const TEL = "tel:+916306988550";
 const PHONE_DISPLAY = "+91 63069 88550";
 
 const trackContactEvent = () => {
-  if (typeof window !== "undefined" && typeof (window as any).fbq !== "undefined") {
-    (window as any).fbq("track", "Contact");
+  if (typeof fbq !== "undefined") {
+    fbq("track", "Contact");
   }
 };
 
 const trackLeadEvent = () => {
-  if (typeof window !== "undefined" && typeof (window as any).fbq !== "undefined") {
-    (window as any).fbq("track", "Lead");
+  if (typeof fbq !== "undefined") {
+    fbq("track", "Lead");
   }
 };
 
@@ -159,7 +161,9 @@ function Hero() {
         const data = await res.json().catch(() => ({}));
         throw new Error((data as { message?: string }).message ?? "Server error");
       }
-      trackLeadEvent();
+      if (typeof fbq !== "undefined") {
+        fbq("track", "Lead");
+      }
       setHeroSubmitted(true);
     } catch {
       setHeroErr("कुछ गड़बड़ हो गई। कृपया पुनः प्रयास करें।");
