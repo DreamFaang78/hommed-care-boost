@@ -22,6 +22,9 @@ import {
   Bed,
   Activity,
   ChevronRight,
+  Instagram,
+  Globe,
+  Youtube,
 } from "lucide-react";
 
 import drIqbalImg from "@/assets/dr-iqbal-portrait.jpg";
@@ -54,8 +57,8 @@ function Landing() {
         <WhyHommed />
         <Testimonials />
         <StatsBar />
-        <Footer />
       </main>
+      <Footer />
       <StickyBottomBar />
     </div>
   );
@@ -1470,67 +1473,226 @@ function StatsBar() {
 }
 
 /* ═══════════════════════════════════════
-   11. FOOTER
+   11. FOOTER (WeClinic Multi-Column Structure)
 ═══════════════════════════════════════ */
 function Footer() {
+  const KANPUR_LOCATIONS = [
+    "Civil Lines",
+    "Jajmau",
+    "Kidwai Nagar",
+    "Kalyanpur",
+    "Swaroop Nagar",
+    "Panki",
+    "Barra",
+  ];
+
   return (
-    <footer id="contact" className="bg-[color:var(--brand-trust)] px-4 pt-7 pb-24 text-white">
-      {/* Logo row */}
-      <div className="flex items-center gap-2.5">
-        <img
-          src={hommedLogoImg}
-          alt="HomMed"
-          className="h-10 w-auto rounded-md bg-white p-0.5"
-        />
-        <div>
-          <p className="text-[16px] font-black">HOMMED</p>
-          <p className="text-[11.5px] font-semibold text-white/70">
-            Men's Wellness · Dr. Iqbal Quasim
-          </p>
-        </div>
-      </div>
+    <footer id="contact" className="w-full bg-[color:var(--brand-trust)] text-white px-4 pt-10 pb-24 border-t border-white/10">
+      <div className="mx-auto max-w-6xl space-y-10">
+        
+        {/* Main 4-Column Grid */}
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          
+          {/* Column 1 — Brand Block */}
+          <div className="space-y-3.5">
+            <div className="flex items-center gap-2.5">
+              <img
+                src={hommedLogoImg}
+                alt="HomMed"
+                className="h-10 w-auto rounded-md bg-white p-0.5"
+              />
+              <div>
+                <p className="text-[17px] font-black tracking-tight text-white">HOMMED</p>
+                <p className="text-[11.5px] font-semibold text-white/70">
+                  Men's Wellness · Dr. Iqbal Qasim
+                </p>
+              </div>
+            </div>
+            <p className="text-[12.5px] font-medium leading-relaxed text-white/80">
+              कानपुर के लोगों का भरोसेमंद होम्योपैथिक इलाज — मर्दाना कमज़ोरी, शीघ्रपतन, शुक्राणु की कमी, स्वप्नदोष और प्रोस्टेट समस्याओं का गुप्त एवं सुरक्षित उपचार, क्लिनिक व ऑनलाइन दोनों माध्यम से।
+            </p>
+            <div className="flex items-center gap-2 rounded-lg bg-white/5 p-2.5 text-[12px] font-semibold text-white/80 border border-white/10">
+              <Clock size={15} className="shrink-0 text-[color:var(--brand-cta)]" />
+              <span>सोम–शनि · सुबह 10–2 बजे और शाम 5–8 बजे</span>
+            </div>
+          </div>
 
-      {/* Clinic locations */}
-      <div className="mt-5 space-y-3">
-        <div className="rounded-xl border border-white/20 bg-white/10 p-4">
-          <p className="flex items-center gap-1.5 text-[11.5px] font-black uppercase tracking-wide text-white/70">
-            <MapPin size={12} /> शाखा 1 — Civil Lines
-          </p>
-          <p className="mt-1 text-[14px] font-bold text-white">
-            Civil Lines, Kanpur, Uttar Pradesh – 208001
-          </p>
-        </div>
-        <div className="rounded-xl border border-white/20 bg-white/10 p-4">
-          <p className="flex items-center gap-1.5 text-[11.5px] font-black uppercase tracking-wide text-white/70">
-            <MapPin size={12} /> शाखा 2 — Jajmau
-          </p>
-          <p className="mt-1 text-[14px] font-bold text-white">
-            Jajmau, Kanpur, Uttar Pradesh
-          </p>
-        </div>
-      </div>
+          {/* Column 2 — Our Services */}
+          <div>
+            <h4 className="mb-3.5 text-[13px] font-bold uppercase tracking-wider text-white border-b border-white/10 pb-2">
+              Our Services
+            </h4>
+            <ul className="space-y-2.5 text-[13px] font-medium text-white/75">
+              <li>
+                <a href="#problems" className="hover:text-[color:var(--brand-cta)] transition-colors">
+                  Low Sperm Count
+                </a>
+              </li>
+              <li>
+                <a href="#problems" className="hover:text-[color:var(--brand-cta)] transition-colors">
+                  Erectile Dysfunction
+                </a>
+              </li>
+              <li>
+                <a href="#problems" className="hover:text-[color:var(--brand-cta)] transition-colors">
+                  Premature Ejaculation
+                </a>
+              </li>
+              <li>
+                <a href="#problems" className="hover:text-[color:var(--brand-cta)] transition-colors">
+                  Nightfall
+                </a>
+              </li>
+              <li>
+                <a href="#problems" className="hover:text-[color:var(--brand-cta)] transition-colors">
+                  Prostate &amp; Urinary
+                </a>
+              </li>
+              <li>
+                <a href="#lead" className="hover:text-[color:var(--brand-cta)] transition-colors">
+                  General Men's Wellness
+                </a>
+              </li>
+            </ul>
+          </div>
 
-      {/* Contact details */}
-      <div className="mt-5 space-y-2.5">
-        <a href={TEL} className="flex items-center gap-2 text-[14px] font-bold text-white">
-          <Phone size={14} className="text-white/70" /> {PHONE_DISPLAY}
-        </a>
-        <a
-          href="mailto:info@hommed.in"
-          className="flex items-center gap-2 text-[13.5px] font-semibold text-white/80"
-        >
-          <Mail size={14} className="text-white/70" /> info@hommed.in
-        </a>
-        <p className="flex items-center gap-2 text-[13.5px] font-semibold text-white/80">
-          <Clock size={14} className="text-white/70" /> सोम–शनि · सुबह 10–2 बजे और शाम 5–8 बजे
-        </p>
-      </div>
+          {/* Column 3 — Quick Links */}
+          <div>
+            <h4 className="mb-3.5 text-[13px] font-bold uppercase tracking-wider text-white border-b border-white/10 pb-2">
+              Quick Links
+            </h4>
+            <ul className="space-y-2.5 text-[13px] font-medium text-white/75">
+              <li>
+                <a href="#hero" className="hover:text-[color:var(--brand-cta)] transition-colors">
+                  Book Appointment
+                </a>
+              </li>
+              <li>
+                <a href="#doctor" className="hover:text-[color:var(--brand-cta)] transition-colors">
+                  Doctor Profile
+                </a>
+              </li>
+              <li>
+                <a href="#credentials" className="hover:text-[color:var(--brand-cta)] transition-colors">
+                  Healthcare Blog
+                </a>
+              </li>
+              <li>
+                <a href="#process" className="hover:text-[color:var(--brand-cta)] transition-colors">
+                  FAQ Panel
+                </a>
+              </li>
+              <li>
+                <Link to="/privacy-policy" className="hover:text-[color:var(--brand-cta)] transition-colors">
+                  Privacy Policy
+                </Link>
+              </li>
+            </ul>
+          </div>
 
-      <div className="mt-6 flex items-center justify-between border-t border-white/20 pt-4 text-[11.5px] text-white/60">
-        <Link to="/privacy-policy" className="font-bold underline hover:text-white/90 transition-colors">
-          Privacy Policy
-        </Link>
-        <span>© {new Date().getFullYear()} HOMMED</span>
+          {/* Column 4 — Contact Us */}
+          <div className="space-y-3.5">
+            <h4 className="mb-3.5 text-[13px] font-bold uppercase tracking-wider text-white border-b border-white/10 pb-2">
+              Contact Us
+            </h4>
+            
+            <div className="space-y-2.5 text-[12.5px] font-medium text-white/80">
+              <div className="flex items-start gap-2">
+                <MapPin size={15} className="mt-0.5 shrink-0 text-[color:var(--brand-cta)]" />
+                <div>
+                  <span className="font-bold text-white">Branch 1 — Civil Lines</span>
+                  <p className="text-white/70">Civil Lines, Kanpur, Uttar Pradesh – 208001</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-2">
+                <MapPin size={15} className="mt-0.5 shrink-0 text-[color:var(--brand-cta)]" />
+                <div>
+                  <span className="font-bold text-white">Branch 2 — Jajmau</span>
+                  <p className="text-white/70">Jajmau, Kanpur, Uttar Pradesh</p>
+                </div>
+              </div>
+
+              <a href={TEL} className="flex items-center gap-2 text-white hover:text-[color:var(--brand-cta)] transition-colors">
+                <Phone size={15} className="shrink-0 text-[color:var(--brand-cta)]" />
+                <span className="font-bold">{PHONE_DISPLAY}</span>
+              </a>
+
+              <a href="mailto:info@hommed.in" className="flex items-center gap-2 text-white/80 hover:text-[color:var(--brand-cta)] transition-colors">
+                <Mail size={15} className="shrink-0 text-[color:var(--brand-cta)]" />
+                <span>info@hommed.in</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Connect With Us / Social Section */}
+        <div className="rounded-xl border border-white/10 bg-white/5 p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="text-center sm:text-left">
+            <h5 className="text-[11px] font-bold tracking-widest text-white uppercase">
+              CONNECT WITH US
+            </h5>
+            <p className="text-[12px] font-medium text-white/70 mt-0.5">
+              Follow Hommed for health tips &amp; updates
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-2.5">
+            <a
+              href="https://www.youtube.com/@hommed_clinic"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-[12px] font-bold text-white transition-colors hover:bg-[#FF0000] hover:border-[#FF0000] group"
+            >
+              <Youtube size={15} className="text-[#FF0000] group-hover:text-white transition-colors" />
+              <span>YouTube</span>
+            </a>
+            <a
+              href="https://www.instagram.com/hommed.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-[12px] font-bold text-white transition-colors hover:bg-[#E1306C] hover:border-[#E1306C] group"
+            >
+              <Instagram size={15} className="text-[#E1306C] group-hover:text-white transition-colors" />
+              <span>Instagram</span>
+            </a>
+            <a
+              href="https://www.hommed.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-[12px] font-bold text-white transition-colors hover:bg-[color:var(--brand-cta)] hover:border-[color:var(--brand-cta)] group"
+            >
+              <Globe size={15} className="text-[color:var(--brand-cta)] group-hover:text-white transition-colors" />
+              <span>Website</span>
+            </a>
+          </div>
+        </div>
+
+        {/* Locations Served SEO Row */}
+        <div className="border-t border-white/10 pt-6 text-center">
+          <h5 className="text-[11px] font-bold tracking-widest text-white/70 uppercase mb-3">
+            LOCATIONS WE SERVE IN KANPUR
+          </h5>
+          <div className="flex flex-wrap justify-center gap-x-2 gap-y-1.5 text-[11.5px] font-medium text-white/60">
+            {KANPUR_LOCATIONS.map((loc, idx) => (
+              <span key={loc} className="flex items-center gap-2">
+                <a href="#problems" className="hover:text-[color:var(--brand-cta)] transition-colors">
+                  Men's Wellness in {loc}
+                </a>
+                {idx < KANPUR_LOCATIONS.length - 1 && <span className="text-white/30">•</span>}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom copyright line */}
+        <div className="border-t border-white/10 pt-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11.5px] text-white/60">
+          <span>© {new Date().getFullYear()} HOMMED</span>
+          <Link to="/privacy-policy" className="font-bold underline hover:text-white/90 transition-colors">
+            Privacy Policy
+          </Link>
+        </div>
+
       </div>
     </footer>
   );
