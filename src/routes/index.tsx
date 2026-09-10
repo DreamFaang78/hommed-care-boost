@@ -135,41 +135,33 @@ function Hero() {
       prev.includes(p) ? prev.filter((x) => x !== p) : [...prev, p],
     );
 
-  const onHeroSubmit = async (e: FormEvent) => {
+  const onHeroSubmit = (e: FormEvent) => {
     e.preventDefault();
     setHeroErr("");
     if (!heroName.trim()) return setHeroErr("कृपया अपना नाम भरें");
     if (!/^[6-9]\d{9}$/.test(heroMobile))
       return setHeroErr("कृपया सही मोबाइल नंबर भरें (10 अंक)");
 
-    setHeroSubmitting(true);
-    try {
-      const apiBase =
-        (import.meta.env.VITE_API_BASE_URL as string | undefined) ?? "";
-      const res = await fetch(`${apiBase}/api/leads`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: heroName.trim(),
-          phone: heroMobile.trim(),
-          inquiry: heroProblems.length > 0 ? heroProblems.join(", ") : "General Inquiry",
-          lead_source: "hero-form",
-          notes: heroDuration ? `Duration: ${heroDuration}` : undefined,
-        }),
-      });
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error((data as { message?: string }).message ?? "Server error");
-      }
-      if (typeof fbq !== "undefined") {
-        fbq("track", "Lead");
-      }
-      setHeroSubmitted(true);
-    } catch {
-      setHeroErr("कुछ गड़बड़ हो गई। कृपया पुनः प्रयास करें।");
-    } finally {
-      setHeroSubmitting(false);
+    if (typeof fbq !== "undefined") {
+      fbq("track", "Lead");
     }
+    setHeroSubmitted(true);
+
+    const apiBase =
+      (import.meta.env.VITE_API_BASE_URL as string | undefined) ?? "";
+    fetch(`${apiBase}/api/leads`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: heroName.trim(),
+        phone: heroMobile.trim(),
+        inquiry: heroProblems.length > 0 ? heroProblems.join(", ") : "General Inquiry",
+        lead_source: "hero-form",
+        notes: heroDuration ? `Duration: ${heroDuration}` : undefined,
+      }),
+    }).catch((err) => {
+      console.error("Background lead submission error:", err);
+    });
   };
 
   const inputCls =
@@ -219,7 +211,7 @@ function Hero() {
               key="hero-thanks"
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.1 }}
               className="px-5 py-8 text-center"
             >
               <div className="mx-auto mb-4 grid h-14 w-14 place-items-center rounded-full bg-[#22c55e] text-white">
@@ -580,38 +572,30 @@ function LeadFormInline({ source }: { source: string }) {
   const [condition, setCondition] = useState("");
   const [err, setErr] = useState("");
 
-  const onSubmit = async (e: FormEvent) => {
+  const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     setErr("");
     if (!name.trim()) return setErr("कृपया अपना नाम भरें");
     if (!/^[6-9]\d{9}$/.test(phone))
       return setErr("कृपया सही मोबाइल नंबर भरें (10 अंक)");
 
-    setLoading(true);
-    try {
-      const apiBase =
-        (import.meta.env.VITE_API_BASE_URL as string | undefined) ?? "";
-      const res = await fetch(`${apiBase}/api/leads`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: name.trim(),
-          phone: phone.trim(),
-          inquiry: condition || "General Inquiry",
-          lead_source: source,
-        }),
-      });
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error((data as { message?: string }).message ?? "Server error");
-      }
-      trackLeadEvent();
-      setDone(true);
-    } catch {
-      setErr("कुछ गड़बड़ हो गई। कृपया पुनः प्रयास करें।");
-    } finally {
-      setLoading(false);
-    }
+    trackLeadEvent();
+    setDone(true);
+
+    const apiBase =
+      (import.meta.env.VITE_API_BASE_URL as string | undefined) ?? "";
+    fetch(`${apiBase}/api/leads`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: name.trim(),
+        phone: phone.trim(),
+        inquiry: condition || "General Inquiry",
+        lead_source: source,
+      }),
+    }).catch((err) => {
+      console.error("Background lead submission error:", err);
+    });
   };
 
   const inputCls =
@@ -740,42 +724,34 @@ function LeadForm() {
       prev.includes(p) ? prev.filter((x) => x !== p) : [...prev, p],
     );
 
-  const onSubmit = async (e: FormEvent) => {
+  const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     setErr("");
     if (!name.trim()) return setErr("कृपया अपना नाम भरें");
     if (!/^[6-9]\d{9}$/.test(mobile))
       return setErr("कृपया सही मोबाइल नंबर भरें (10 अंक)");
 
-    setSubmitting(true);
-    try {
-      const apiBase =
-        (import.meta.env.VITE_API_BASE_URL as string | undefined) ?? "";
-      const res = await fetch(`${apiBase}/api/leads`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: name.trim(),
-          phone: mobile.trim(),
-          inquiry:
-            problems.length > 0
-              ? problems.join(", ")
-              : "General Inquiry",
-          lead_source: "landing-page",
-          notes: duration ? `Duration: ${duration}` : undefined,
-        }),
-      });
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error((data as { message?: string }).message ?? "Server error");
-      }
-      trackLeadEvent();
-      setSubmitted(true);
-    } catch {
-      setErr("कुछ गड़बड़ हो गई। कृपया पुनः प्रयास करें।");
-    } finally {
-      setSubmitting(false);
-    }
+    trackLeadEvent();
+    setSubmitted(true);
+
+    const apiBase =
+      (import.meta.env.VITE_API_BASE_URL as string | undefined) ?? "";
+    fetch(`${apiBase}/api/leads`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: name.trim(),
+        phone: mobile.trim(),
+        inquiry:
+          problems.length > 0
+            ? problems.join(", ")
+            : "General Inquiry",
+        lead_source: "landing-page",
+        notes: duration ? `Duration: ${duration}` : undefined,
+      }),
+    }).catch((err) => {
+      console.error("Background lead submission error:", err);
+    });
   };
 
   const inputCls =
@@ -799,7 +775,7 @@ function LeadForm() {
               key="ok"
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.1 }}
               className="py-6 text-center"
             >
               <div className="mx-auto mb-4 grid h-14 w-14 place-items-center rounded-full bg-[#22c55e] text-white">
