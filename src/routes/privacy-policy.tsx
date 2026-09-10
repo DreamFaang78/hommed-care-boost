@@ -1,4 +1,4 @@
-﻿import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   Shield,
   Phone,
@@ -32,6 +32,12 @@ export const Route = createFileRoute("/privacy-policy")({
 const TEL = "tel:+916306988550";
 const PHONE_DISPLAY = "+91 63069 88550";
 const EFFECTIVE_DATE = "10 September 2025";
+
+const trackContactEvent = () => {
+  if (typeof window !== "undefined" && typeof (window as any).fbq !== "undefined") {
+    (window as any).fbq("track", "Contact");
+  }
+};
 
 export default function PrivacyPolicy() {
   return (
@@ -328,7 +334,7 @@ export default function PrivacyPolicy() {
               <p className="mt-1 text-[13.5px] font-semibold">HOMMED — Dr. Iqbal Quasim's Homoeopathic Centre</p>
               <p className="text-[13px] text-white/80">Civil Lines, Kanpur, Uttar Pradesh – 208001</p>
             </div>
-            <a href={TEL} className="flex items-center gap-3 rounded-lg bg-emerald-500 p-3 transition-opacity hover:opacity-90">
+            <a href={TEL} onClick={trackContactEvent} className="flex items-center gap-3 rounded-lg bg-emerald-500 p-3 transition-opacity hover:opacity-90">
               <Phone size={17} strokeWidth={2.3} />
               <div>
                 <p className="text-[11px] font-bold uppercase tracking-wide text-white/70">Phone / WhatsApp</p>

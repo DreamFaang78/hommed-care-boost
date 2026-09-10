@@ -42,6 +42,18 @@ export const Route = createFileRoute("/")(({
 const TEL = "tel:+916306988550";
 const PHONE_DISPLAY = "+91 63069 88550";
 
+const trackContactEvent = () => {
+  if (typeof window !== "undefined" && typeof (window as any).fbq !== "undefined") {
+    (window as any).fbq("track", "Contact");
+  }
+};
+
+const trackLeadEvent = () => {
+  if (typeof window !== "undefined" && typeof (window as any).fbq !== "undefined") {
+    (window as any).fbq("track", "Lead");
+  }
+};
+
 /* ───────── Landing ───────── */
 function Landing() {
   return (
@@ -84,6 +96,7 @@ function StickyHeader() {
         <div className="flex items-center gap-2 text-right">
           <a
             href={TEL}
+            onClick={trackContactEvent}
             className="text-[11.5px] font-bold text-white/80"
           >
             {PHONE_DISPLAY}
@@ -146,6 +159,7 @@ function Hero() {
         const data = await res.json().catch(() => ({}));
         throw new Error((data as { message?: string }).message ?? "Server error");
       }
+      trackLeadEvent();
       setHeroSubmitted(true);
     } catch {
       setHeroErr("कुछ गड़बड़ हो गई। कृपया पुनः प्रयास करें।");
@@ -175,6 +189,7 @@ function Hero() {
         <div className="mt-5 flex flex-col items-center gap-2.5">
           <a
             href={TEL}
+            onClick={trackContactEvent}
             id="hero-phone-display"
             className="text-[18px] font-black tracking-tight text-[color:var(--brand-trust)] underline decoration-[color:var(--brand-cta)] decoration-2 underline-offset-[3px]"
           >
@@ -182,6 +197,7 @@ function Hero() {
           </a>
           <a
             href={TEL}
+            onClick={trackContactEvent}
             id="hero-call-now"
             className="call-now-btn inline-flex items-center gap-1.5 rounded-full bg-[color:var(--brand-cta)] px-5 py-2 text-[13.5px] font-bold text-white shadow-sm transition-all active:scale-95 hover:opacity-90"
           >
@@ -213,6 +229,7 @@ function Hero() {
               </p>
               <a
                 href={TEL}
+                onClick={trackContactEvent}
                 id="hero-call-after-submit"
                 className="mt-5 inline-flex items-center justify-center gap-2 rounded-full border-2 border-[color:var(--brand-trust)] bg-white px-6 py-2.5 text-[14px] font-black text-[color:var(--brand-trust)] transition-colors hover:bg-[color:var(--brand-trust)] hover:text-white"
               >
@@ -527,6 +544,7 @@ function Pricing() {
 
         <a
           href={TEL}
+          onClick={trackContactEvent}
           id="pricing-call-now"
           className="call-now-btn inline-flex items-center gap-1.5 rounded-full bg-[color:var(--brand-cta)] px-5 py-2 text-[13.5px] font-bold text-white shadow-sm transition-all active:scale-95 hover:opacity-90"
         >
@@ -583,6 +601,7 @@ function LeadFormInline({ source }: { source: string }) {
         const data = await res.json().catch(() => ({}));
         throw new Error((data as { message?: string }).message ?? "Server error");
       }
+      trackLeadEvent();
       setDone(true);
     } catch {
       setErr("कुछ गड़बड़ हो गई। कृपया पुनः प्रयास करें।");
@@ -606,6 +625,7 @@ function LeadFormInline({ source }: { source: string }) {
         </p>
         <a
           href={TEL}
+          onClick={trackContactEvent}
           className="mt-4 flex items-center justify-center gap-2 rounded-lg border border-[color:var(--brand-trust)] bg-white py-2.5 text-[14px] font-bold text-[color:var(--brand-trust)] hover:bg-[color:var(--section-alt)] transition-colors"
         >
           <Phone size={14} strokeWidth={2.2} />
@@ -745,6 +765,7 @@ function LeadForm() {
         const data = await res.json().catch(() => ({}));
         throw new Error((data as { message?: string }).message ?? "Server error");
       }
+      trackLeadEvent();
       setSubmitted(true);
     } catch {
       setErr("कुछ गड़बड़ हो गई। कृपया पुनः प्रयास करें।");
@@ -789,6 +810,7 @@ function LeadForm() {
               <div className="mt-5">
                 <a
                   href={TEL}
+                  onClick={trackContactEvent}
                   className="flex items-center justify-center gap-2 rounded-lg border-2 border-[color:var(--brand-trust)] bg-white py-3 text-[15px] font-black text-[color:var(--brand-trust)]"
                 >
                   <Phone size={15} strokeWidth={2.5} />
@@ -959,6 +981,7 @@ function ProcessSteps() {
 
         <a
           href={TEL}
+          onClick={trackContactEvent}
           id="process-call-now"
           className="call-now-btn inline-flex items-center gap-1.5 rounded-full bg-[color:var(--brand-cta)] px-5 py-2 text-[13.5px] font-bold text-white shadow-sm transition-all active:scale-95 hover:opacity-90"
         >
@@ -1409,6 +1432,7 @@ function Testimonials() {
       <div className="mt-4 flex justify-center">
         <a
           href={TEL}
+          onClick={trackContactEvent}
           id="testimonials-call-now"
           className="call-now-btn inline-flex items-center gap-1.5 rounded-full bg-[color:var(--brand-cta)] px-5 py-2 text-[13.5px] font-bold text-white shadow-sm transition-all active:scale-95 hover:opacity-90"
         >
@@ -1613,7 +1637,7 @@ function Footer() {
                 </div>
               </div>
 
-              <a href={TEL} className="flex items-center gap-2 text-white hover:text-[color:var(--brand-cta)] transition-colors">
+              <a href={TEL} onClick={trackContactEvent} className="flex items-center gap-2 text-white hover:text-[color:var(--brand-cta)] transition-colors">
                 <Phone size={15} className="shrink-0 text-[color:var(--brand-cta)]" />
                 <span className="font-bold">{PHONE_DISPLAY}</span>
               </a>
@@ -1685,12 +1709,27 @@ function Footer() {
           </div>
         </div>
 
-        {/* Bottom copyright line */}
-        <div className="border-t border-white/10 pt-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11.5px] text-white/60">
-          <span>© {new Date().getFullYear()} HOMMED</span>
-          <Link to="/privacy-policy" className="font-bold underline hover:text-white/90 transition-colors">
-            Privacy Policy
-          </Link>
+        {/* Bottom legal links & copyright section */}
+        <div className="border-t border-white/10 pt-5 flex flex-col items-center justify-center gap-2 text-center text-[12px] text-white/60">
+          {/* Legal links row: Terms · Privacy · Refunds */}
+          <div className="flex items-center justify-center gap-2.5 font-medium text-white/70">
+            <Link to="/terms-and-conditions" className="hover:text-white hover:underline transition-colors">
+              Terms
+            </Link>
+            <span className="text-white/40 font-bold">·</span>
+            <Link to="/privacy-policy" className="hover:text-white hover:underline transition-colors">
+              Privacy
+            </Link>
+            <span className="text-white/40 font-bold">·</span>
+            <Link to="/refund-policy" className="hover:text-white hover:underline transition-colors">
+              Refunds
+            </Link>
+          </div>
+
+          {/* Copyright line */}
+          <p className="text-[11.5px] text-white/50">
+            © {new Date().getFullYear()} HOMMED
+          </p>
         </div>
 
       </div>
@@ -1712,6 +1751,7 @@ function StickyBottomBar() {
           </p>
           <a
             href={TEL}
+            onClick={trackContactEvent}
             id="sticky-phone"
             className="mt-0.5 block text-[15px] font-black tracking-tight text-[color:var(--brand-trust)] underline decoration-[color:var(--brand-cta)] decoration-2 underline-offset-[3px]"
           >
@@ -1722,6 +1762,7 @@ function StickyBottomBar() {
         {/* Call CTA — pill button */}
         <a
           href={TEL}
+          onClick={trackContactEvent}
           id="sticky-call"
           className="inline-flex shrink-0 items-center gap-2 rounded-full bg-[color:var(--brand-cta)] px-5 py-2.5 text-[14px] font-black text-white shadow-[0_3px_12px_rgba(194,94,38,0.40)] active:scale-[0.97] transition-transform call-cta-button"
         >
