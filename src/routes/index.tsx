@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useRef, useState, type FormEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { CountUp } from "@/lib/motion";
@@ -21,10 +21,12 @@ import {
   Loader2,
   Bed,
   Activity,
+  ChevronRight,
 } from "lucide-react";
 
 import drIqbalImg from "@/assets/dr-iqbal-portrait.jpg";
 import drCertsImg from "@/assets/dr-iqbal-stethoscope.jpg";
+import drIqbalCertificatesImg from "@/assets/dr-iqbal-certificates.jpg";
 import clinicExteriorImg from "@/assets/clinic-exterior.jpg";
 import hommedLogoImg from "@/assets/hommed-logo.png";
 import testimonialSanjeevImg from "@/assets/dr-iqbal-consultation.jpg";
@@ -42,12 +44,13 @@ function Landing() {
   return (
     <div className="min-h-screen bg-background text-foreground font-hindi">
       <StickyHeader />
-      <main id="top" className="mx-auto max-w-[440px] pb-28">
+      <main id="top" className="mx-auto max-w-[440px]">
         <Hero />
         <DoctorBlock />
         <ProblemGrid />
         <Pricing />
         <ProcessSteps />
+        <CredentialsRecognition />
         <WhyHommed />
         <Testimonials />
         <StatsBar />
@@ -149,33 +152,44 @@ function Hero() {
   };
 
   const inputCls =
-    "w-full rounded-lg border border-[color:var(--card-border)] bg-[color:var(--section-alt)] px-3.5 py-2.5 text-[14.5px] font-semibold text-foreground outline-none placeholder:text-[color:var(--body-dim)]/60 focus:border-[color:var(--brand-trust)] transition-colors";
-  const labelCls = "mb-1 block text-[12px] font-bold text-[color:var(--body-dim)] uppercase tracking-wide";
+    "w-full rounded-xl border border-[#D1D5DB] bg-white px-3.5 py-2.5 text-[14.5px] font-medium text-[#1C1C1E] outline-none placeholder:text-[#9CA3AF] focus:border-[color:var(--brand-trust)] focus:ring-2 focus:ring-[color:var(--brand-trust)]/15 transition-colors";
+  const labelCls = "mb-2 block text-[12.5px] font-semibold text-[#6B7280] tracking-wide";
 
   return (
-    <section id="hero" className="bg-[color:var(--brand-trust)] px-4 pt-7 pb-8 text-white">
-      {/* Headline */}
-      <h1 className="text-[22px] font-black leading-[1.25] tracking-tight">
-        क्या आपको <span className="border-b-2 border-white/30 text-white">मर्दाना तकलीफ़</span> है?
-      </h1>
-      <p className="mt-3 text-[14px] font-medium leading-relaxed text-white/80">
-        सही इलाज होता है — बस एक बार बात करें।
-      </p>
+    <section id="hero" className="bg-[#FDF6EE] px-4 pt-9 pb-8">
+      {/* Headline block — center aligned */}
+      <div className="mb-6 text-center">
+        <h1 className="text-[23px] font-black leading-[1.3] tracking-tight text-[#1C1C1E]">
+          क्या आपको{" "}
+          <span className="text-[color:var(--brand-trust)]">मर्दाना तकलीफ़</span>{" "}
+          है?
+        </h1>
+        <p className="mt-2 text-[14px] font-medium leading-relaxed text-[#6B7280]">
+          हमारे विशेषज्ञों से निःशुल्क सलाह लें
+        </p>
 
-      {/* Call Now pill button */}
-      <div className="mt-4 mb-2 flex justify-center">
-        <a
-          href={TEL}
-          id="hero-call-now"
-          className="flex items-center gap-2 rounded-full bg-[#183B52] border border-white/20 px-6 py-2.5 text-[14px] font-bold text-white/95 shadow-sm transition-all duration-150 active:scale-95 hover:bg-[#122E40]"
-        >
-          <Phone size={15} strokeWidth={2.2} />
-          Call Now
-        </a>
+        {/* Phone number stacked above pill CTA — centered */}
+        <div className="mt-5 flex flex-col items-center gap-2.5">
+          <a
+            href={TEL}
+            id="hero-phone-display"
+            className="text-[18px] font-black tracking-tight text-[color:var(--brand-trust)] underline decoration-[color:var(--brand-cta)] decoration-2 underline-offset-[3px]"
+          >
+            +91 63069 88550
+          </a>
+          <a
+            href={TEL}
+            id="hero-call-now"
+            className="call-now-btn inline-flex items-center gap-1.5 rounded-full bg-[color:var(--brand-cta)] px-5 py-2 text-[13.5px] font-bold text-white shadow-sm transition-all active:scale-95 hover:opacity-90"
+          >
+            <Phone size={13} strokeWidth={2.5} />
+            Call Now
+          </a>
+        </div>
       </div>
 
-      {/* Inline lead form card */}
-      <div className="mt-3 rounded-xl border border-white/20 bg-white shadow-card-sm">
+      {/* Lead form card */}
+      <div className="rounded-2xl border border-[#E5E7EB] bg-white shadow-[0_2px_16px_rgba(0,0,0,0.07)]">
         <AnimatePresence mode="wait" initial={false}>
           {heroSubmitted ? (
             <motion.div
@@ -191,13 +205,13 @@ function Hero() {
               <h3 className="text-[18px] font-black text-[color:var(--brand-trust)]">
                 धन्यवाद
               </h3>
-              <p className="mt-2 text-[13.5px] font-semibold leading-relaxed text-[color:var(--body-dim)]">
-                डॉक्टर जल्द कॉल करेंगे।
+              <p className="mt-2 text-[13.5px] font-semibold leading-relaxed text-[#6B7280]">
+                विशेषज्ञ जल्द कॉल करेंगे।
               </p>
               <a
                 href={TEL}
                 id="hero-call-after-submit"
-                className="mt-5 flex items-center justify-center gap-2 rounded-lg border-2 border-[color:var(--brand-trust)] bg-white py-3 text-[15px] font-black text-[color:var(--brand-trust)]"
+                className="mt-5 inline-flex items-center justify-center gap-2 rounded-full border-2 border-[color:var(--brand-trust)] bg-white px-6 py-2.5 text-[14px] font-black text-[color:var(--brand-trust)] transition-colors hover:bg-[color:var(--brand-trust)] hover:text-white"
               >
                 <Phone size={15} strokeWidth={2.5} />
                 कॉल करें
@@ -210,7 +224,7 @@ function Hero() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.2 }}
               onSubmit={onHeroSubmit}
-              className="space-y-3.5 p-4"
+              className="space-y-4 p-4"
             >
               {/* Name */}
               <div>
@@ -255,29 +269,29 @@ function Hero() {
 
               {/* Problem checkboxes */}
               <div>
-                <p className="mb-2 text-[12px] font-bold uppercase tracking-wide text-[color:var(--body-dim)]">
+                <p className="mb-2.5 text-[12.5px] font-semibold tracking-wide text-[#6B7280]">
                   क्या तकलीफ़ है?
                 </p>
-                <div className="grid grid-cols-2 gap-x-3 gap-y-2.5">
+                <div className="grid grid-cols-2 gap-x-3 gap-y-3">
                   {HERO_PROBLEMS.map((p) => {
                     const active = heroProblems.includes(p);
                     return (
                       <label
                         key={p}
-                        className="flex cursor-pointer items-center gap-2 text-[13px] font-semibold text-foreground"
+                        onClick={() => toggleHeroProblem(p)}
+                        className="flex cursor-pointer items-center gap-2 text-[13px] font-medium text-[#1C1C1E]"
                       >
                         <span
-                          onClick={() => toggleHeroProblem(p)}
                           className={
-                            "grid h-5 w-5 shrink-0 place-items-center rounded border-2 transition-colors " +
+                            "grid h-[18px] w-[18px] shrink-0 place-items-center rounded-[4px] border transition-colors " +
                             (active
                               ? "border-[color:var(--brand-trust)] bg-[color:var(--brand-trust)] text-white"
-                              : "border-[color:var(--card-border)] bg-[color:var(--section-alt)]")
+                              : "border-[#D1D5DB] bg-white")
                           }
                         >
-                          {active && <Check size={12} strokeWidth={3.5} />}
+                          {active && <Check size={11} strokeWidth={3} />}
                         </span>
-                        <span onClick={() => toggleHeroProblem(p)}>{p}</span>
+                        <span className="leading-tight">{p}</span>
                       </label>
                     );
                   })}
@@ -303,7 +317,7 @@ function Hero() {
                 type="submit"
                 disabled={heroSubmitting}
                 id="hero-submit"
-                className="flex w-full items-center justify-center gap-2 rounded-lg bg-[color:var(--brand-cta)] py-3 text-[15.5px] font-bold tracking-wide text-white disabled:opacity-70 hover:opacity-90 transition-opacity"
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-[color:var(--brand-cta)] py-3.5 text-[15.5px] font-bold tracking-wide text-white disabled:opacity-70 hover:opacity-90 transition-opacity shadow-[0_4px_14px_rgba(194,94,38,0.35)]"
               >
                 {heroSubmitting ? (
                   <>
@@ -315,14 +329,46 @@ function Hero() {
               </button>
 
               {/* Trust line */}
-              <p className="text-center text-[11.5px] font-medium text-[color:var(--body-dim)]">
-                आपकी जानकारी सुरक्षित रखी जाएगी।
+              <p className="text-center text-[11.5px] font-medium text-[#9CA3AF]">
+                🔒 आपकी जानकारी सुरक्षित रखी जाएगी।
               </p>
             </motion.form>
           )}
         </AnimatePresence>
       </div>
     </section>
+  );
+}
+
+/* ═══════════════════════════════════════
+   MID-PAGE CALL STRIP
+═══════════════════════════════════════ */
+function CallStrip() {
+  return (
+    <div className="bg-white border-y border-[#E5E7EB] px-4 py-3.5">
+      <div className="mx-auto flex max-w-[440px] items-center justify-between gap-3">
+        <div>
+          <p className="text-[11px] font-semibold uppercase tracking-widest text-[#9CA3AF]">
+            सीधे बात करें
+          </p>
+          <a
+            href={TEL}
+            id="strip-phone"
+            className="mt-0.5 block text-[16px] font-black text-[color:var(--brand-trust)] underline decoration-[color:var(--brand-cta)] decoration-2 underline-offset-[3px]"
+          >
+            +91 63069 88550
+          </a>
+        </div>
+        <a
+          href={TEL}
+          id="strip-call-now"
+          className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[color:var(--brand-cta)] px-4 py-2 text-[13px] font-bold text-white shadow-sm transition-all active:scale-95 hover:opacity-90"
+        >
+          <Phone size={13} strokeWidth={2.5} />
+          Call Now
+        </a>
+      </div>
+    </div>
   );
 }
 
@@ -335,9 +381,6 @@ function DoctorBlock() {
       id="doctor"
       className="bg-background px-4 py-7"
     >
-      <p className="mb-4 text-center text-[13.5px] font-semibold leading-snug text-[color:var(--body-dim)]">
-        कानपुर के डॉक्टर — सीधे आपसे बात करेंगे।
-      </p>
       <div className="overflow-hidden rounded-xl border-2 border-[color:var(--brand-trust)] shadow-card">
         <img
           src={clinicExteriorImg}
@@ -351,38 +394,33 @@ function DoctorBlock() {
 }
 
 /* ═══════════════════════════════════════
-   4. PROBLEM GRID
+   4. PROBLEM GRID (WeClinic-style condition cards)
 ═══════════════════════════════════════ */
 const PROBLEM_CARDS = [
   {
-    t: "शुक्राणु की कमी",
-    en: "Low Sperm Count",
-    d: "बच्चा नहीं हो रहा? इसका इलाज होता है।",
-    icon: Microscope,
+    title: "शुक्राणु की कमी - Low Sperm Count",
+    description:
+      "यह स्थिति तब होती है जब वीर्य में शुक्राणुओं की संख्या सामान्य से कम हो जाती है। इसका कारण हार्मोन असंतुलन, तनाव या गलत खान-पान हो सकता है। इसके कारण संतान प्राप्ति में देरी या कठिनाई हो सकती है।",
   },
   {
-    t: "मर्दाना कमज़ोरी / टाइमिंग की समस्या",
-    en: "Erectile Dysfunction",
-    d: "बिस्तर पर कमज़ोरी आ रही है? आप अकेले नहीं हैं।",
-    icon: HeartPulse,
+    title: "मर्दाना कमज़ोरी / टाइमिंग की समस्या - Erectile Dysfunction",
+    description:
+      "यह वह स्थिति है जिसमें संबंध बनाने के दौरान उचित मजबूती बनाए रखना कठिन हो जाता है। यह अक्सर रक्त प्रवाह में कमी, तनाव या उम्र बढ़ने के कारण होता है। इससे आत्मविश्वास में कमी और रिश्ते में तनाव आ सकता है।",
   },
   {
-    t: "शीघ्रपतन / जल्दी डिस्चार्ज",
-    en: "Premature Ejaculation",
-    d: "जल्दी डिस्चार्ज होता है? होम्योपैथी से ठीक होता है।",
-    icon: TimerReset,
+    title: "शीघ्रपतन / जल्दी डिस्चार्ज - Premature Ejaculation",
+    description:
+      "यह समस्या तब होती है जब संबंध के दौरान डिस्चार्ज समय से पहले हो जाता है। इसका कारण मानसिक तनाव, अत्यधिक उत्तेजना या तंत्रिका संवेदनशीलता हो सकती है। इससे संतुष्टि में कमी महसूस होती है।",
   },
   {
-    t: "स्वप्नदोष",
-    en: "Nightfall",
-    d: "रात में बार-बार हो रहा है? इलाज होता है।",
-    icon: Bed,
+    title: "स्वप्नदोष - Nightfall",
+    description:
+      "यह स्थिति है जिसमें नींद के दौरान अनैच्छिक रूप से वीर्य स्खलन हो जाता है। यह सामान्यतः हार्मोनल बदलाव या अत्यधिक यौन विचारों के कारण होता है। बार-बार होने पर यह शारीरिक कमज़ोरी का कारण बन सकता है।",
   },
   {
-    t: "प्रोस्टेट और मूत्राशय",
-    en: "Prostate & Urinary",
-    d: "बार-बार पेशाब आता है या जलन होती है?",
-    icon: Activity,
+    title: "प्रोस्टेट और मूत्राशय - Prostate & Urinary",
+    description:
+      "यह समस्या प्रोस्टेट ग्रंथि में सूजन या मूत्राशय की कार्यक्षमता में कमी के कारण होती है। उम्र बढ़ने के साथ यह अधिक सामान्य हो जाती है। इसके कारण बार-बार पेशाब आना या जलन जैसी परेशानी हो सकती है।",
   },
 ];
 
@@ -392,32 +430,25 @@ function ProblemGrid() {
       <h2 className="mb-5 text-center text-[21px] font-black leading-tight text-[color:var(--brand-trust)]">
         किस तकलीफ़ का इलाज होता है?
       </h2>
-      <div className="space-y-3">
-        {PROBLEM_CARDS.map((c) => {
-          const Icon = c.icon;
-          return (
-            <div
-              key={c.t}
-              className="flex items-start gap-3 rounded-xl border border-[color:var(--card-border)] bg-white p-4 shadow-card-sm"
-              style={{ borderLeftWidth: 3, borderLeftColor: "var(--brand-trust)" }}
-            >
-              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-lg bg-[color:var(--brand-trust)] text-white">
-                <Icon size={24} strokeWidth={2} />
-              </div>
-              <div className="min-w-0 flex-1">
-                <h3 className="text-[16px] font-black leading-tight text-[color:var(--foreground)]">
-                  {c.t}
-                </h3>
-                <p className="mt-0.5 text-[11px] font-semibold uppercase tracking-wide text-[color:var(--body-dim)]">
-                  {c.en}
-                </p>
-                <p className="mt-1.5 text-[13px] font-medium leading-snug text-[color:var(--body-dim)]">
-                  {c.d}
-                </p>
-              </div>
+      <div className="space-y-3.5">
+        {PROBLEM_CARDS.map((c) => (
+          <div
+            key={c.title}
+            className="flex items-start gap-3.5 rounded-xl border border-[color:var(--card-border)] bg-white p-4 shadow-card-sm"
+          >
+            <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-[#22c55e] text-white shadow-xs">
+              <Check size={20} strokeWidth={3} />
             </div>
-          );
-        })}
+            <div className="min-w-0 flex-1">
+              <h3 className="text-[15.5px] font-bold leading-tight text-[#1E3A8A]">
+                {c.title}
+              </h3>
+              <p className="mt-1.5 text-[13px] font-medium leading-relaxed text-slate-600">
+                {c.description}
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );
@@ -427,56 +458,78 @@ function ProblemGrid() {
    5. PRICING
 ═══════════════════════════════════════ */
 function Pricing() {
+  const PRICING_POINTS = [
+    "25 दिन की दवा — घर पर गुप्त डिलीवरी",
+    "ऑनलाइन या क्लिनिक — जैसे चाहें",
+    "Follow-up भी शामिल",
+    "100% गुप्त — आपकी जानकारी कहीं शेयर नहीं होती",
+    "पूरे भारत में दवाओं की होम डिलीवरी",
+    "प्राकृतिक व सुरक्षित होम्योपैथिक दवाएं",
+    "पहला महीना ₹1599। ज़्यादातर लोगों को 3–5 महीने लगते हैं — विशेषज्ञ खुद बताएंगे",
+  ];
+
   return (
-    <section id="pricing" className="bg-background px-4 py-7">
-      <h2 className="mb-5 text-center text-[21px] font-black leading-tight text-[color:var(--brand-trust)]">
-        दवा की कीमत
-      </h2>
-      <div className="overflow-hidden rounded-xl border-2 border-[color:var(--brand-trust)] bg-white shadow-card">
-        {/* Price highlight */}
-        <div className="bg-[color:var(--brand-trust)] px-5 py-4 text-white">
-          <p className="text-[13px] font-semibold text-white/70">पहला महीना</p>
-          <div className="mt-1 flex items-baseline gap-2">
-            <span className="text-[36px] font-black leading-none">₹1599</span>
-            <span className="text-[14px] font-semibold text-white/80">25 दिन की दवा</span>
-          </div>
-        </div>
-        {/* Details */}
-        <div className="divide-y divide-[color:var(--card-border)] px-5">
-          <div className="py-4">
-            <div className="flex items-start gap-2.5">
-              <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[color:var(--brand-trust)]" fill="var(--accent)" />
-              <p className="text-[14px] font-semibold leading-snug text-foreground">
-                25 दिन की दवा — घर पर गुप्त डिलीवरी
-              </p>
+    <section id="pricing" className="bg-background px-4 py-8">
+      {/* Section Title & Main Pitch Headline */}
+      <div className="text-center">
+        <h2 className="text-[20px] font-black leading-tight text-[#1C1C1E]">
+          मर्दाना तकलीफ़ का{" "}
+          <span className="text-[color:var(--brand-cta)] font-black">जड़ से इलाज</span>{" "}
+          मात्र <span className="text-[color:var(--brand-cta)] font-black">₹1599*</span> में
+        </h2>
+
+        {/* Social Proof row */}
+        <div className="mt-2.5 flex flex-col items-center justify-center gap-1">
+          <div className="flex items-center gap-1.5 text-[13px] font-bold text-[#374151]">
+            <div className="flex items-center text-[#F59E0B]">
+              {[0, 1, 2, 3, 4].map((i) => (
+                <Star
+                  key={i}
+                  size={14}
+                  fill="currentColor"
+                  strokeWidth={0}
+                />
+              ))}
             </div>
+            <span>4.6</span>
           </div>
-          <div className="py-4">
-            <div className="flex items-start gap-2.5">
-              <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[color:var(--brand-trust)]" fill="var(--accent)" />
-              <p className="text-[14px] font-semibold leading-snug text-foreground">
-                ऑनलाइन या क्लिनिक — जैसे चाहें
-              </p>
-            </div>
-          </div>
-          <div className="py-4">
-            <div className="flex items-start gap-2.5">
-              <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-[color:var(--brand-trust)]" fill="var(--accent)" />
-              <p className="text-[14px] font-semibold leading-snug text-foreground">
-                Follow-up भी शामिल
-              </p>
-            </div>
-          </div>
-        </div>
-        {/* Honest disclaimer */}
-        <div className="mx-5 mb-5 rounded-lg bg-[color:var(--section-alt)] px-4 py-3">
-          <p className="text-[13px] font-medium leading-relaxed text-[color:var(--body-dim)]">
-            पहला महीना ₹1599। ज़्यादातर लोगों को <strong className="text-foreground">3–5 महीने</strong> लगते हैं — डॉक्टर खुद बताएंगे।
+          <p className="text-[12px] font-semibold text-[#15803d]">
+            👍 95% मरीज इसे दूसरों को सुझाते हैं
           </p>
         </div>
-        <div className="px-5 pb-5">
-          <LeadFormInline source="pricing" />
+      </div>
+
+      {/* Bullet list - clean & unboxed */}
+      <ul className="mt-6 space-y-3.5">
+        {PRICING_POINTS.map((pt, i) => (
+          <li key={i} className="flex items-start gap-2.5 text-[14px] leading-snug text-[#374151]">
+            <ChevronRight
+              size={17}
+              className="mt-0.5 shrink-0 text-[color:var(--brand-cta)] stroke-[2.5]"
+            />
+            <span>{pt}</span>
+          </li>
+        ))}
+      </ul>
+
+      {/* Online urgency line + compact Call Now pill */}
+      <div className="mt-7 flex flex-col items-center gap-2.5 border-t border-[#E5E7EB] pt-5">
+        <div className="flex items-center gap-2 text-[12.5px] font-semibold text-[#374151]">
+          <span className="relative flex h-2 w-2 shrink-0">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#22c55e] opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-[#22c55e]" />
+          </span>
+          <span>हमारे विशेषज्ञ ऑनलाइन हैं… अभी कॉल करें</span>
         </div>
+
+        <a
+          href={TEL}
+          id="pricing-call-now"
+          className="call-now-btn inline-flex items-center gap-1.5 rounded-full bg-[color:var(--brand-cta)] px-5 py-2 text-[13.5px] font-bold text-white shadow-sm transition-all active:scale-95 hover:opacity-90"
+        >
+          <Phone size={13} strokeWidth={2.5} />
+          Call Now
+        </a>
       </div>
     </section>
   );
@@ -860,83 +913,351 @@ function LeadForm() {
    7. PROCESS STEPS
 ═══════════════════════════════════════ */
 const STEPS = [
-  {
-    t: "फॉर्म भरें या कॉल करें",
-    d: "बस अपनी तकलीफ़ बताइए",
-  },
-  {
-    t: "वक्त तय करें",
-    d: "क्लिनिक में या ऑनलाइन, जैसा आपको सही लगे",
-  },
-  {
-    t: "डॉक्टर खुद आपकी बात सुनेंगे",
-    d: "पूरी गुप्त बात",
-  },
-  {
-    t: "दवाएं घर तक डिलीवर",
-    d: "सादे पैकेट में + follow-up भी",
-  },
+  "फॉर्म भरें या कॉल करें — बस अपनी तकलीफ़ बताइए।",
+  "वक्त तय करें — क्लिनिक में या ऑनलाइन, जैसा आपको सही लगे।",
+  "विशेषज्ञ खुद आपकी बात सुनेंगे — पूरी गुप्त बातचीत।",
+  "दवाएं घर तक डिलीवर होंगी — सादे पैकेट में, फॉलो-अप सहित।",
+  "आपके इलाज के दौरान हमारी टीम आपको समय समय पर कॉल करती रहेगी।",
+  "इलाज के दौरान किसी भी समस्या के लिए आप हमारे विशेषज्ञों के साथ अपॉइंटमेंट ले सकते हैं।",
 ];
 
 function ProcessSteps() {
   return (
-    <section id="process" className="bg-[color:var(--section-alt)] px-4 py-7">
-      <h2 className="mb-5 text-center text-[21px] font-black leading-tight text-[color:var(--brand-trust)]">
+    <section id="process" className="bg-[color:var(--section-alt)] px-4 py-8">
+      <h2 className="mb-6 text-center text-[21px] font-black leading-tight text-[#1C1C1E]">
         कैसे शुरू करें?
       </h2>
-      <ol className="space-y-3">
+
+      {/* Unboxed step list */}
+      <ol className="space-y-4">
         {STEPS.map((s, i) => (
-          <li
-            key={s.t}
-            className="flex items-start gap-3.5 rounded-xl border border-[color:var(--card-border)] bg-white p-4 shadow-card-sm"
-            style={{ borderLeftWidth: 3, borderLeftColor: "var(--brand-trust)" }}
-          >
-            <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-[color:var(--brand-trust)] text-[16px] font-black text-white">
-              {i + 1}
-            </div>
-            <div className="min-w-0 pt-0.5">
-              <h3 className="text-[15px] font-black leading-tight text-foreground">
-                {s.t}
-              </h3>
-              <p className="mt-1 text-[12.5px] font-medium text-[color:var(--body-dim)]">
-                {s.d}
-              </p>
+          <li key={i} className="flex items-start gap-2.5 text-[14px] leading-snug">
+            <ChevronRight
+              size={17}
+              className="mt-0.5 shrink-0 text-[color:var(--brand-cta)] stroke-[2.5]"
+            />
+            <div>
+              <span className="font-bold text-[#1C1C1E]">Step {i + 1}: </span>
+              <span className="font-normal text-[#374151]">{s}</span>
             </div>
           </li>
         ))}
       </ol>
+
+      {/* Online indicator + Call Now button */}
+      <div className="mt-7 flex flex-col items-center gap-2.5 border-t border-[color:var(--card-border)] pt-5">
+        <div className="flex items-center gap-2 text-[12.5px] font-semibold text-[#374151]">
+          <span className="relative flex h-2 w-2 shrink-0">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#22c55e] opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-[#22c55e]" />
+          </span>
+          <span>हम ऑनलाइन हैं, अभी परामर्श लें</span>
+        </div>
+
+        <a
+          href={TEL}
+          id="process-call-now"
+          className="call-now-btn inline-flex items-center gap-1.5 rounded-full bg-[color:var(--brand-cta)] px-5 py-2 text-[13.5px] font-bold text-white shadow-sm transition-all active:scale-95 hover:opacity-90"
+        >
+          <Phone size={13} strokeWidth={2.5} />
+          Call Now
+        </a>
+      </div>
     </section>
   );
 }
 
 /* ═══════════════════════════════════════
-   8. WHY HOMMED (merged)
+   7.5 CREDENTIALS & RECOGNITION (WeClinic Media Mentions Style)
 ═══════════════════════════════════════ */
-const WHY = [
+function AwardIconIllustration() {
+  return (
+    <div className="mb-3.5 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-amber-50 to-orange-100/70 p-3 shadow-[0_2px_8px_rgba(194,94,38,0.08)] border border-amber-100">
+      <svg viewBox="0 0 48 48" className="h-10 w-10" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="20" r="12" fill="#F59E0B" fillOpacity="0.25" stroke="#D97706" strokeWidth="2.5" />
+        <path d="M18 31L15 42L24 37L33 42L30 31" fill="#FDBA74" fillOpacity="0.4" stroke="#C25E26" strokeWidth="2" strokeLinejoin="round" />
+        <path d="M24 12L26 16.5L31 17.2L27.5 20.7L28.3 25.5L24 23.2L19.7 25.5L20.5 20.7L17 17.2L22 16.5L24 12Z" fill="#C25E26" stroke="#C25E26" strokeWidth="1" strokeLinejoin="round" />
+      </svg>
+    </div>
+  );
+}
+
+function SpeakerIconIllustration() {
+  return (
+    <div className="mb-3.5 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-orange-50 to-amber-100/70 p-3 shadow-[0_2px_8px_rgba(194,94,38,0.08)] border border-orange-100">
+      <svg viewBox="0 0 48 48" className="h-10 w-10" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14 14H34V28H14V14Z" fill="#EA580C" fillOpacity="0.2" stroke="#C25E26" strokeWidth="2.5" strokeLinejoin="round" />
+        <path d="M24 28V38" stroke="#C25E26" strokeWidth="2.5" strokeLinecap="round" />
+        <path d="M18 38H30" stroke="#C25E26" strokeWidth="2.5" strokeLinecap="round" />
+        <circle cx="24" cy="21" r="3" fill="#C25E26" />
+        <path d="M8 20C8 20 10 16 14 16" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" />
+        <path d="M40 20C40 20 38 16 34 16" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+    </div>
+  );
+}
+
+function CertificateIconIllustration() {
+  return (
+    <div className="mb-3.5 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-amber-50 to-yellow-100/70 p-3 shadow-[0_2px_8px_rgba(194,94,38,0.08)] border border-amber-100">
+      <svg viewBox="0 0 48 48" className="h-10 w-10" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="8" width="28" height="32" rx="3" fill="#FBBF24" fillOpacity="0.2" stroke="#D97706" strokeWidth="2.5" />
+        <path d="M16 16H32" stroke="#D97706" strokeWidth="2" strokeLinecap="round" />
+        <path d="M16 22H28" stroke="#D97706" strokeWidth="2" strokeLinecap="round" />
+        <circle cx="30" cy="30" r="5" fill="#C25E26" stroke="#FFFFFF" strokeWidth="1.5" />
+        <path d="M28 30L29.5 31.5L32 29" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </div>
+  );
+}
+
+function GlobalCertIconIllustration() {
+  return (
+    <div className="mb-3.5 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-orange-50 to-red-100/70 p-3 shadow-[0_2px_8px_rgba(194,94,38,0.08)] border border-orange-100">
+      <svg viewBox="0 0 48 48" className="h-10 w-10" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="15" fill="#F97316" fillOpacity="0.2" stroke="#EA580C" strokeWidth="2.5" />
+        <path d="M9 24H39" stroke="#EA580C" strokeWidth="1.5" strokeDasharray="3 3" />
+        <path d="M24 9C28 14 30 19 30 24C30 29 28 34 24 39C20 34 18 29 18 24C18 19 20 14 24 9Z" fill="#C25E26" fillOpacity="0.25" stroke="#C25E26" strokeWidth="2" />
+        <path d="M19 19L24 15L29 19" stroke="#C25E26" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </div>
+  );
+}
+
+const CREDENTIALS_CARDS = [
   {
-    icon: ShieldCheck,
-    t: "गोपनीय परामर्श",
-    d: "आपकी जानकारी सुरक्षित रखी जाती है।",
+    Illustration: AwardIconIllustration,
+    title: "Homoeopathic Icon Award 2025",
+    tagline: "Conferred State Honor & Recognition",
+    summary:
+      "UP के सबसे बड़े मंच KGMU लखनऊ में डॉ. इक़बाल क़ासिम को 10 साल के अनुभव और 10,000+ मरीज़ों के भरोसे के लिए यह राष्ट्रीय सम्मान मिला।",
+    cta: "प्रमाणपत्र देखें",
   },
   {
-    icon: Truck,
-    t: "घर तक डिलीवरी",
-    d: "पूरे भारत में — सादे पैकेट में।",
+    Illustration: SpeakerIconIllustration,
+    title: "Clinical Speaker at HomoeoVision 3.0",
+    tagline: "National Conference Speaker",
+    summary:
+      "नेशनल कॉन्फ्रेंस में डॉ. इक़बाल ने देशभर के विशेषज्ञों को 'Chronic Kidney Failure में होम्योपैथी की भूमिका' पर व्याख्यान दिया।",
+    cta: "विवरण देखें",
   },
   {
-    icon: Leaf,
-    t: "साइड इफेक्ट की संभावना कम",
-    d: "प्राकृतिक होम्योपैथिक दवा — शरीर के अनुकूल।",
+    Illustration: CertificateIconIllustration,
+    title: "Rigomo Certificate of Completion",
+    tagline: "Integrative Diabetes Certification",
+    summary:
+      "'Integrative Diabetes Treatment Support' कोर्स नवंबर 2023 में सफलतापूर्वक पूर्ण किया, डायबिटीज़ प्रबंधन में उन्नत ज्ञान का प्रमाण।",
+    cta: "प्रमाणपत्र देखें",
   },
   {
-    icon: Stethoscope,
-    t: "10+ साल का अनुभव",
-    d: "डॉ. इक़बाल 10 से अधिक वर्षों से परामर्श दे रहे हैं।",
+    Illustration: GlobalCertIconIllustration,
+    title: "Alison Certificate of Completion",
+    tagline: "Global CPD-Accredited Course",
+    summary:
+      "'Type 2 Diabetes: Understanding and Management' — जून 2025 में पूर्ण किया गया वैश्विक स्तर पर मान्यता प्राप्त CPD-प्रमाणित कोर्स।",
+    cta: "प्रमाणपत्र देखें",
+  },
+];
+
+function CredentialsRecognition() {
+  const [selectedCert, setSelectedCert] = useState<{
+    title: string;
+    summary: string;
+  } | null>(null);
+
+  return (
+    <section id="credentials" className="bg-background px-4 py-8">
+      <h2 className="mb-5 text-center text-[21px] font-black leading-tight text-[color:var(--brand-trust)]">
+        हमारी उपलब्धियां और मान्यता
+      </h2>
+
+      <div className="space-y-4">
+        {CREDENTIALS_CARDS.map((c) => {
+          const Illustration = c.Illustration;
+          return (
+            <div
+              key={c.title}
+              className="flex flex-col items-center rounded-xl border border-[color:var(--card-border)] bg-white p-5 text-center shadow-card-sm"
+            >
+              <Illustration />
+              <h3 className="text-[15.5px] font-bold leading-tight text-[#1E3A8A]">
+                {c.title}
+              </h3>
+              <span className="mt-1 text-[11.5px] font-bold tracking-wide text-[color:var(--brand-cta)] uppercase">
+                {c.tagline}
+              </span>
+              <p className="mt-2 text-[13px] font-medium leading-relaxed text-slate-600 max-w-[300px]">
+                {c.summary}
+              </p>
+              <button
+                type="button"
+                onClick={() =>
+                  setSelectedCert({ title: c.title, summary: c.summary })
+                }
+                className="mt-3.5 inline-flex items-center gap-1.5 rounded-md bg-[#F59E0B] px-3.5 py-1.5 text-[12px] font-bold text-white shadow-xs transition-transform active:scale-95 hover:bg-[#D97706]"
+              >
+                <Award size={13} strokeWidth={2.5} />
+                <span>{c.cta}</span>
+              </button>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Lightbox / Modal for viewing Certificate */}
+      <AnimatePresence>
+        {selectedCert && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-xs"
+            onClick={() => setSelectedCert(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-h-[90vh] w-full max-w-[400px] overflow-hidden rounded-2xl bg-white p-4 shadow-2xl"
+            >
+              <div className="mb-3 flex items-center justify-between border-b border-slate-100 pb-2.5">
+                <div className="flex items-center gap-2">
+                  <Award className="h-5 w-5 text-[color:var(--brand-cta)]" />
+                  <h4 className="text-[14px] font-bold text-[#1E3A8A] leading-tight">
+                    {selectedCert.title}
+                  </h4>
+                </div>
+                <button
+                  onClick={() => setSelectedCert(null)}
+                  className="grid h-7 w-7 place-items-center rounded-full bg-slate-100 text-[13px] font-bold text-slate-600 hover:bg-slate-200"
+                >
+                  ✕
+                </button>
+              </div>
+
+              <div className="overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
+                <img
+                  src={drIqbalCertificatesImg}
+                  alt={selectedCert.title}
+                  className="h-auto w-full object-contain max-h-[300px]"
+                />
+              </div>
+
+              <p className="mt-3 text-[12px] font-medium leading-snug text-slate-600 text-center">
+                {selectedCert.summary}
+              </p>
+
+              <button
+                onClick={() => setSelectedCert(null)}
+                className="mt-4 w-full rounded-xl bg-[color:var(--brand-trust)] py-2.5 text-[13.5px] font-bold text-white transition-opacity hover:opacity-90"
+              >
+                बंद करें
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════
+   8. WHY HOMMED (WeClinic-style structure)
+═══════════════════════════════════════ */
+function PrivacyIllustration() {
+  return (
+    <div className="mb-3.5 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-indigo-50 to-blue-100/70 p-3 shadow-[0_2px_8px_rgba(30,58,138,0.08)] border border-indigo-100">
+      <svg viewBox="0 0 48 48" className="h-10 w-10" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M24 6L38 12V22C38 31.5 32 39.5 24 42C16 39.5 10 31.5 10 22V12L24 6Z" fill="#3B82F6" fillOpacity="0.18" stroke="#1E40AF" strokeWidth="2.5" strokeLinejoin="round" />
+        <path d="M24 10L35 15V22C35 29.5 30 36.5 24 38.8C18 36.5 13 29.5 13 22V15L24 10Z" fill="#60A5FA" fillOpacity="0.25" />
+        <rect x="18" y="22" width="12" height="10" rx="2" fill="#1E3A8A" />
+        <path d="M21 22V19C21 17.3431 22.3431 16 24 16C25.6569 16 27 17.3431 27 19V22" stroke="#1E3A8A" strokeWidth="2.5" strokeLinecap="round" />
+        <circle cx="24" cy="26" r="1.5" fill="#FFFFFF" />
+      </svg>
+    </div>
+  );
+}
+
+function DeliveryIllustration() {
+  return (
+    <div className="mb-3.5 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-amber-50 to-orange-100/70 p-3 shadow-[0_2px_8px_rgba(194,94,38,0.08)] border border-amber-100">
+      <svg viewBox="0 0 48 48" className="h-10 w-10" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="8" y="16" width="22" height="16" rx="3" fill="#F59E0B" fillOpacity="0.25" stroke="#D97706" strokeWidth="2.5" />
+        <path d="M30 20H36L41 25V32H30V20Z" fill="#FBBF24" fillOpacity="0.3" stroke="#D97706" strokeWidth="2.5" strokeLinejoin="round" />
+        <circle cx="16" cy="35" r="4.5" fill="#C25E26" stroke="#FFFFFF" strokeWidth="2" />
+        <circle cx="34" cy="35" r="4.5" fill="#C25E26" stroke="#FFFFFF" strokeWidth="2" />
+        <path d="M4 22H10" stroke="#EA580C" strokeWidth="2" strokeLinecap="round" />
+        <path d="M2 26H8" stroke="#EA580C" strokeWidth="2" strokeLinecap="round" />
+        <rect x="14" y="10" width="10" height="8" rx="1.5" fill="#C25E26" />
+        <path d="M17 10V18" stroke="#FFFFFF" strokeWidth="1.5" strokeDasharray="2 2" />
+      </svg>
+    </div>
+  );
+}
+
+function NaturalIllustration() {
+  return (
+    <div className="mb-3.5 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-emerald-50 to-teal-100/70 p-3 shadow-[0_2px_8px_rgba(16,185,129,0.08)] border border-emerald-100">
+      <svg viewBox="0 0 48 48" className="h-10 w-10" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M38 12C38 12 28 13 20 21C12 29 11 39 11 39C11 39 21 38 29 30C37 22 38 12 38 12Z" fill="#10B981" fillOpacity="0.3" stroke="#059669" strokeWidth="2.5" strokeLinejoin="round" />
+        <path d="M11 39C16 33 24 25 38 12" stroke="#047857" strokeWidth="2" strokeLinecap="round" />
+        <path d="M22 28C22 28 16 26 12 20C8 14 9 7 9 7C9 7 16 8 20 14C24 20 22 28 22 28Z" fill="#34D399" fillOpacity="0.35" stroke="#059669" strokeWidth="2" strokeLinejoin="round" />
+      </svg>
+    </div>
+  );
+}
+
+function ExperienceIllustration() {
+  return (
+    <div className="mb-3.5 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-sky-50 to-blue-100/70 p-3 shadow-[0_2px_8px_rgba(2,132,199,0.08)] border border-sky-100">
+      <svg viewBox="0 0 48 48" className="h-10 w-10" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="22" r="14" fill="#38BDF8" fillOpacity="0.2" stroke="#0284C7" strokeWidth="2.5" />
+        <path d="M24 14V22L29 25" stroke="#1E3A8A" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+        <rect x="14" y="32" width="20" height="10" rx="3" fill="#1B4B66" />
+        <text x="24" y="39.5" textAnchor="middle" fill="#FFFFFF" fontSize="9" fontWeight="900" fontFamily="sans-serif">10+ YRS</text>
+      </svg>
+    </div>
+  );
+}
+
+function TrustIllustration() {
+  return (
+    <div className="mb-3.5 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-rose-50 to-pink-100/70 p-3 shadow-[0_2px_8px_rgba(225,29,72,0.08)] border border-rose-100">
+      <svg viewBox="0 0 48 48" className="h-10 w-10" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="20" r="13" fill="#F43F5E" fillOpacity="0.2" stroke="#E11D48" strokeWidth="2.5" />
+        <path d="M18 31L15 42L24 37L33 42L30 31" fill="#FDA4AF" fillOpacity="0.4" stroke="#BE123C" strokeWidth="2" strokeLinejoin="round" />
+        <path d="M24 12L26.5 17L32 17.8L28 21.7L28.9 27.2L24 24.6L19.1 27.2L20 21.7L16 17.8L21.5 17L24 12Z" fill="#F59E0B" stroke="#D97706" strokeWidth="1.5" strokeLinejoin="round" />
+      </svg>
+    </div>
+  );
+}
+
+const WHY_CARDS = [
+  {
+    Illustration: PrivacyIllustration,
+    heading: "पूर्ण रूप से गुप्त",
+    description: "आपकी जानकारी पूर्णतः सुरक्षित रखी जाएगी।",
   },
   {
-    icon: Award,
-    t: "10,000+ मरीज़ों का परामर्श",
-    d: "कानपुर एवं अन्य शहरों में विश्वसनीय सेवा।",
+    Illustration: DeliveryIllustration,
+    heading: "घर तक डिलीवरी",
+    description: "दवाएं सादे पैकेट में, पूरे भारत में डिलीवर की जाएंगी।",
+  },
+  {
+    Illustration: NaturalIllustration,
+    heading: "जड़ से इलाज",
+    description: "प्राकृतिक होम्योपैथिक दवा से शरीर के अनुकूल असर, साइड इफ़ेक्ट की संभावना कम।",
+  },
+  {
+    Illustration: ExperienceIllustration,
+    heading: "अनुभवी विशेषज्ञ",
+    description: "डॉ. इक़बाल 10 से अधिक वर्षों से परामर्श दे रहे हैं।",
+  },
+  {
+    Illustration: TrustIllustration,
+    heading: "भरोसेमंद सेवा",
+    description: "10,000+ मरीज़ों को कानपुर एवं अन्य शहरों में सेवा दी जा चुकी है।",
   },
 ];
 
@@ -946,25 +1267,25 @@ function WhyHommed() {
       <h2 className="mb-5 text-center text-[21px] font-black leading-tight text-[color:var(--brand-trust)]">
         HOMMED क्यों?
       </h2>
-      <div className="space-y-3">
-        {WHY.map((w) => (
-          <div
-            key={w.t}
-            className="flex items-center gap-3.5 rounded-xl border border-[color:var(--card-border)] bg-white p-4 shadow-card-sm"
-          >
-            <div className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-[color:var(--brand-trust)] text-white">
-              <w.icon size={22} strokeWidth={2} />
-            </div>
-            <div className="min-w-0">
-              <h3 className="text-[15px] font-black leading-tight text-foreground">
-                {w.t}
+      <div className="space-y-3.5">
+        {WHY_CARDS.map((w) => {
+          const Illustration = w.Illustration;
+          return (
+            <div
+              key={w.heading}
+              className="flex flex-col items-center rounded-xl border border-[color:var(--card-border)] bg-white p-5 text-center shadow-card-sm"
+            >
+              <Illustration />
+              <h3 className="flex items-center justify-center gap-1.5 text-[16px] font-bold text-[#1E3A8A] leading-tight">
+                <span className="text-[#EC4899] font-black text-[13px]">○</span>
+                <span>{w.heading}</span>
               </h3>
-              <p className="mt-0.5 text-[12.5px] font-medium text-[color:var(--body-dim)]">
-                {w.d}
+              <p className="mt-1.5 text-[13px] font-medium text-slate-600 leading-relaxed max-w-[290px]">
+                {w.description}
               </p>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
@@ -1082,6 +1403,16 @@ function Testimonials() {
       <p className="mt-3 text-center text-[10.5px] font-medium italic text-[color:var(--body-dim)]">
         *परिणाम प्रत्येक व्यक्ति की स्थिति के अनुसार भिन्न हो सकते हैं।
       </p>
+      <div className="mt-4 flex justify-center">
+        <a
+          href={TEL}
+          id="testimonials-call-now"
+          className="call-now-btn inline-flex items-center gap-1.5 rounded-full bg-[color:var(--brand-cta)] px-5 py-2 text-[13.5px] font-bold text-white shadow-sm transition-all active:scale-95 hover:opacity-90"
+        >
+          <Phone size={13} strokeWidth={2.5} />
+          Call Now
+        </a>
+      </div>
     </section>
   );
 }
@@ -1143,7 +1474,7 @@ function StatsBar() {
 ═══════════════════════════════════════ */
 function Footer() {
   return (
-    <footer id="contact" className="bg-[color:var(--brand-trust)] px-4 py-7 text-white">
+    <footer id="contact" className="bg-[color:var(--brand-trust)] px-4 pt-7 pb-24 text-white">
       {/* Logo row */}
       <div className="flex items-center gap-2.5">
         <img
@@ -1196,9 +1527,9 @@ function Footer() {
       </div>
 
       <div className="mt-6 flex items-center justify-between border-t border-white/20 pt-4 text-[11.5px] text-white/60">
-        <a href="#" className="font-bold underline">
+        <Link to="/privacy-policy" className="font-bold underline hover:text-white/90 transition-colors">
           Privacy Policy
-        </a>
+        </Link>
         <span>© {new Date().getFullYear()} HOMMED</span>
       </div>
     </footer>
@@ -1210,19 +1541,30 @@ function Footer() {
 ═══════════════════════════════════════ */
 function StickyBottomBar() {
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 bg-white shadow-[0_-6px_24px_rgba(0,0,0,0.18)]">
-      <div className="mx-auto max-w-[440px] px-4 py-3">
-        {/* Call — full width */}
+    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#E5E7EB] bg-[#FDF6EE] shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
+      <div className="mx-auto flex max-w-[440px] items-center justify-between gap-3 px-4 py-3">
+        {/* Phone number — tap to call */}
+        <div>
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-[#9CA3AF]">
+            निःशुल्क परामर्श
+          </p>
+          <a
+            href={TEL}
+            id="sticky-phone"
+            className="mt-0.5 block text-[15px] font-black tracking-tight text-[color:var(--brand-trust)] underline decoration-[color:var(--brand-cta)] decoration-2 underline-offset-[3px]"
+          >
+            +91 63069 88550
+          </a>
+        </div>
+
+        {/* Call CTA — pill button */}
         <a
           href={TEL}
           id="sticky-call"
-          className="flex w-full items-center justify-center gap-2.5 rounded-xl bg-[color:var(--brand-trust)] py-3.5 text-[16px] font-black text-white shadow-[0_4px_18px_rgba(27,75,102,0.50)] active:scale-[0.98] transition-transform call-cta-button"
+          className="inline-flex shrink-0 items-center gap-2 rounded-full bg-[color:var(--brand-cta)] px-5 py-2.5 text-[14px] font-black text-white shadow-[0_3px_12px_rgba(194,94,38,0.40)] active:scale-[0.97] transition-transform call-cta-button"
         >
-          <span className="relative flex h-5 w-5 items-center justify-center">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-30" />
-            <Phone size={18} strokeWidth={2.5} className="relative" />
-          </span>
-          <span>कॉल करें — +91 63069 88550</span>
+          <Phone size={15} strokeWidth={2.5} />
+          <span>कॉल करें</span>
         </a>
       </div>
     </div>
