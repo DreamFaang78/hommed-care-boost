@@ -29,8 +29,8 @@ export const Route = createFileRoute("/privacy-policy")({
   }),
 });
 
-const TEL = "tel:+916306988550";
-const PHONE_DISPLAY = "+91 63069 88550";
+const TEL = "tel:+918934934708";
+const PHONE_DISPLAY = "+91 89349 34708";
 const EFFECTIVE_DATE = "10 September 2025";
 
 const trackContactEvent = () => {

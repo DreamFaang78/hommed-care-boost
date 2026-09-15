@@ -41,8 +41,8 @@ export const Route = createFileRoute("/")(({
 
 declare let fbq: any;
 
-const TEL = "tel:+916306988550";
-const PHONE_DISPLAY = "+91 63069 88550";
+const TEL = "tel:+918934934708";
+const PHONE_DISPLAY = "+91 89349 34708";
 
 const trackContactEvent = () => {
   if (typeof fbq !== "undefined") {
@@ -189,7 +189,7 @@ function Hero() {
             id="hero-phone-display"
             className="text-[18px] font-black tracking-tight text-[color:var(--brand-trust)] underline decoration-[color:var(--brand-cta)] decoration-2 underline-offset-[3px]"
           >
-            +91 63069 88550
+            {PHONE_DISPLAY}
           </a>
           <a
             href={TEL}
@@ -372,7 +372,7 @@ function CallStrip() {
             id="strip-phone"
             className="mt-0.5 block text-[16px] font-black text-[color:var(--brand-trust)] underline decoration-[color:var(--brand-cta)] decoration-2 underline-offset-[3px]"
           >
-            +91 63069 88550
+            {PHONE_DISPLAY}
           </a>
         </div>
         <a
@@ -1735,7 +1735,7 @@ function StickyBottomBar() {
             id="sticky-phone"
             className="mt-0.5 block text-[15px] font-black tracking-tight text-[color:var(--brand-trust)] underline decoration-[color:var(--brand-cta)] decoration-2 underline-offset-[3px]"
           >
-            +91 63069 88550
+            {PHONE_DISPLAY}
           </a>
         </div>
 

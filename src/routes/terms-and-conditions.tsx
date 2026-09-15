@@ -15,8 +15,8 @@ export const Route = createFileRoute("/terms-and-conditions")({
   }),
 });
 
-const TEL = "tel:+916306988550";
-const PHONE_DISPLAY = "+91 63069 88550";
+const TEL = "tel:+918934934708";
+const PHONE_DISPLAY = "+91 89349 34708";
 
 const trackContactEvent = () => {
   if (typeof window !== "undefined" && typeof (window as any).fbq !== "undefined") {
